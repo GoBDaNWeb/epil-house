@@ -1,0 +1,27 @@
+:root {
+	--white-color: #fff;
+	--black-color: #000;
+	--beige-back-color: #f2e9e5;
+	--gray-color: #495468;
+	--gray-back-color: #e7eaef;
+	--gray-line-color: #e6e6e6;
+	--pink-light-back-color: #fae6e7;
+	--pink-color: #df9494;
+	--pink-back-color: #fabfbf;
+
+	--border-color: rgba(92, 81, 81, 0.15);
+	--trs-300: 300ms ease;
+	--trs-600: 600ms ease;
+	--shadow: 0px 4px 55px 0px rgba(0, 0, 0, 0.1);
+	--shadow-inset: 0px 4px 10px 0px rgba(0, 0, 0, 0.15) inset;
+}
+
+$desktop-xl: 2000px;
+$desktop-lg: 1920px;
+$desktop-md: 1440px;
+$desktop-md-2: 1400px;
+$desktop-sm: 1280px;
+$tab: 1024px;
+$tab-sm: 767px;
+$pre-mob: 630px;
+$mob: 500px;

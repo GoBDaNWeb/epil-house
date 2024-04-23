@@ -1,0 +1,81 @@
+.container {
+	max-width: 1440px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 30px;
+	padding-right: 30px;
+	width: 100%;
+	@media (max-width: 1024px) {
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+}
+button {
+	font-family: 'Vela Sans', sans-serif;
+}
+body {
+	background: var(--white-color);
+	font-family: 'Vela Sans', sans-serif;
+	font-optical-sizing: auto;
+	color: var(--gray-color);
+}
+.ymaps-2-1-79-gotoymaps {
+	display: none !important;
+}
+.ymaps-2-1-79-gototech {
+	display: none !important;
+}
+.ymaps-2-1-79-copyright {
+	display: none !important;
+}
+.ymaps-2-1-79-gototaxi {
+	display: none !important;
+}
+.swiper-button-disabled {
+	opacity: 0;
+}
+.swiper-navigation {
+	border: 1px solid var(--gray-line-color);
+	border-radius: 10px;
+	.swiper-button-disabled {
+		opacity: 0.3;
+		pointer-events: none;
+	}
+	button {
+		background: var(--white-color);
+		transition: var(--trs-300);
+		height: 50px;
+		width: 50px;
+		position: relative;
+		svg {
+			path {
+				transition: var(--trs-300);
+			}
+		}
+		&:hover {
+			background: var(--pink-color);
+			svg {
+				path {
+					stroke: var(--white-color);
+				}
+			}
+		}
+		&:first-child {
+			border-radius: 10px 0 0 10px;
+			&:after {
+				content: '';
+				position: absolute;
+				width: 1px;
+				height: 30px;
+				background: var(--gray-line-color);
+				right: 0;
+				top: 0;
+				bottom: 0;
+				margin: auto;
+			}
+		}
+		&:last-child {
+			border-radius: 0 10px 10px 0;
+		}
+	}
+}
