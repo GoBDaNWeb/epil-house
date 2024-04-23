@@ -6,6 +6,7 @@ import { Equipments } from '@/pages/equipments';
 import { Home } from '@/pages/home';
 import { Price } from '@/pages/price';
 import { Services } from '@/pages/services';
+import { Specialists } from '@/pages/specialists';
 import { Stocks } from '@/pages/stocks';
 
 import { PATH_PAGE } from '@/shared/config';
@@ -47,6 +48,11 @@ const router = createRouter({
 			path: PATH_PAGE.certificate,
 			name: 'certificate',
 			component: Certificate
+		},
+		{
+			path: PATH_PAGE.specialists,
+			name: 'specialists',
+			component: Specialists
 		}
 	]
 });

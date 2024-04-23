@@ -5,6 +5,13 @@ import { RouterView, useRoute } from 'vue-router';
 import { Footer } from '@/widgets/footer';
 import { Header } from '@/widgets/header';
 import { Menu } from '@/widgets/menu';
+import { OrderModal } from '@/widgets/order-modal';
+import { SpecialistModal } from '@/widgets/specialist-modal';
+import { SuccessModal } from '@/widgets/success-modal';
+
+import { useSpecialistModalStore } from '@/entities/specialist-modal-store';
+
+const modal = useSpecialistModalStore();
 
 const router = useRoute();
 
@@ -22,4 +29,7 @@ watch(router, () => {
 	<Menu />
 	<RouterView />
 	<Footer />
+	<SpecialistModal :specialist="modal.specialistInfo" />
+	<OrderModal />
+	<SuccessModal />
 </template>

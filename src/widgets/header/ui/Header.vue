@@ -3,6 +3,7 @@ import { onMounted, ref, watch } from 'vue';
 import { RouterLink, useRoute } from 'vue-router';
 
 import { useMenuStore } from '@/entities/menu-store';
+import { useOrderModalStore } from '@/entities/order-modal-store';
 
 import { PATH_PAGE } from '@/shared/config';
 import { BurgerIcon, LogoIcon, WhatsappIcon } from '@/shared/icons';
@@ -11,6 +12,7 @@ import { Button } from '@/shared/ui';
 import { routes } from '../config';
 
 const menu = useMenuStore();
+const modal = useOrderModalStore();
 const route = useRoute();
 
 const active = ref(false);
@@ -27,7 +29,12 @@ const controlNavbar = () => {
 };
 
 const handleBeigeHeader = () => {
-	if (route.name === 'contacts' || route.name === 'price' || route.name === 'equipments') {
+	if (
+		route.name === 'contacts' ||
+		route.name === 'price' ||
+		route.name === 'equipments' ||
+		route.name === 'specialists'
+	) {
 		beige.value = true;
 	} else {
 		beige.value = false;
@@ -72,7 +79,7 @@ window.addEventListener('scroll', controlNavbar);
 				<a href="#" target="_blank"><WhatsappIcon /></a>
 				<div class="btns">
 					<Button :variable="active || beige ? 'primary-beige' : 'primary-white'">позвонить</Button>
-					<Button variable="primary">записаться</Button>
+					<Button variable="primary" @click="modal.handleOpenModal">записаться</Button>
 				</div>
 			</div>
 		</div>

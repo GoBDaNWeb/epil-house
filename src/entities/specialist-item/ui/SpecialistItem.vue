@@ -1,8 +1,22 @@
 <script setup>
+import { useOrderModalStore } from '@/entities/order-modal-store';
+import { useSpecialistModalStore } from '@/entities/specialist-modal-store';
+
 import { InfoIcon } from '@/shared/icons';
 import { Button, Title } from '@/shared/ui';
 
-defineProps(['specialist']);
+const props = defineProps(['specialist']);
+
+const specialistModal = useSpecialistModalStore();
+const orderModal = useOrderModalStore();
+
+const hadleOpenSpecialistModal = () => {
+	specialistModal.handleOpenModal();
+	specialistModal.setInfo(props.specialist);
+};
+const hadleOpenOrderModal = () => {
+	orderModal.handleOpenModal();
+};
 </script>
 
 <template>
@@ -20,8 +34,8 @@ defineProps(['specialist']);
 			</div>
 
 			<div class="btns">
-				<Button variable="primary">записаться</Button>
-				<Button variable="square"><InfoIcon /></Button>
+				<Button variable="primary" @click="hadleOpenOrderModal()">записаться</Button>
+				<Button variable="square" @click="hadleOpenSpecialistModal()"><InfoIcon /></Button>
 			</div>
 		</div>
 	</div>

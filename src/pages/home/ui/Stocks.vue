@@ -7,6 +7,7 @@ import { Swiper } from '@/widgets/swiper';
 
 import { StockItem } from '@/entities/stock-item';
 
+import { PATH_PAGE } from '@/shared/config';
 import { ArrowLeftIcon, ArrowRightIcon } from '@/shared/icons';
 import { Button, Title } from '@/shared/ui';
 
@@ -23,7 +24,7 @@ const next = ref(null);
 			<div class="top">
 				<Title variant="h3">акции</Title>
 				<div class="navigation">
-					<Button @click="router.push('/about')" variable="outline">
+					<Button @click="router.push(PATH_PAGE.stocks)" variable="outline">
 						все акции <ArrowRightIcon />
 					</Button>
 					<div class="swiper-navigation">

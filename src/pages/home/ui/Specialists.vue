@@ -7,6 +7,7 @@ import { Swiper } from '@/widgets/swiper';
 
 import { SpecialistItem } from '@/entities/specialist-item';
 
+import { PATH_PAGE } from '@/shared/config';
 import { ArrowLeftIcon, ArrowRightIcon } from '@/shared/icons';
 import { Button, Title } from '@/shared/ui';
 
@@ -21,9 +22,9 @@ const next = ref(null);
 	<div class="specialists">
 		<div class="specialists-inner container">
 			<div class="top">
-				<Title variant="h3">акции</Title>
+				<Title variant="h3">специалисты</Title>
 				<div class="navigation">
-					<Button @click="router.push('/about')" variable="outline">
+					<Button @click="router.push(PATH_PAGE.specialists)" variable="outline">
 						все специалисты <ArrowRightIcon />
 					</Button>
 					<div class="swiper-navigation">
@@ -42,8 +43,8 @@ const next = ref(null);
 					:allowTouchMove="true"
 				>
 					<SwiperSlide v-for="(specialist, index) in specialistsList" :key="index">
-						<SpecialistItem :specialist="specialist"
-					/></SwiperSlide>
+						<SpecialistItem :specialist="specialist" />
+					</SwiperSlide>
 				</Swiper>
 			</div>
 		</div>

@@ -1,4 +1,6 @@
 import App from './app/App.vue';
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css';
 import { createApp } from 'vue';
 import VueTheMask from 'vue-the-mask';
 
@@ -9,6 +11,7 @@ import './shared/styles/index.scss';
 
 const app = createApp(App);
 app.use(VueTheMask);
+app.component('VueDatePicker', VueDatePicker);
 
 app.use(createPinia());
 app.use(router);

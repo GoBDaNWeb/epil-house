@@ -1,17 +1,24 @@
 <script setup>
+import { useRouter } from 'vue-router';
+
 import { EquipmentItem } from '@/entities/equipment-item';
 
+import { PATH_PAGE } from '@/shared/config';
 import { ArrowRightIcon } from '@/shared/icons';
 import { Button, Title } from '@/shared/ui';
 
 import { equipments } from '../config';
+
+const router = useRouter();
 </script>
 
 <template>
 	<div class="equipments container">
 		<div class="top">
 			<Title variant="h3">оборудование</Title>
-			<Button variable="outline">все оборудование <ArrowRightIcon /></Button>
+			<Button variable="outline" @click="router.push(PATH_PAGE.equipments)"
+				>все оборудование <ArrowRightIcon
+			/></Button>
 		</div>
 		<div class="content">
 			<EquipmentItem v-for="(equipment, index) in equipments" :key="index" :equipment="equipment" />

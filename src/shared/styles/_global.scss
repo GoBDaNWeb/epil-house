@@ -19,6 +19,40 @@ body {
 	font-optical-sizing: auto;
 	color: var(--gray-color);
 }
+.dp__input_wrap {
+	input {
+		border: none;
+		border: 1px solid var(--gray-line-color);
+		border-radius: 10px;
+		padding: 19px 24px;
+		height: 50px;
+	}
+	.dp__input_icon {
+		padding: 0;
+		right: 19px;
+		left: auto;
+		width: 28px;
+		height: 21px;
+		top: 24px;
+	}
+	.dp__clear_icon {
+		display: none;
+	}
+}
+.dp__menu {
+	border-radius: 20px;
+}
+.dp__outer_menu_wrap {
+	.dp__active_date {
+		background-color: var(--pink-color);
+	}
+	.dp__today {
+		border-color: var(--pink-color);
+	}
+	.dp__button_bottom {
+		display: none;
+	}
+}
 .ymaps-2-1-79-gotoymaps {
 	display: none !important;
 }

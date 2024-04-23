@@ -1,3 +1,4 @@
+import ArrowDownIcon from './ArrowDownIcon.vue';
 import ArrowLeftIcon from './ArrowLeftIcon.vue';
 import ArrowRightIcon from './ArrowRightIcon.vue';
 import BurgerIcon from './BurgerIcon.vue';
@@ -21,5 +22,6 @@ export {
 	DownloadIcon,
 	TourIcon,
 	ParadigmaIcon,
-	CloseIcon
+	CloseIcon,
+	ArrowDownIcon
 };

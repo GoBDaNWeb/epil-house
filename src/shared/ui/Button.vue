@@ -213,4 +213,40 @@ button.outline {
 		box-shadow: var(--shadow-inset);
 	}
 }
+button.outline-reset {
+	border-radius: 10px;
+	border: 1px solid var(--gray-color);
+	height: 50px;
+	padding: 0 35px;
+	text-align: center;
+	opacity: 0.4;
+	font-weight: 600;
+	font-size: 15px;
+	text-transform: uppercase;
+	line-height: 19px;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	transition: var(--trs-300);
+	color: var(--gray-color);
+	svg {
+		path {
+			transition: var(--trs-300);
+		}
+	}
+	&:hover {
+		background: var(--pink-color);
+		border-color: var(--pink-color);
+		color: var(--white-color);
+		opacity: 1;
+		svg {
+			path {
+				stroke: var(--white-color);
+			}
+		}
+	}
+	&:active {
+		box-shadow: var(--shadow-inset);
+	}
+}
 </style>
