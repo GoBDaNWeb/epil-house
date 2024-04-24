@@ -150,5 +150,95 @@ export const servicesDirectionList = [
 				url: `${PATH_PAGE.services}/hair-removal/skins`
 			}
 		]
+	},
+	{
+		url: `${PATH_PAGE.services}/nail service`,
+		title: 'Ногтевой Сервис',
+		services: [
+			{
+				img: '/images/service-directions/1.jpg',
+				title: 'Лазерная эпиляция',
+				text: 'В стоимость услуги сопутствующие одноразовые материалы.',
+				url: `${PATH_PAGE.services}/hair-removal/laser-hair-removal`
+			},
+			{
+				img: '/images/service-directions/2.jpg',
+				title: 'Шугаринг / воск',
+				text: 'В стоимость услуги сопутствующие одноразовые материалы.',
+				url: `${PATH_PAGE.services}/hair-removal/sugaring-wax`
+			},
+			{
+				img: '/images/service-directions/3.jpg',
+				title: 'Электроэпиляция',
+				text: 'В стоимость услуги сопутствующие одноразовые материалы.',
+				url: `${PATH_PAGE.services}/hair-removal/electroepilation`
+			},
+			{
+				img: '/images/service-directions/4.jpg',
+				title: 'Skins',
+				text: 'В стоимость услуги сопутствующие одноразовые материалы.',
+				url: `${PATH_PAGE.services}/hair-removal/skins`
+			}
+		]
+	},
+	{
+		url: `${PATH_PAGE.services}/eyelashes-and-etebrows`,
+		title: 'Ресницы и Брови',
+		services: [
+			{
+				img: '/images/service-directions/1.jpg',
+				title: 'Лазерная эпиляция',
+				text: 'В стоимость услуги сопутствующие одноразовые материалы.',
+				url: `${PATH_PAGE.services}/hair-removal/laser-hair-removal`
+			},
+			{
+				img: '/images/service-directions/2.jpg',
+				title: 'Шугаринг / воск',
+				text: 'В стоимость услуги сопутствующие одноразовые материалы.',
+				url: `${PATH_PAGE.services}/hair-removal/sugaring-wax`
+			},
+			{
+				img: '/images/service-directions/3.jpg',
+				title: 'Электроэпиляция',
+				text: 'В стоимость услуги сопутствующие одноразовые материалы.',
+				url: `${PATH_PAGE.services}/hair-removal/electroepilation`
+			},
+			{
+				img: '/images/service-directions/4.jpg',
+				title: 'Skins',
+				text: 'В стоимость услуги сопутствующие одноразовые материалы.',
+				url: `${PATH_PAGE.services}/hair-removal/skins`
+			}
+		]
+	},
+	{
+		url: `${PATH_PAGE.services}/massage`,
+		title: 'Массаж',
+		services: [
+			{
+				img: '/images/service-directions/1.jpg',
+				title: 'Лазерная эпиляция',
+				text: 'В стоимость услуги сопутствующие одноразовые материалы.',
+				url: `${PATH_PAGE.services}/hair-removal/laser-hair-removal`
+			},
+			{
+				img: '/images/service-directions/2.jpg',
+				title: 'Шугаринг / воск',
+				text: 'В стоимость услуги сопутствующие одноразовые материалы.',
+				url: `${PATH_PAGE.services}/hair-removal/sugaring-wax`
+			},
+			{
+				img: '/images/service-directions/3.jpg',
+				title: 'Электроэпиляция',
+				text: 'В стоимость услуги сопутствующие одноразовые материалы.',
+				url: `${PATH_PAGE.services}/hair-removal/electroepilation`
+			},
+			{
+				img: '/images/service-directions/4.jpg',
+				title: 'Skins',
+				text: 'В стоимость услуги сопутствующие одноразовые материалы.',
+				url: `${PATH_PAGE.services}/hair-removal/skins`
+			}
+		]
 	}
 ];
