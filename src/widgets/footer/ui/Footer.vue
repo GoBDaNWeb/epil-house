@@ -45,6 +45,7 @@ import { Title } from '@/shared/ui';
 					svg {
 						path {
 							stroke: var(--pink-back-color);
+							fill: var(--pink-back-color);
 						}
 					}
 				}

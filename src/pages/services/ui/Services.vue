@@ -14,6 +14,8 @@ import { breadcrumbsList } from '../config';
 			:breadcrumbs="breadcrumbsList"
 			title="услуги"
 			text="В Эпилхаус работают профессионалы высокого уровня в области косметологии. Специалисты проводят популярные и востребованные эстетические процедуры и операции, уникальные коррекции."
+			btnText="консультация"
+			:hasForm="true"
 		/>
 		<ServiceList />
 		<ConsultationForm />

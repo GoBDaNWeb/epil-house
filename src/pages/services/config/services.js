@@ -1,7 +1,10 @@
+import { PATH_PAGE } from '@/shared/config';
+
 export const services = [
 	{
 		img: '/images/services/1.jpg',
 		title: 'Инъекционная косметология',
+		url: `${PATH_PAGE.services}/injectable-cosmetology`,
 		list: [
 			{ title: 'Биоревитализация', url: '/' },
 			{ title: 'Мезотерапия', url: '/' },
@@ -13,6 +16,7 @@ export const services = [
 	{
 		img: '/images/services/2.jpg',
 		title: 'Эстетическая косметология',
+		url: `${PATH_PAGE.services}/aesthetic-cosmetology`,
 		list: [
 			{ title: 'Пилинги', url: '/' },
 			{ title: 'Уходовые процедуры', url: '/' },
@@ -23,6 +27,7 @@ export const services = [
 	{
 		img: '/images/services/3.jpg',
 		title: 'Аппаратная косметология',
+		url: `${PATH_PAGE.services}/hardware-cosmetology`,
 		list: [
 			{ title: 'LPG-массаж', url: '/' },
 			{ title: 'Фотоомоложение', url: '/' },
@@ -37,6 +42,7 @@ export const services = [
 	{
 		img: '/images/services/4.jpg',
 		title: 'эпиляция',
+		url: `${PATH_PAGE.services}/hair-removal`,
 		list: [
 			{ title: 'Лазерная эпиляция', url: '/' },
 			{ title: 'Шугаринг / воск', url: '/' },

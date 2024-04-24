@@ -13,7 +13,9 @@ defineProps(['service']);
 			<img :src="service.img" alt="service" />
 		</div>
 		<div class="content">
-			<Title variant="h3">{{ service.title }}</Title>
+			<RouterLink :to="service.url">
+				<Title variant="h3">{{ service.title }}</Title>
+			</RouterLink>
 			<div class="info-list">
 				<RouterLink v-for="(item, index) in service.list" :key="index" :to="item.url">
 					<div class="text">
@@ -81,8 +83,16 @@ defineProps(['service']);
 		padding-top: 30px;
 		border-top: 1px solid var(--gray-line-color);
 		border-radius: 20px 0 0 0;
+		& > a {
+			&:hover {
+				h3 {
+					color: var(--pink-color);
+				}
+			}
+		}
 		h3 {
 			text-align: left;
+			transition: var(--trs-300);
 		}
 		.info-list {
 			display: grid;

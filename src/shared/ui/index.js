@@ -1,3 +1,4 @@
+import Accordion from './Accordion.vue';
 import Badge from './Badge.vue';
 import Breadcrumbs from './Breadcrumbs.vue';
 import Button from './Button.vue';
@@ -21,5 +22,6 @@ export {
 	Pagination,
 	Select,
 	DatePicker,
-	Textarea
+	Textarea,
+	Accordion
 };

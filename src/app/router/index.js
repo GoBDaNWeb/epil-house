@@ -5,9 +5,12 @@ import { Contacts } from '@/pages/contacts';
 import { Equipments } from '@/pages/equipments';
 import { Home } from '@/pages/home';
 import { Price } from '@/pages/price';
+import { Service } from '@/pages/service';
+import { ServiceDirection } from '@/pages/service-direction';
 import { Services } from '@/pages/services';
 import { Specialists } from '@/pages/specialists';
 import { Stocks } from '@/pages/stocks';
+import { Training } from '@/pages/training';
 
 import { PATH_PAGE } from '@/shared/config';
 
@@ -53,6 +56,21 @@ const router = createRouter({
 			path: PATH_PAGE.specialists,
 			name: 'specialists',
 			component: Specialists
+		},
+		{
+			path: `${PATH_PAGE.services}/:slug`,
+			name: 'service-direction',
+			component: ServiceDirection
+		},
+		{
+			path: `${PATH_PAGE.services}/:slug/:slug`,
+			name: 'service',
+			component: Service
+		},
+		{
+			path: PATH_PAGE.training,
+			name: 'training',
+			component: Training
 		}
 	]
 });

@@ -1,5 +1,5 @@
 <script setup>
-import { computed, defineEmits, defineProps, ref } from 'vue';
+import { computed, ref } from 'vue';
 
 const props = defineProps(['options', 'modelValue', 'placeholder']);
 const selected = ref(null);
