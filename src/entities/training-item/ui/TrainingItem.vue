@@ -1,7 +1,10 @@
 <script setup>
+import { useOrderModalStore } from '@/entities/order-modal-store';
+
 import { DownloadIcon } from '@/shared/icons';
 import { Button, Title } from '@/shared/ui';
 
+const modal = useOrderModalStore();
 defineProps(['training']);
 </script>
 
@@ -25,7 +28,7 @@ defineProps(['training']);
 				<p>{{ training.price }}</p>
 				<div class="btns">
 					<Button variable="secondary"><DownloadIcon /> программа</Button>
-					<Button variable="primary">записаться</Button>
+					<Button variable="primary" @click="modal.handleOpenModal">записаться</Button>
 				</div>
 			</div>
 		</div>

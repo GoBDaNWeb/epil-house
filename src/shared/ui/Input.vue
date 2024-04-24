@@ -8,7 +8,6 @@ const value = computed({
 	get: () => props.modelValue,
 	set: val => emit('update:modelValue', val)
 });
-
 defineExpose({ value });
 </script>
 
@@ -24,7 +23,7 @@ defineExpose({ value });
 		@input="$emit('update:modelValue', $event.target.value)"
 	/>
 	<input
-		v-else
+		v-else-if="type === 'text'"
 		class="input"
 		:class="error ? 'error' : ''"
 		:type="type"
@@ -32,6 +31,10 @@ defineExpose({ value });
 		:value="modelValue"
 		@input="$emit('update:modelValue', $event.target.value)"
 	/>
+	<label v-else-if="type === 'file'" class="input file">
+		<input :class="error ? 'error' : ''" :type="type" />
+		<p>{{ placeholder }}</p>
+	</label>
 </template>
 
 <style lang="scss" scoped>
@@ -43,10 +46,43 @@ defineExpose({ value });
 .input.error {
 	border-color: var(--pink-back-color) !important;
 }
+.input.file {
+	border-color: var(--gray-color);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 50px;
+	cursor: pointer;
+	transition: var(--trs-300);
+	&:hover {
+		background: var(--pink-color);
+		border-color: var(--pink-color);
+		p {
+			color: var(--white-color);
+		}
+	}
+	&:active {
+		box-shadow: var(--shadow-inset);
+	}
+	input {
+		display: none;
+	}
+	p {
+		transition: var(--trs-300);
+
+		color: var(--gray-color);
+		text-transform: none;
+		opacity: 1;
+		font-weight: 600;
+		font-size: 15px;
+		line-height: 19px;
+		text-transform: uppercase;
+	}
+}
 .input {
 	outline: none;
 	background: var(--white-color);
-	border: 1px solid rgba(255, 255, 255, 0.2);
+	border: 1px solid var(--gray-color);
 	font-size: 16px;
 	line-height: 20px;
 	font-weight: 400;

@@ -7,7 +7,8 @@ export const stockList = [
 		text: '<p>Скидка при заказе абонемента на лазерную (диодную) эпиляцию.</p><br><p> Мы ценим наших постонных клиентов и делаем все, чтобы посещение нашего салона было для Вас не только приятным, но и самым выгодным!</p>',
 		btn: 'заказать абонемент',
 		date: 'бессрочно',
-		tab: ['0', '1', '2', '3']
+		tab: ['0', '1', '2', '3'],
+		btnFnType: 'season-ticket'
 	},
 	{
 		img: '/images/home/stock/2.jpg',
@@ -17,7 +18,8 @@ export const stockList = [
 		smText: 'Все салоны',
 		date: 'до 20 мая 2024',
 		btn: 'записаться',
-		tab: ['0']
+		tab: ['0'],
+		btnFnType: 'order'
 	},
 	{
 		img: '/images/home/stock/3.jpg',
@@ -29,7 +31,8 @@ export const stockList = [
 		oldPrice: '2 500 ₽',
 		date: 'до 20 мая 2024',
 		btn: 'записаться',
-		tab: ['0', '1']
+		tab: ['0', '1'],
+		btnFnType: 'order'
 	},
 	{
 		img: '/images/home/stock/2.jpg',
@@ -39,7 +42,8 @@ export const stockList = [
 		smText: 'Все салоны',
 		date: 'до 20 мая 2024',
 		btn: 'записаться',
-		tab: ['0', '3']
+		tab: ['0', '3'],
+		btnFnType: 'order'
 	},
 	{
 		img: '/images/home/stock/3.jpg',
@@ -51,7 +55,8 @@ export const stockList = [
 		oldPrice: '2 500 ₽',
 		date: 'до 20 мая 2024',
 		btn: 'записаться',
-		tab: ['0', '3']
+		tab: ['0', '3'],
+		btnFnType: 'order'
 	},
 	{
 		img: '/images/home/stock/2.jpg',
@@ -61,7 +66,8 @@ export const stockList = [
 		smText: 'Все салоны',
 		date: 'до 20 мая 2024',
 		btn: 'записаться',
-		tab: ['0', '2']
+		tab: ['0', '2'],
+		btnFnType: 'order'
 	},
 	{
 		img: '/images/home/stock/3.jpg',
@@ -73,6 +79,7 @@ export const stockList = [
 		oldPrice: '2 500 ₽',
 		date: 'до 20 мая 2024',
 		btn: 'записаться',
-		tab: ['0', '1']
+		tab: ['0', '1'],
+		btnFnType: 'order'
 	}
 ];

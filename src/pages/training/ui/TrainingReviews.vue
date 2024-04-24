@@ -5,11 +5,14 @@ import { ref } from 'vue';
 import { Swiper } from '@/widgets/swiper';
 
 import { ReviewItem } from '@/entities/review-item';
+import { useReviewModalStore } from '@/entities/review-modal-store';
 
 import { ArrowLeftIcon, ArrowRightIcon } from '@/shared/icons';
 import { Button, Title } from '@/shared/ui';
 
 import { reviewsList } from '../config';
+
+const modal = useReviewModalStore();
 
 const prev = ref(null);
 const next = ref(null);
@@ -20,7 +23,7 @@ const next = ref(null);
 		<div class="top container">
 			<Title variant="h4">отзывы</Title>
 			<div class="navigation">
-				<Button variable="primary"> оставить отзыв </Button>
+				<Button variable="primary" @click="modal.handleOpenModal"> оставить отзыв </Button>
 				<div class="swiper-navigation">
 					<button ref="prev"><ArrowLeftIcon /></button>
 					<button ref="next"><ArrowRightIcon /></button>

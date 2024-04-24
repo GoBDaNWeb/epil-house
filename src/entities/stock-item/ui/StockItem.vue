@@ -1,7 +1,21 @@
 <script setup>
+import { useOrderModalStore } from '@/entities/order-modal-store';
+import { useSeasonTicketModalStore } from '@/entities/season-ticket-modal-store';
+
 import { Button } from '@/shared/ui';
 
-defineProps(['stock']);
+const seasonTicketModal = useSeasonTicketModalStore();
+const orderModal = useOrderModalStore();
+const props = defineProps(['stock']);
+
+const handleOpenModal = () => {
+	console.log(props.stock);
+	if (props.stock.btnFnType === 'order') {
+		orderModal.handleOpenModal();
+	} else {
+		seasonTicketModal.handleOpenModal();
+	}
+};
 </script>
 
 <template>
@@ -27,7 +41,7 @@ defineProps(['stock']);
 				</div>
 			</div>
 
-			<Button variable="primary" v-if="stock.btn">{{ stock.btn }}</Button>
+			<Button variable="primary" v-if="stock.btn" @click="handleOpenModal">{{ stock.btn }}</Button>
 		</div>
 	</div>
 </template>

@@ -3,3 +3,4 @@ export * from './hero';
 export * from './equipment';
 export * from './medication';
 export * from './questions';
+export * from './result';

@@ -5,6 +5,8 @@ import ServiceFaq from './ServiceFaq.vue';
 import ServiceGallery from './ServiceGallery.vue';
 import ServiceInfo from './ServiceInfo.vue';
 import ServiceMedication from './ServiceMedication.vue';
+import ServiceResult1 from './ServiceResult1.vue';
+import ServiceResult2 from './ServiceResult2.vue';
 import ServiceSubscribe from './ServiceSubscribe.vue';
 import { onMounted, ref } from 'vue';
 
@@ -28,6 +30,8 @@ import { breadcrumbsList, heroImages } from '../config';
 		<ServiceAbout />
 		<ServiceSubscribe />
 		<ServiceInfo />
+		<ServiceResult1 />
+		<ServiceResult2 />
 		<ServiceEquipments />
 		<ServiceMedication />
 		<ServiceFaq />
