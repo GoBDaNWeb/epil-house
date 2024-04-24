@@ -82,7 +82,7 @@ defineExpose({ value });
 .input {
 	outline: none;
 	background: var(--white-color);
-	border: 1px solid var(--gray-color);
+	border: none;
 	font-size: 16px;
 	line-height: 20px;
 	font-weight: 400;

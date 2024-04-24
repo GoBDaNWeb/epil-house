@@ -9,7 +9,6 @@ const orderModal = useOrderModalStore();
 const props = defineProps(['stock']);
 
 const handleOpenModal = () => {
-	console.log(props.stock);
 	if (props.stock.btnFnType === 'order') {
 		orderModal.handleOpenModal();
 	} else {
