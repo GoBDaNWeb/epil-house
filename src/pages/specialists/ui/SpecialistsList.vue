@@ -65,7 +65,28 @@ watch(
 	</div>
 </template>
 
+<style lang="scss">
+@import '@/shared/styles/vars';
+
+.specialists-list {
+	.specialists-list-inner {
+		.specialist-item {
+			.content {
+				.btns {
+					@media (max-width: $mob) {
+						flex-direction: column;
+						gap: 5px;
+						align-items: flex-start;
+					}
+				}
+			}
+		}
+	}
+}
+</style>
 <style lang="scss" scoped>
+@import '@/shared/styles/vars';
+
 .specialists-list {
 	margin-top: 30px;
 	.specialists-list-inner {
@@ -73,6 +94,14 @@ watch(
 		grid-template-columns: repeat(4, 1fr);
 		column-gap: 30px;
 		row-gap: 80px;
+		@media (max-width: $tab) {
+			grid-template-columns: repeat(3, 1fr);
+			column-gap: 20px;
+			row-gap: 50px;
+		}
+		@media (max-width: $tab-sm) {
+			grid-template-columns: repeat(2, 1fr);
+		}
 	}
 	.navigation {
 		display: flex;

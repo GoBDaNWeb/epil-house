@@ -68,9 +68,40 @@ body {
 .swiper-button-disabled {
 	opacity: 0;
 }
+.swiper-pagination.pink {
+	.swiper-pagination-bullet {
+		background: var(--pink-light-back-color);
+	}
+}
+.swiper-pagination {
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	margin-top: 20px;
+	gap: 15px;
+	position: relative;
+	display: none;
+	@media (max-width: $tab) {
+		display: flex;
+	}
+	.swiper-pagination-bullet-active {
+		background: var(--gray-color) !important;
+	}
+	.swiper-pagination-bullet {
+		width: 8px;
+		height: 10px;
+		border-radius: 50%;
+		background: var(--white-color);
+		opacity: 1;
+		transition: var(--trs-300);
+	}
+}
 .swiper-navigation {
 	border: 1px solid var(--gray-line-color);
 	border-radius: 10px;
+	@media (max-width: $tab) {
+		display: none;
+	}
 	.swiper-button-disabled {
 		opacity: 0.3;
 		pointer-events: none;

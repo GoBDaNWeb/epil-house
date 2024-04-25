@@ -6,7 +6,7 @@ import { useMenuStore } from '@/entities/menu-store';
 import { useOrderModalStore } from '@/entities/order-modal-store';
 
 import { PATH_PAGE } from '@/shared/config';
-import { BurgerIcon, LogoIcon, WhatsappIcon } from '@/shared/icons';
+import { BurgerIcon, LogoIcon, MailIcon, PhoneIcon, WhatsappIcon } from '@/shared/icons';
 import { Button } from '@/shared/ui';
 
 import { routes } from '../config';
@@ -82,11 +82,21 @@ window.addEventListener('scroll', controlNavbar);
 					<Button variable="primary" @click="modal.handleOpenModal">записаться</Button>
 				</div>
 			</div>
+			<div class="info-mob">
+				<Button :variable="active || beige ? 'square-beige' : 'square-white'"
+					><a href="#"><PhoneIcon /></a
+				></Button>
+				<Button variable="square-primary">
+					<a href="#"><MailIcon /></a
+				></Button>
+			</div>
 		</div>
 	</header>
 </template>
 
 <style lang="scss">
+@import '@/shared/styles/vars';
+
 .header {
 	.header-inner {
 		.center {
@@ -109,8 +119,8 @@ window.addEventListener('scroll', controlNavbar);
 }
 </style>
 <style lang="scss" scoped>
-.header.beige {
-}
+@import '@/shared/styles/vars';
+
 .header.active {
 	background: var(--white-color);
 	box-shadow: var(--shadow);
@@ -123,20 +133,32 @@ window.addEventListener('scroll', controlNavbar);
 	left: 0;
 	right: 0;
 	transition: var(--trs-300);
+	@media (max-width: $tab-sm) {
+		height: 60px;
+	}
 	.header-inner {
 		display: flex;
 		align-items: flex-end;
 		justify-content: space-between;
 		height: 100%;
+		@media (max-width: $tab) {
+			align-items: center;
+		}
 		.navigation {
 			display: flex;
 			align-items: center;
 			gap: 30px;
 			padding-bottom: 13px;
+			@media (max-width: $tab) {
+				padding-bottom: 0;
+			}
 			nav {
 				display: flex;
 				align-items: center;
 				gap: 30px;
+				@media (max-width: $desktop-sm) {
+					display: none;
+				}
 				a {
 					text-transform: uppercase;
 					transition: var(--trs-300);
@@ -156,6 +178,31 @@ window.addEventListener('scroll', controlNavbar);
 			justify-content: center;
 			.logo {
 				margin-left: 115px;
+				width: 150px;
+				height: 70px;
+				@media (max-width: $desktop-sm) {
+					margin-left: 35px;
+				}
+				@media (max-width: $tab-sm) {
+					width: 85px;
+					height: 40px;
+				}
+				svg {
+					width: 100%;
+					height: 100%;
+				}
+			}
+		}
+		.info-mob {
+			display: none;
+			align-items: center;
+			gap: 5px;
+			padding-bottom: 13px;
+			@media (max-width: $desktop-sm) {
+				display: flex;
+			}
+			@media (max-width: $tab) {
+				padding-bottom: 0;
 			}
 		}
 		.info {
@@ -163,6 +210,9 @@ window.addEventListener('scroll', controlNavbar);
 			align-items: center;
 			gap: 30px;
 			padding-bottom: 13px;
+			@media (max-width: $desktop-sm) {
+				display: none;
+			}
 
 			.time {
 				font-weight: 600;

@@ -12,7 +12,12 @@ defineProps(['breadcrumbsList', 'title']);
 </template>
 
 <style lang="scss" scoped>
+@import '@/shared/styles/vars';
+
 .hero {
 	padding-top: 140px;
+	@media (max-width: $tab-sm) {
+		padding-top: 100px;
+	}
 }
 </style>

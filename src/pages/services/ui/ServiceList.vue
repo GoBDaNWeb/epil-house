@@ -19,11 +19,17 @@ import { additionServices, services } from '../config';
 </template>
 
 <style lang="scss" scoped>
+@import '@/shared/styles/vars';
+
 .service-list {
 	margin-top: 100px;
 	padding-bottom: 100px;
 	position: relative;
 	z-index: 2;
+	@media (max-width: $tab) {
+		margin-top: 80px;
+		padding-bottom: 80px;
+	}
 	&:after {
 		content: '';
 		position: absolute;
@@ -38,11 +44,19 @@ import { additionServices, services } from '../config';
 		flex-direction: column;
 		gap: 100px;
 		margin-bottom: 100px;
+		@media (max-width: $tab) {
+			margin-bottom: 50px;
+			gap: 50px;
+		}
 	}
 	.additional-services {
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
 		gap: 30px;
+		@media (max-width: $tab) {
+			grid-template-columns: repeat(1, 1fr);
+			gap: 10px;
+		}
 	}
 }
 </style>

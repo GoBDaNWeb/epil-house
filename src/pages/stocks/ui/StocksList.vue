@@ -1,13 +1,16 @@
 <script setup>
+import { useWindowSize } from '@vueuse/core';
 import { reactive, ref } from 'vue';
 
 import { StockItem } from '@/entities/stock-item';
 
 import { Tab } from '@/shared/ui';
+import { scroll } from '@/shared/utils';
 
 import { stockList, tabs } from '../config';
 
 const currentTab = reactive({ tab: 0 });
+const { width } = useWindowSize();
 
 const handleSelectTab = index => {
 	currentTab.tab = index;
@@ -21,7 +24,7 @@ const hadleShowStocks = tab => {
 <template>
 	<div class="stock-list">
 		<div class="stock-list-inner container">
-			<div class="tabs">
+			<div class="tabs" @mouseenter="e => scroll(e, width)">
 				<Tab
 					v-for="tab in tabs"
 					:key="tab.tab"
@@ -44,6 +47,8 @@ const hadleShowStocks = tab => {
 </template>
 
 <style lang="scss" scoped>
+@import '@/shared/styles/vars';
+
 .stock-list {
 	padding-bottom: 80px;
 	position: relative;
@@ -63,21 +68,41 @@ const hadleShowStocks = tab => {
 			gap: 10px;
 			justify-content: center;
 			margin-top: 40px;
+			@media (max-width: $tab) {
+				justify-content: flex-start;
+				flex-wrap: nowrap;
+				overflow: auto;
+				scrollbar-width: thin;
+				scrollbar-color: rgba(73, 84, 104, 0) rgba(0, 0, 0, 0);
+				&::-webkit-scrollbar {
+					height: 0px;
+				}
+			}
 		}
 		.list {
 			margin-top: 30px;
 			display: flex;
 			flex-wrap: wrap;
 			gap: 30px;
+			@media (max-width: $tab) {
+				flex-direction: column;
+				gap: 20px;
+			}
 			.stock-item {
 				border: 1px solid var(--gray-line-color);
 				height: auto;
 				&:nth-child(7n + 1) {
 					flex: 1 1 49%;
+					@media (max-width: $tab) {
+						flex: auto;
+					}
 				}
 				&:nth-child(7n + 2),
 				&:nth-child(7n + 3) {
 					flex: 1 1 23%;
+					@media (max-width: $tab) {
+						flex: auto;
+					}
 				}
 
 				&:nth-child(7n + 4),
@@ -85,6 +110,9 @@ const hadleShowStocks = tab => {
 				&:nth-child(7n + 6),
 				&:nth-child(7n + 7) {
 					flex: 1 1 23%;
+					@media (max-width: $tab) {
+						flex: auto;
+					}
 				}
 			}
 		}

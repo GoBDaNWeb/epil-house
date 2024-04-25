@@ -9,6 +9,8 @@ defineProps(['isActive']);
 </template>
 
 <style lang="scss" scoped>
+@import '@/shared/styles/vars';
+
 .tab.active {
 	color: var(--white-color);
 	background: var(--pink-color);
@@ -24,5 +26,12 @@ defineProps(['isActive']);
 	transition: var(--trs-300);
 	border-radius: 10px;
 	color: var(--gray-color);
+	white-space: nowrap;
+	@media (max-width: $tab) {
+		height: 31px;
+		padding: 0 15px;
+		font-size: 15px;
+		line-height: 21px;
+	}
 }
 </style>

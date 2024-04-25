@@ -46,10 +46,16 @@ import { Title } from '@/shared/ui';
 </template>
 
 <style lang="scss" scoped>
+@import '@/shared/styles/vars';
+
 .service-info {
 	margin-top: 100px;
 	padding-bottom: 100px;
 	position: relative;
+	@media (max-width: $tab) {
+		margin-top: 80px;
+		padding-bottom: 80px;
+	}
 	&::after {
 		content: '';
 		position: absolute;
@@ -63,23 +69,40 @@ import { Title } from '@/shared/ui';
 		display: grid;
 		grid-template-columns: 0.4fr 1fr;
 		gap: 30px;
+		@media (max-width: $tab-sm) {
+			grid-template-columns: 1fr;
+			gap: 20px;
+		}
 		.title-block {
 			position: relative;
 			h4 {
 				text-align: left;
 				position: sticky;
 				top: 150px;
+				@media (max-width: $tab) {
+					top: 100px;
+				}
 			}
 		}
 		.text-block {
 			h5 {
 				margin-bottom: 30px;
+				@media (max-width: $tab) {
+					margin-bottom: 20px;
+				}
 			}
 			p {
 				margin-bottom: 50px;
 				font-weight: 400;
 				font-size: 16px;
 				line-height: 22px;
+				&:last-child {
+					margin-bottom: 0;
+				}
+				@media (max-width: $tab) {
+					font-size: 15px;
+					line-height: 21px;
+				}
 			}
 		}
 	}

@@ -16,6 +16,7 @@ const modal = useReviewModalStore();
 
 const prev = ref(null);
 const next = ref(null);
+const pagination = ref(null);
 </script>
 
 <template>
@@ -39,22 +40,47 @@ const next = ref(null);
 					:next="next"
 					:spaceBetween="30"
 					:allowTouchMove="true"
+					:pagination="pagination"
+					:breakpoints="{
+						0: {
+							slidesPerView: 1,
+							spaceBetween: 20
+						},
+						767: {
+							slidesPerView: 1.2,
+							spaceBetween: 20
+						},
+						1024: {
+							slidesPerView: 1.4,
+							spaceBetween: 30
+						}
+					}"
 				>
 					<SwiperSlide v-for="(review, index) in reviewsList" :key="index">
 						<ReviewItem :review="review" />
 					</SwiperSlide>
 				</Swiper>
+				<div ref="pagination" class="swiper-pagination"></div>
 			</div>
+		</div>
+		<div class="btn-mob container">
+			<Button variable="primary" @click="modal.handleOpenModal"> оставить отзыв </Button>
 		</div>
 	</div>
 </template>
 
 <style lang="scss" scoped>
+@import '@/shared/styles/vars';
+
 .training-reviews {
 	padding-top: 130px;
 	background: var(--pink-light-back-color);
 	padding-bottom: 100px;
 	border-radius: 0 0 20px 20px;
+	@media (max-width: $tab) {
+		padding-top: 80px;
+		padding-bottom: 30px;
+	}
 	.top {
 		display: flex;
 		align-items: center;
@@ -66,6 +92,9 @@ const next = ref(null);
 			display: flex;
 			align-items: center;
 			gap: 30px;
+			@media (max-width: $tab) {
+				display: none;
+			}
 		}
 	}
 	.reviews-swiper-wrapper {
@@ -74,6 +103,13 @@ const next = ref(null);
 
 		.swiper {
 			overflow: visible;
+		}
+	}
+	.btn-mob {
+		display: none;
+		margin-top: 30px;
+		@media (max-width: $tab) {
+			display: block;
 		}
 	}
 }

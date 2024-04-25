@@ -44,6 +44,8 @@ const hadleShowEquipment = tab => {
 </template>
 
 <style lang="scss" scoped>
+@import '@/shared/styles/vars';
+
 .equipments-list {
 	padding-bottom: 80px;
 	position: relative;
@@ -69,6 +71,9 @@ const hadleShowEquipment = tab => {
 			display: flex;
 			flex-direction: column;
 			gap: 30px;
+			@media (max-width: $tab) {
+				gap: 50px;
+			}
 		}
 	}
 }

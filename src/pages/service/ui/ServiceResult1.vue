@@ -31,6 +31,19 @@ const next = ref(null);
 					:next="next"
 					:spaceBetween="30"
 					:allowTouchMove="true"
+					:breakpoints="{
+						0: {
+							slidesPerView: 1,
+							spaceBetween: 20
+						},
+						767: {
+							slidesPerView: 2,
+							spaceBetween: 20
+						},
+						1024: {
+							spaceBetween: 30
+						}
+					}"
 				>
 					<SwiperSlide v-for="(resut, index) in resutList1" :key="index">
 						<div class="image-container" v-for="(item, index) in resut" :key="index">
@@ -47,17 +60,23 @@ const next = ref(null);
 </template>
 
 <style lang="scss" scoped>
+@import '@/shared/styles/vars';
+
 .service-result-1 {
 	padding-top: 127px;
 	background: var(--beige-back-color);
 	padding-bottom: 103px;
 	border-radius: 0 0 20px 20px;
+	@media (max-width: $tab) {
+		padding-top: 80px;
+		padding-bottom: 80px;
+	}
 	.service-result-1-inner {
 		.top {
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
-			h3 {
+			h4 {
 				text-align: left;
 			}
 		}
@@ -71,6 +90,10 @@ const next = ref(null);
 				border-radius: 15px;
 				background: var(--white-color);
 				padding: 30px;
+				@media (max-width: $tab) {
+					gap: 20px;
+					padding: 10px;
+				}
 				.image-container {
 					padding-bottom: 12px;
 					border-bottom: 1px solid var(--gray-line-color);

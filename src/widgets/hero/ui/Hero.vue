@@ -2,6 +2,8 @@
 import { SwiperSlide } from 'swiper/vue';
 import { onMounted, ref, watch } from 'vue';
 
+import { TRUE } from 'sass';
+
 import { Swiper } from '@/widgets/swiper';
 
 import { Breadcrumbs, Button, Input, Title } from '@/shared/ui';
@@ -51,8 +53,19 @@ defineProps(['breadcrumbs', 'title', 'text', 'btnText', 'imgs', 'hasForm']);
 					:prev="null"
 					:next="null"
 					:spaceBetween="10"
-					:allowTouchMove="false"
+					:allowTouchMove="true"
 					:setSwiperRef="setSwiperRef"
+					:breakpoints="{
+						0: {
+							slidesPerView: 1,
+							allowTouchMove: true,
+							centeredSlides: false
+						},
+						767: {
+							slidesPerView: 'auto',
+							allowTouchMove: false
+						}
+					}"
 				>
 					<SwiperSlide v-for="(img, index) in imgs" :key="index">
 						<div class="image-wrapper">
@@ -66,11 +79,17 @@ defineProps(['breadcrumbs', 'title', 'text', 'btnText', 'imgs', 'hasForm']);
 </template>
 
 <style lang="scss" scoped>
+@import '@/shared/styles/vars';
+
 .hero {
 	padding-top: 140px;
 	background: var(--beige-back-color);
 	padding-bottom: 50px;
 	border-radius: 0 0 20px 20px;
+	@media (max-width: $tab-sm) {
+		padding-top: 100px;
+		padding-bottom: 30px;
+	}
 	.hero-inner {
 		display: flex;
 		flex-direction: column;
@@ -83,6 +102,11 @@ defineProps(['breadcrumbs', 'title', 'text', 'btnText', 'imgs', 'hasForm']);
 			line-height: 28px;
 			text-align: center;
 			margin-top: 50px;
+			@media (max-width: $tab) {
+				margin-top: 30px;
+				font-size: 18px;
+				line-height: 25px;
+			}
 		}
 		form {
 			width: 100%;
@@ -91,6 +115,10 @@ defineProps(['breadcrumbs', 'title', 'text', 'btnText', 'imgs', 'hasForm']);
 			justify-content: center;
 			gap: 30px;
 			margin-top: 30px;
+			@media (max-width: $tab-sm) {
+				flex-direction: column;
+				gap: 20px;
+			}
 			button,
 			input {
 				max-width: 323px;
@@ -99,12 +127,27 @@ defineProps(['breadcrumbs', 'title', 'text', 'btnText', 'imgs', 'hasForm']);
 		}
 		.hero-swiper-wrapper {
 			margin-top: 50px;
+			@media (max-width: $tab-sm) {
+				width: 100%;
+			}
 			.swiper {
 				.swiper-slide {
 					height: auto;
 					display: flex;
 					align-items: flex-end;
 					position: relative;
+					@media (max-width: $tab-sm) {
+						width: 100% !important;
+						.image-wrapper {
+							padding-bottom: 75% !important;
+							height: auto !important;
+						}
+					}
+					@media (max-width: $pre-mob) {
+						.image-wrapper {
+							padding-bottom: 100% !important;
+						}
+					}
 					&:nth-child(1) {
 						width: 323px;
 						.image-wrapper {

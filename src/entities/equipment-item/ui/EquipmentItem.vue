@@ -20,12 +20,16 @@ defineProps(['equipment']);
 </template>
 
 <style lang="scss" scoped>
+@import '@/shared/styles/vars';
+
 .equipment-item.top {
 	flex-direction: column;
+	height: 100%;
 	.content {
 		border-bottom: 1px solid var(--gray-line-color);
 		border-radius: 0 0 0 12px;
 		padding-bottom: 19px;
+		flex: 1;
 	}
 }
 .equipment-item.right {
@@ -49,12 +53,27 @@ defineProps(['equipment']);
 	display: grid;
 	grid-template-columns: 0.6fr 1fr;
 	flex-direction: row;
+	@media (max-width: $tab) {
+		display: flex;
+		flex-direction: column;
+	}
 	.content {
 		border-top: 1px solid var(--gray-line-color);
 		border-radius: 12px 0 0 0;
 		padding-top: 19px;
+		@media (max-width: $tab) {
+			padding-left: 23px;
+			padding-top: 0;
+			padding-bottom: 30px;
+			border-top: none;
+			border-bottom: 1px solid var(--gray-line-color);
+			border-radius: 0 0 0 12px;
+		}
 		&:before {
 			top: 20px;
+			@media (max-width: $tab) {
+				top: 0;
+			}
 		}
 	}
 }

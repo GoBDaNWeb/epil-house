@@ -46,6 +46,8 @@ const handleOpenModal = () => {
 </template>
 
 <style lang="scss">
+@import '@/shared/styles/vars';
+
 .stock-item {
 	.content {
 		.title {
@@ -58,12 +60,18 @@ const handleOpenModal = () => {
 				font-weight: 400;
 				font-size: 16px;
 				line-height: 22px;
+				@media (max-width: $tab) {
+					font-size: 15px;
+					line-height: 21px;
+				}
 			}
 		}
 	}
 }
 </style>
 <style lang="scss" scoped>
+@import '@/shared/styles/vars';
+
 .stock-item.full {
 	.content {
 		.title {
@@ -78,6 +86,9 @@ const handleOpenModal = () => {
 	height: 100%;
 	display: flex;
 	flex-direction: column;
+	@media (max-width: $tab) {
+		padding: 10px 10px 20px 10px;
+	}
 	.top {
 		position: relative;
 		.ticket {
@@ -87,12 +98,23 @@ const handleOpenModal = () => {
 			right: 10px;
 			top: 10px;
 			bottom: 10px;
+			@media (max-width: $tab) {
+				width: 130px;
+				height: 92px;
+				top: auto;
+				bottom: 10px;
+			}
 		}
 		.image-wrapper {
 			position: relative;
 			height: 225px;
 			border-radius: 15px;
 			overflow: hidden;
+
+			@media (max-width: $tab-sm) {
+				height: 180px;
+			}
+
 			img {
 				position: absolute;
 				width: 100%;
@@ -111,7 +133,13 @@ const handleOpenModal = () => {
 				position: absolute;
 				top: 16px;
 				left: 20px;
+				display: flex;
+				align-items: center;
 				color: var(--white-color);
+				@media (max-width: $tab) {
+					top: 10px;
+					left: 10px;
+				}
 			}
 		}
 	}
@@ -124,6 +152,10 @@ const handleOpenModal = () => {
 		flex-direction: column;
 		justify-content: space-between;
 		align-items: flex-start;
+		@media (max-width: $tab) {
+			padding: 0 10px;
+			margin-top: 20px;
+		}
 		.title {
 			margin-bottom: 15px;
 		}

@@ -50,11 +50,17 @@ const handleSetError = () => {
 </template>
 
 <style lang="scss" scoped>
+@import '@/shared/styles/vars';
+
 .consultation-form {
 	padding-top: 90px;
 	padding-bottom: 60px;
 	background: var(--pink-light-back-color);
 	position: relative;
+	@media (max-width: $tab) {
+		padding-top: 80px;
+		padding-bottom: 80px;
+	}
 	&:after {
 		content: '';
 		position: absolute;
@@ -69,10 +75,19 @@ const handleSetError = () => {
 		grid-template-columns: 0.4fr 1fr;
 		align-items: center;
 		gap: 110px;
+		@media (max-width: $tab) {
+			grid-template-columns: 1fr;
+			gap: 30px;
+		}
 		.alert {
 			display: flex;
 			align-items: center;
 			gap: 30px;
+			@media (max-width: $tab-sm) {
+				flex-direction: column;
+				gap: 20px;
+				align-items: flex-start;
+			}
 			.image-wrapper {
 				position: relative;
 				width: 120px;
@@ -81,6 +96,12 @@ const handleSetError = () => {
 				min-height: 150px;
 				max-width: 120px;
 				max-height: 150px;
+				@media (max-width: $tab-sm) {
+					min-width: 93px;
+					min-height: 116px;
+					max-width: 93px;
+					max-height: 116px;
+				}
 				img {
 					position: absolute;
 					width: 100%;
@@ -95,15 +116,33 @@ const handleSetError = () => {
 			display: flex;
 			flex-direction: column;
 			gap: 20px;
+			@media (max-width: $tab) {
+				align-items: center;
+				max-width: 500px;
+				margin: auto;
+			}
 			.inputs {
 				display: grid;
 				grid-template-columns: 1fr 0.65fr 0.65fr;
 				gap: 30px;
+				@media (max-width: $desktop-sm) {
+					gap: 15px;
+					grid-template-columns: 1fr 0.65fr;
+				}
+				@media (max-width: $tab) {
+					width: 100%;
+					gap: 20px;
+					grid-template-columns: 1fr;
+				}
 			}
 			p {
 				font-weight: 400;
 				font-size: 14px;
 				line-height: 16px;
+				@media (max-width: $tab) {
+					font-size: 12px;
+					line-height: 16px;
+				}
 				a {
 					text-decoration: underline;
 				}

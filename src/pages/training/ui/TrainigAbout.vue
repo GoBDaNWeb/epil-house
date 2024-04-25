@@ -11,6 +11,7 @@ import { aboutSwiper, advantages } from '../config';
 
 const prev = ref(null);
 const next = ref(null);
+const pagination = ref(null);
 </script>
 
 <template>
@@ -49,6 +50,7 @@ const next = ref(null);
 				:next="next"
 				:spaceBetween="0"
 				:allowTouchMove="true"
+				:pagination="pagination"
 			>
 				<SwiperSlide v-for="(img, index) in aboutSwiper" :key="index">
 					<div class="image-wrapper">
@@ -60,35 +62,60 @@ const next = ref(null);
 				<button ref="prev"><ArrowLeftIcon /></button>
 				<button ref="next"><ArrowRightIcon /></button>
 			</div>
+			<div ref="pagination" class="swiper-pagination pink"></div>
 		</div>
 	</div>
 </template>
 
 <style lang="scss" scoped>
+@import '@/shared/styles/vars';
+
 .training-about {
 	display: flex;
 	gap: 30px;
 	margin-top: 100px;
+	@media (max-width: $tab-sm) {
+		margin-top: 80px;
+		flex-direction: column;
+	}
 	.text-block {
 		width: 48%;
+		@media (max-width: $tab) {
+			width: 100%;
+		}
 		h4 {
 			text-align: left;
 			margin-bottom: 30px;
+			@media (max-width: $tab) {
+				margin-bottom: 20px;
+			}
 		}
 		h6 {
 			margin-bottom: 30px;
 			text-align: left;
+			@media (max-width: $tab) {
+				margin-bottom: 20px;
+			}
 		}
 		p {
 			font-weight: 400;
 			font-size: 16px;
 			line-height: 22px;
+			@media (max-width: $tab) {
+				font-size: 15px;
+				line-height: 21px;
+			}
 		}
 		.advantages-list {
 			display: grid;
 			grid-template-columns: repeat(2, 1fr);
 			margin-top: 50px;
 			gap: 20px;
+			@media (max-width: $tab-sm) {
+				grid-template-columns: repeat(1, 1fr);
+				margin-top: 30px;
+				gap: 15px;
+			}
 			.advantage-item {
 				display: flex;
 				align-items: center;
@@ -101,12 +128,24 @@ const next = ref(null);
 					display: flex;
 					align-items: center;
 					justify-content: center;
+					@media (max-width: $tab) {
+						width: 40px;
+						height: 50px;
+						img {
+							width: 60%;
+							height: 80%;
+						}
+					}
 				}
 				p {
 					font-weight: 600;
 					font-size: 20px;
 					line-height: 23px;
 					max-width: 200px;
+					@media (max-width: $tab) {
+						font-size: 16px;
+						line-height: 18px;
+					}
 				}
 			}
 		}
@@ -117,9 +156,14 @@ const next = ref(null);
 		overflow: hidden;
 		position: relative;
 		height: fit-content;
+		@media (max-width: $tab) {
+			width: 100%;
+		}
 		.swiper-slide {
 			padding-bottom: 80%;
 			position: relative;
+			border-radius: 20px;
+			overflow: hidden;
 			.image-wrapper {
 				height: 100%;
 				img {

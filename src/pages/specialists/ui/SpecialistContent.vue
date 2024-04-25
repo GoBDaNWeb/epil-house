@@ -1,13 +1,17 @@
 <script setup>
 import SpecialistsList from './SpecialistsList.vue';
+import { useWindowSize } from '@vueuse/core';
 import { reactive, ref } from 'vue';
 
 import { SpecialistItem } from '@/entities/specialist-item';
 
 import { CloseIcon } from '@/shared/icons';
 import { Button, Tab } from '@/shared/ui';
+import { scroll } from '@/shared/utils';
 
 import { tabs } from '../config';
+
+const { width } = useWindowSize();
 
 const tabsList = reactive({
 	selectTab: '',
@@ -46,7 +50,7 @@ const isActiveTab = index => {
 	<div class="specialists-content">
 		<div class="specialists-content-inner container">
 			<div class="top">
-				<div class="tabs">
+				<div class="tabs" @mouseenter="e => scroll(e, width)">
 					<Tab
 						v-for="tab in tabs"
 						:key="tab.tab"
@@ -64,9 +68,12 @@ const isActiveTab = index => {
 </template>
 
 <style lang="scss" scoped>
+@import '@/shared/styles/vars';
+
 .specialists-content {
 	padding-bottom: 80px;
 	position: relative;
+
 	&::after {
 		content: '';
 		position: absolute;
@@ -85,6 +92,15 @@ const isActiveTab = index => {
 				gap: 10px;
 				margin-top: 40px;
 				margin-bottom: 20px;
+				@media (max-width: $tab) {
+					flex-wrap: nowrap;
+					overflow: auto;
+					scrollbar-width: thin;
+					scrollbar-color: rgba(73, 84, 104, 0) rgba(0, 0, 0, 0);
+					&::-webkit-scrollbar {
+						height: 0px;
+					}
+				}
 			}
 			& > button {
 				height: 42px;

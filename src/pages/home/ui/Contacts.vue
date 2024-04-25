@@ -13,10 +13,16 @@ import { contactsList } from '@/shared/config';
 </template>
 
 <style lang="scss" scoped>
+@import '@/shared/styles/vars';
+
 .contacts {
 	margin-top: 108px;
 	padding-bottom: 130px;
 	position: relative;
+	@media (max-width: $tab) {
+		margin-top: 80px;
+		padding-bottom: 80px;
+	}
 	&:after {
 		content: '';
 		height: 20px;
@@ -30,6 +36,10 @@ import { contactsList } from '@/shared/config';
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
 		gap: 30px;
+		@media (max-width: $tab) {
+			grid-template-columns: repeat(1, 1fr);
+			gap: 60px;
+		}
 	}
 }
 </style>

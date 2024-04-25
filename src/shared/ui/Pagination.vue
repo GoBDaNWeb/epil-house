@@ -5,7 +5,7 @@ import { ArrowLeftIcon, ArrowRightIcon } from '@/shared/icons';
 <template>
 	<div class="pagination-wrapper">
 		<div class="pagination">
-			<button v-for="(_, index) in [...Array(9)]" :key="index">{{ index + 1 }}</button>
+			<button v-for="(_, index) in [...Array(4)]" :key="index">{{ index + 1 }}</button>
 		</div>
 		<div class="navigation">
 			<button ref="prev"><ArrowLeftIcon /></button>

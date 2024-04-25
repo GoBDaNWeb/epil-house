@@ -20,47 +20,68 @@ const next = ref(null);
 
 <template>
 	<div class="stocks">
-		<div class="container">
-			<div class="top">
-				<Title variant="h3">акции</Title>
-				<div class="navigation">
-					<Button @click="router.push(PATH_PAGE.stocks)" variable="outline">
-						все акции <ArrowRightIcon />
-					</Button>
-					<div class="swiper-navigation">
-						<button ref="prev"><ArrowLeftIcon /></button>
-						<button ref="next"><ArrowRightIcon /></button>
-					</div>
+		<div class="top container">
+			<Title variant="h3">акции</Title>
+			<div class="navigation">
+				<Button @click="router.push(PATH_PAGE.stocks)" variable="outline">
+					все акции <ArrowRightIcon />
+				</Button>
+				<div class="swiper-navigation">
+					<button ref="prev"><ArrowLeftIcon /></button>
+					<button ref="next"><ArrowRightIcon /></button>
 				</div>
 			</div>
-			<div class="stocks-swiper-wrapper">
-				<Swiper
-					:slides-per-view="'auto'"
-					:centered-slides="false"
-					:prev="prev"
-					:next="next"
-					:spaceBetween="30"
-					:allowTouchMove="true"
+		</div>
+		<div class="stocks-swiper-wrapper container">
+			<Swiper
+				:slides-per-view="'auto'"
+				:centered-slides="false"
+				:prev="prev"
+				:next="next"
+				:spaceBetween="30"
+				:allowTouchMove="true"
+				:pagination="null"
+				:breakpoints="{
+					0: {
+						slidesPerView: 1.2,
+						spaceBetween: 20
+					},
+					1024: {
+						slidesPerView: 'auto',
+						spaceBetween: 30
+					}
+				}"
+			>
+				<SwiperSlide
+					v-for="(stock, index) in stockList"
+					:key="index"
+					:class="stock.content ? 'full' : ''"
 				>
-					<SwiperSlide
-						v-for="(stock, index) in stockList"
-						:key="index"
-						:class="stock.content ? 'full' : ''"
-					>
-						<StockItem :stock="stock" />
-					</SwiperSlide>
-				</Swiper>
-			</div>
+					<StockItem :stock="stock" />
+				</SwiperSlide>
+			</Swiper>
+		</div>
+		<div class="btn-mob container">
+			<Button @click="router.push(PATH_PAGE.stocks)" variable="outline">
+				все акции <ArrowRightIcon />
+			</Button>
 		</div>
 	</div>
 </template>
 
 <style lang="scss" scoped>
+@import '@/shared/styles/vars';
+
 .stocks {
 	background: var(--beige-back-color);
 	padding-top: 110px;
 	padding-bottom: 100px;
 	border-radius: 0 0 20px 20px;
+	@media (max-width: $tab) {
+		padding-top: 80px;
+		padding-bottom: 23px;
+		overflow: hidden;
+	}
 	.top {
 		display: flex;
 		align-items: center;
@@ -72,18 +93,38 @@ const next = ref(null);
 			display: flex;
 			align-items: center;
 			gap: 30px;
+			@media (max-width: $tab) {
+				display: none;
+			}
 		}
 	}
 	.stocks-swiper-wrapper {
 		margin-top: 30px;
+
 		.swiper {
+			@media (max-width: $tab) {
+				overflow: visible;
+			}
 			.swiper-slide.full {
 				width: 675px;
+				@media (max-width: $tab) {
+					width: auto;
+				}
 			}
 			.swiper-slide {
 				height: auto;
 				width: 322px;
+				@media (max-width: $tab) {
+					width: auto;
+				}
 			}
+		}
+	}
+	.btn-mob {
+		display: none;
+		margin-top: 20px;
+		@media (max-width: $tab) {
+			display: block;
 		}
 	}
 }

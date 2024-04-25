@@ -17,6 +17,8 @@ defineProps(['price']);
 </template>
 
 <style lang="scss" scoped>
+@import '@/shared/styles/vars';
+
 .price-item {
 	padding-top: 35px;
 	border-top: 1px solid var(--gray-line-color);
@@ -26,6 +28,10 @@ defineProps(['price']);
 		display: flex;
 		flex-direction: column;
 		gap: 25px;
+		@media (max-width: $tab) {
+			margin-top: 20px;
+			gap: 15px;
+		}
 		li {
 			display: flex;
 			align-items: center;
@@ -34,11 +40,19 @@ defineProps(['price']);
 				font-weight: 400;
 				font-size: 20px;
 				line-height: 28px;
+				@media (max-width: $tab) {
+					font-size: 15px;
+					line-height: 21px;
+				}
 			}
 			span {
 				font-weight: 600;
 				font-size: 20px;
 				line-height: 28px;
+				@media (max-width: $tab) {
+					font-size: 15px;
+					line-height: 21px;
+				}
 			}
 		}
 	}

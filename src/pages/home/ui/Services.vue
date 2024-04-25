@@ -45,11 +45,17 @@ import { services } from '../config';
 }
 </style>
 <style lang="scss" scoped>
+@import '@/shared/styles/vars';
+
 .services {
 	margin-top: 100px;
 	background: var(--white-color);
 	position: relative;
 	padding-bottom: 105px;
+	@media (max-width: $tab) {
+		margin-top: 80px;
+		padding-bottom: 80px;
+	}
 	&:after {
 		content: '';
 		bottom: -20px;
@@ -62,25 +68,43 @@ import { services } from '../config';
 	& h3 {
 		text-align: left;
 		margin-bottom: 25px;
+		@media (max-width: $tab) {
+			text-align: center;
+			margin-bottom: 30px;
+		}
 	}
 
 	.services-list {
 		display: flex;
 		flex-wrap: wrap;
 		gap: 30px;
+		@media (max-width: $tab) {
+			flex-direction: column;
+			flex-wrap: nowrap;
+			gap: 10px;
+		}
 		.service-item {
 			height: 250px;
 			position: relative;
+			@media (max-width: $tab-sm) {
+				height: 150px;
+			}
 			&:nth-child(7n + 1),
 			&:nth-child(7n + 2),
 			&:nth-child(7n + 3),
 			&:nth-child(7n + 4) {
 				flex: 1 1 45%;
+				@media (max-width: $tab) {
+					flex: auto;
+				}
 			}
 			&:nth-child(7n + 5),
 			&:nth-child(7n + 6),
 			&:nth-child(7n + 7) {
 				flex: 1 1 30%;
+				@media (max-width: $tab) {
+					flex: auto;
+				}
 			}
 		}
 	}
@@ -90,6 +114,12 @@ import { services } from '../config';
 		gap: 52px;
 		justify-content: center;
 		margin-top: 105px;
+		@media (max-width: $tab) {
+			flex-direction: column;
+			margin-top: 50px;
+			gap: 30px;
+			align-items: flex-start;
+		}
 		h4 {
 			text-align: left;
 		}

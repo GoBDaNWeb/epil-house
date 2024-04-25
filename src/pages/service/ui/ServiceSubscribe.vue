@@ -54,17 +54,29 @@ const formValues = reactive({
 </template>
 
 <style lang="scss" scoped>
+@import '@/shared/styles/vars';
+
 .service-subscribe {
 	margin-top: 100px;
+	@media (max-width: $tab) {
+		margin-top: 80px;
+	}
 	.service-subscribe-inner {
 		display: grid;
 		grid-template-columns: 0.4fr 1fr;
 		gap: 30px;
+		@media (max-width: $tab-sm) {
+			grid-template-columns: 1fr;
+			gap: 20px;
+		}
 		.title-block-wrapper {
 			position: relative;
 			.title-block {
 				position: sticky;
 				top: 150px;
+				@media (max-width: $tab) {
+					top: 100px;
+				}
 				h4 {
 					text-align: left;
 				}
@@ -73,6 +85,11 @@ const formValues = reactive({
 					font-weight: 400;
 					font-size: 16px;
 					line-height: 22px;
+					@media (max-width: $tab) {
+						font-size: 15px;
+						line-height: 21px;
+						margin-top: 20px;
+					}
 				}
 			}
 		}
@@ -83,10 +100,18 @@ const formValues = reactive({
 				padding: 60px;
 				display: flex;
 				flex-direction: column;
+				@media (max-width: $tab) {
+					padding: 20px 30px;
+				}
 				.form-info {
 					margin-bottom: 50px;
 					display: grid;
 					grid-template-columns: repeat(3, 1fr);
+					gap: 20px;
+					@media (max-width: $tab-sm) {
+						grid-template-columns: repeat(1, 1fr);
+						margin-bottom: 20px;
+					}
 					.info-item {
 						display: flex;
 						flex-direction: column;
@@ -94,11 +119,19 @@ const formValues = reactive({
 							font-weight: 700;
 							font-size: 20px;
 							line-height: 28px;
+							@media (max-width: $tab) {
+								font-size: 18px;
+								line-height: 25px;
+							}
 						}
 						p {
 							font-weight: 400;
 							font-size: 14px;
 							line-height: 16px;
+							@media (max-width: $tab) {
+								font-size: 12px;
+								line-height: 16px;
+							}
 						}
 					}
 				}
@@ -106,12 +139,24 @@ const formValues = reactive({
 					display: grid;
 					grid-template-columns: 1fr 0.55fr 0.55fr;
 					gap: 30px;
+					@media (max-width: $desktop-sm) {
+						grid-template-columns: 1fr 1fr;
+						gap: 20px;
+					}
+					@media (max-width: $tab-sm) {
+						grid-template-columns: 1fr;
+						gap: 20px;
+					}
 				}
 				& > p {
 					margin-top: 20px;
 					font-weight: 400;
 					font-size: 14px;
 					line-height: 16px;
+					@media (max-width: $tab) {
+						font-size: 12px;
+						line-height: 16px;
+					}
 					a {
 						text-decoration: underline;
 					}

@@ -46,11 +46,17 @@ import { Title } from '@/shared/ui';
 </template>
 
 <style lang="scss" scoped>
+@import '@/shared/styles/vars';
+
 .direction-info {
 	margin-top: 100px;
 	padding-bottom: 110px;
 	position: relative;
 	z-index: 2;
+	@media (max-width: $tab) {
+		margin-top: 80px;
+		padding-bottom: 80px;
+	}
 	&::after {
 		content: '';
 		position: absolute;
@@ -65,6 +71,9 @@ import { Title } from '@/shared/ui';
 		grid-template-columns: 0.5fr 1fr;
 		gap: 30px;
 		position: relative;
+		@media (max-width: $tab-sm) {
+			grid-template-columns: 1fr;
+		}
 		.title-block {
 			position: relative;
 
@@ -77,12 +86,19 @@ import { Title } from '@/shared/ui';
 		.text-block {
 			h5 {
 				margin-bottom: 30px;
+				@media (max-width: $tab) {
+					margin-bottom: 20px;
+				}
 			}
 			p {
 				margin-bottom: 50px;
 				font-weight: 400;
 				font-size: 16px;
 				line-height: 22px;
+				@media (max-width: $tab) {
+					font-size: 15px;
+					line-height: 21px;
+				}
 			}
 		}
 	}

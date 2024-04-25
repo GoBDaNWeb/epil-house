@@ -18,9 +18,14 @@ import { trainingList } from '../config';
 </template>
 
 <style lang="scss">
+@import '@/shared/styles/vars';
+
 .training-list {
 	padding-bottom: 100px;
 	position: relative;
+	@media (max-width: $tab) {
+		padding-bottom: 80px;
+	}
 	&::after {
 		content: '';
 		position: absolute;
@@ -41,6 +46,14 @@ import { trainingList } from '../config';
 				margin-top: 0;
 				padding-left: 42px;
 				position: relative;
+				@media (max-width: $tab) {
+					border-top: none;
+					border-bottom: 1px solid var(--gray-line-color);
+					padding-left: 23px;
+					padding-top: 0;
+					padding-bottom: 25px;
+					border-radius: 0 0 0 20px;
+				}
 				&:before {
 					content: '';
 					position: absolute;
@@ -60,8 +73,13 @@ import { trainingList } from '../config';
 }
 </style>
 <style lang="scss" scoped>
+@import '@/shared/styles/vars';
+
 .training-list {
 	margin-top: 100px;
+	@media (max-width: $tab) {
+		margin-top: 80px;
+	}
 	.training-list-inner {
 		h4 {
 			text-align: left;
@@ -71,6 +89,9 @@ import { trainingList } from '../config';
 			display: flex;
 			flex-direction: column;
 			gap: 100px;
+			@media (max-width: $tab) {
+				gap: 50px;
+			}
 		}
 	}
 }

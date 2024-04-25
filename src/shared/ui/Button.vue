@@ -11,6 +11,15 @@ const props = defineProps(['title', 'variable', 'click', 'type', 'disabled']);
 <style lang="scss">
 @import '@/shared/styles/vars';
 
+button {
+	a {
+		width: 100%;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+}
 button.primary {
 	background: var(--gray-color);
 	border-radius: 10px;
@@ -23,6 +32,10 @@ button.primary {
 	line-height: 19px;
 	color: var(--white-color);
 	transition: var(--trs-300);
+	@media (max-width: $tab) {
+		font-size: 13px;
+		line-height: 16px;
+	}
 	&:hover {
 		background: var(--pink-color);
 	}
@@ -62,6 +75,10 @@ button.primary-beige {
 	line-height: 19px;
 	color: var(--gray-color);
 	transition: var(--trs-300);
+	@media (max-width: $tab) {
+		font-size: 13px;
+		line-height: 16px;
+	}
 	&:hover {
 		background: var(--pink-color);
 		color: var(--white-color);
@@ -85,6 +102,11 @@ button.secondary {
 	line-height: 19px;
 	transition: var(--trs-300);
 	color: var(--gray-color);
+	@media (max-width: $tab) {
+		font-size: 13px;
+		line-height: 16px;
+		padding: 0 16px;
+	}
 	svg {
 		path,
 		line {
@@ -113,6 +135,13 @@ button.burger {
 	text-align: center;
 	font-weight: 600;
 	transition: var(--trs-300);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	@media (max-width: $tab) {
+		height: 40px;
+		padding: 13px 12px;
+	}
 	svg {
 		line {
 			transition: var(--trs-300);
@@ -137,7 +166,14 @@ button.burger-beige {
 	padding: 15px 20px;
 	text-align: center;
 	font-weight: 600;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	transition: var(--trs-300);
+	@media (max-width: $tab) {
+		height: 40px;
+		padding: 13px 12px;
+	}
 	svg {
 		line {
 			transition: var(--trs-300);
@@ -164,6 +200,10 @@ button.square {
 	justify-content: center;
 	transition: var(--trs-300);
 	border: 1px solid var(--gray-color);
+	@media (max-width: $tab) {
+		height: 35px;
+		width: 35px;
+	}
 	svg {
 		path {
 			transition: var(--trs-300);
@@ -176,6 +216,63 @@ button.square {
 				stroke: var(--pink-color);
 				fill: var(--pink-color);
 			}
+		}
+	}
+}
+button.square-primary {
+	border-radius: 10px;
+	height: 50px;
+	width: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: var(--trs-300);
+	background: var(--gray-color);
+	@media (max-width: $tab) {
+		height: 40px;
+		width: 40px;
+	}
+	svg {
+		path {
+			transition: var(--trs-300);
+		}
+	}
+}
+button.square-white {
+	border-radius: 10px;
+	height: 50px;
+	width: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: var(--trs-300);
+	background: var(--white-color);
+	@media (max-width: $tab) {
+		height: 40px;
+		width: 40px;
+	}
+	svg {
+		path {
+			transition: var(--trs-300);
+		}
+	}
+}
+button.square-beige {
+	border-radius: 10px;
+	height: 50px;
+	width: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: var(--trs-300);
+	background: var(--beige-back-color);
+	@media (max-width: $tab) {
+		height: 40px;
+		width: 40px;
+	}
+	svg {
+		path {
+			transition: var(--trs-300);
 		}
 	}
 }
@@ -194,6 +291,10 @@ button.outline {
 	gap: 10px;
 	transition: var(--trs-300);
 	color: var(--gray-color);
+	@media (max-width: $tab) {
+		font-size: 13px;
+		line-height: 16px;
+	}
 	svg {
 		path {
 			transition: var(--trs-300);
@@ -229,6 +330,12 @@ button.outline-reset {
 	gap: 10px;
 	transition: var(--trs-300);
 	color: var(--gray-color);
+	@media (max-width: $tab) {
+		font-size: 15px;
+		line-height: 21px;
+		height: 31px;
+		padding: 0 15px;
+	}
 	svg {
 		path {
 			transition: var(--trs-300);

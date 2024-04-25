@@ -10,19 +10,25 @@ import { Title } from '@/shared/ui';
 		<Gallery :imgs="galleryList" title="комфортное пространство" titleVariant="h3" />
 		<div class="about container">
 			<img src="/images/home/space/space.svg" alt="" />
-			<Title variant="h4"
-				>Мы специализируемся на оказании качественных и безболезненных процедур на современном
-				оборудовании.</Title
-			>
+			<Title variant="h4">
+				Мы специализируемся на оказании качественных и безболезненных процедур на современном
+				оборудовании.
+			</Title>
 		</div>
 	</div>
 </template>
 
 <style lang="scss" scoped>
+@import '@/shared/styles/vars';
+
 .space {
 	margin-top: 115px;
 	padding-bottom: 105px;
 	position: relative;
+	@media (max-width: $tab) {
+		margin-top: 80px;
+		padding-bottom: 80px;
+	}
 	&:after {
 		content: '';
 		width: 100%;
@@ -40,6 +46,11 @@ import { Title } from '@/shared/ui';
 		gap: 52px;
 		justify-content: center;
 		margin-top: 105px;
+		@media (max-width: $tab) {
+			flex-direction: column;
+			gap: 30px;
+			align-items: flex-start;
+		}
 		h4 {
 			text-align: left;
 			max-width: 790px;

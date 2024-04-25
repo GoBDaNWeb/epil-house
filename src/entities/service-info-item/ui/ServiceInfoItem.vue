@@ -59,11 +59,19 @@ defineProps(['service']);
 }
 </style>
 <style lang="scss" scoped>
+@import '@/shared/styles/vars';
+
 .service-info-item {
 	display: grid;
 	grid-template-columns: 0.48fr 1fr;
 	gap: 30px;
 	align-items: flex-start;
+	@media (max-width: $desktop-sm) {
+		grid-template-columns: 0.6fr 1fr;
+	}
+	@media (max-width: $tab) {
+		grid-template-columns: 1fr;
+	}
 	.image-wrapper {
 		padding-bottom: 75%;
 		position: relative;
@@ -83,6 +91,14 @@ defineProps(['service']);
 		padding-top: 30px;
 		border-top: 1px solid var(--gray-line-color);
 		border-radius: 20px 0 0 0;
+		@media (max-width: $tab) {
+			gap: 20px;
+			padding-top: 0;
+			padding-bottom: 45px;
+			border-top: none;
+			border-bottom: 1px solid var(--gray-line-color);
+			border-radius: 0 0 0 20px;
+		}
 		& > a {
 			&:hover {
 				h3 {
@@ -99,11 +115,15 @@ defineProps(['service']);
 			grid-template-columns: repeat(2, 1fr);
 			column-gap: 30px;
 			row-gap: 10px;
-
+			@media (max-width: $tab-sm) {
+				grid-template-columns: repeat(1, 1fr);
+				gap: 5px;
+			}
 			a {
 				display: flex;
 				align-items: center;
 				justify-content: space-between;
+				gap: 15px;
 				&:hover {
 					p {
 						color: var(--pink-color);

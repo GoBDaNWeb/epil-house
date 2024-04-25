@@ -1,14 +1,17 @@
 <script setup>
+import { useWindowSize } from '@vueuse/core';
 import { reactive, ref } from 'vue';
 
 import { PriceItem } from '@/entities/price-item';
 
 import { DownloadIcon } from '@/shared/icons';
 import { Tab } from '@/shared/ui';
+import { scroll } from '@/shared/utils';
 
 import { priceList, tabs } from '../config';
 
 const currentTab = reactive({ tab: 0 });
+const { width } = useWindowSize();
 
 const handleSelectTab = index => {
 	currentTab.tab = index;
@@ -22,7 +25,7 @@ const handleShowPrice = tab => {
 <template>
 	<div class="price-list">
 		<div class="price-list-inner container">
-			<div class="tabs">
+			<div class="tabs" @mouseenter="e => scroll(e, width)">
 				<Tab
 					v-for="tab in tabs"
 					:key="tab.tab"
@@ -56,6 +59,8 @@ const handleShowPrice = tab => {
 </template>
 
 <style lang="scss" scoped>
+@import '@/shared/styles/vars';
+
 .price-list {
 	padding-bottom: 80px;
 	position: relative;
@@ -75,12 +80,27 @@ const handleShowPrice = tab => {
 			gap: 10px;
 			justify-content: center;
 			margin-top: 40px;
+			@media (max-width: $tab) {
+				justify-content: flex-start;
+
+				flex-wrap: nowrap;
+				overflow: auto;
+				scrollbar-width: thin;
+				scrollbar-color: rgba(73, 84, 104, 0) rgba(0, 0, 0, 0);
+				&::-webkit-scrollbar {
+					height: 0px;
+				}
+			}
 		}
 		.content {
 			display: grid;
 			grid-template-columns: 1fr 0.6fr;
 			margin-top: 30px;
 			gap: 30px;
+			@media (max-width: $tab) {
+				grid-template-columns: 1fr;
+				gap: 50px;
+			}
 			.list {
 				display: flex;
 				flex-direction: column;
@@ -94,6 +114,9 @@ const handleShowPrice = tab => {
 					top: 100px;
 					border-radius: 20px;
 					overflow: hidden;
+					@media (max-width: $tab) {
+						padding-bottom: 75%;
+					}
 					button {
 						position: absolute;
 						background: var(--white-color);
@@ -107,6 +130,9 @@ const handleShowPrice = tab => {
 						z-index: 2;
 						width: 96%;
 						border-radius: 15px;
+						@media (max-width: $tab) {
+							gap: 15px;
+						}
 						svg {
 							width: 60px;
 							height: 80px;
@@ -118,6 +144,10 @@ const handleShowPrice = tab => {
 							text-align: left;
 							color: var(--gray-color);
 							text-transform: uppercase;
+							@media (max-width: $tab) {
+								font-size: 16px;
+								line-height: 18px;
+							}
 						}
 					}
 					img {

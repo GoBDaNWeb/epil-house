@@ -75,13 +75,16 @@ function handleAccordion(selectedIndex) {
 }
 </style>
 <style lang="scss" scoped>
-.accordion.active {
-}
+@import '@/shared/styles/vars';
+
 .accordion {
 	display: flex;
 	flex-direction: column;
 	padding: 25px 0;
 	border-top: 1px solid var(--gray-line-color);
+	@media (max-width: $tab) {
+		padding: 20px 0;
+	}
 	&:last-child {
 		border-bottom: 1px solid var(--gray-line-color);
 	}
@@ -90,6 +93,9 @@ function handleAccordion(selectedIndex) {
 		display: flex;
 		align-items: center;
 		gap: 20px;
+		@media (max-width: $tab) {
+			gap: 15px;
+		}
 		button {
 			width: 40px;
 			height: 40px;
@@ -97,6 +103,14 @@ function handleAccordion(selectedIndex) {
 			min-height: 40px;
 			max-width: 40px;
 			max-height: 40px;
+			@media (max-width: $tab) {
+				width: 35px;
+				height: 35px;
+				min-width: 35px;
+				min-height: 35px;
+				max-width: 35px;
+				max-height: 35px;
+			}
 			svg {
 				transition: var(--trs-300);
 			}
@@ -112,6 +126,11 @@ function handleAccordion(selectedIndex) {
 			font-weight: 400;
 			font-size: 16px;
 			line-height: 22px;
+			@media (max-width: $tab) {
+				padding-left: 55px;
+				font-size: 15px;
+				line-height: 21px;
+			}
 		}
 	}
 }

@@ -52,6 +52,8 @@ defineProps(['contact']);
 }
 </style>
 <style lang="scss" scoped>
+@import '@/shared/styles/vars';
+
 .contacts-item {
 	h4 {
 		text-align: left;
@@ -62,6 +64,12 @@ defineProps(['contact']);
 		padding-bottom: 75%;
 		border-radius: 12px;
 		overflow: hidden;
+		@media (max-width: $tab) {
+			padding-bottom: 50%;
+		}
+		@media (max-width: $mob) {
+			padding-bottom: 55%;
+		}
 		& > img {
 			position: absolute;
 			width: 100%;
@@ -81,6 +89,10 @@ defineProps(['contact']);
 			font-weight: 700;
 			font-size: 20px;
 			line-height: 28px;
+			@media (max-width: $tab) {
+				font-size: 18px;
+				line-height: 25px;
+			}
 		}
 		.timetable {
 			display: flex;
@@ -90,6 +102,10 @@ defineProps(['contact']);
 				font-weight: 400;
 				font-size: 20px;
 				line-height: 28px;
+				@media (max-width: $tab) {
+					font-size: 18px;
+					line-height: 25px;
+				}
 			}
 		}
 		.address {
@@ -97,6 +113,11 @@ defineProps(['contact']);
 			font-weight: 400;
 			font-size: 20px;
 			line-height: 28px;
+			@media (max-width: $tab) {
+				margin-top: 20px;
+				font-size: 18px;
+				line-height: 25px;
+			}
 		}
 		.map-link {
 			font-weight: 600;
@@ -111,6 +132,12 @@ defineProps(['contact']);
 			align-items: center;
 			justify-content: center;
 			margin-top: 15px;
+			@media (max-width: $tab) {
+				margin-top: 10px;
+				font-size: 13px;
+				line-height: 16px;
+				width: 101px;
+			}
 		}
 	}
 }

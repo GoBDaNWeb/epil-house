@@ -1,5 +1,8 @@
 <script setup>
+import { SwiperSlide } from 'swiper/vue';
 import { useRouter } from 'vue-router';
+
+import { Swiper } from '@/widgets/swiper';
 
 import { EquipmentItem } from '@/entities/equipment-item';
 
@@ -7,7 +10,7 @@ import { PATH_PAGE } from '@/shared/config';
 import { ArrowRightIcon } from '@/shared/icons';
 import { Button, Title } from '@/shared/ui';
 
-import { equipments } from '../config';
+import { equipments, equipmentsMob } from '../config';
 
 const router = useRouter();
 </script>
@@ -16,22 +19,68 @@ const router = useRouter();
 	<div class="equipments container">
 		<div class="top">
 			<Title variant="h3">оборудование</Title>
-			<Button variable="outline" @click="router.push(PATH_PAGE.equipments)"
-				>все оборудование <ArrowRightIcon
-			/></Button>
+			<Button variable="outline" @click="router.push(PATH_PAGE.equipments)">
+				все оборудование <ArrowRightIcon />
+			</Button>
 		</div>
 		<div class="content">
 			<EquipmentItem v-for="(equipment, index) in equipments" :key="index" :equipment="equipment" />
+		</div>
+		<div class="equipments-swiper-wrapper">
+			<Swiper
+				:slides-per-view="2.5"
+				:centered-slides="false"
+				:prev="null"
+				:next="null"
+				:spaceBetween="30"
+				:allowTouchMove="true"
+				:pagination="null"
+				:breakpoints="{
+					0: {
+						slidesPerView: 1.2,
+						spaceBetween: 20
+					},
+					767: {
+						slidesPerView: 2.2,
+						spaceBetween: 20
+					},
+					1024: {
+						slidesPerView: 2.5,
+						spaceBetween: 30
+					}
+				}"
+			>
+				<SwiperSlide v-for="(equipment, index) in equipmentsMob" :key="index">
+					<EquipmentItem :equipment="equipment" />
+				</SwiperSlide>
+			</Swiper>
+		</div>
+		<div class="btn-mob">
+			<Button variable="outline" @click="router.push(PATH_PAGE.equipments)">
+				все оборудование <ArrowRightIcon />
+			</Button>
 		</div>
 	</div>
 </template>
 
 <style lang="scss" scoped>
+@import '@/shared/styles/vars';
+
 .equipments {
 	margin-bottom: 100px;
+	overflow: hidden;
+
+	@media (max-width: $tab) {
+		margin-bottom: 80px;
+	}
 	.top {
 		display: flex;
 		justify-content: space-between;
+		button {
+			@media (max-width: $tab) {
+				display: none;
+			}
+		}
 	}
 	.content {
 		display: grid;
@@ -39,7 +88,9 @@ const router = useRouter();
 		column-gap: 30px;
 		row-gap: 81px;
 		margin-top: 30px;
-
+		@media (max-width: $desktop-sm) {
+			display: none;
+		}
 		.equipment-item {
 			&:nth-child(1) {
 				grid-area: A;
@@ -50,6 +101,26 @@ const router = useRouter();
 			&:nth-child(3) {
 				grid-area: C;
 			}
+		}
+	}
+	.equipments-swiper-wrapper {
+		margin-top: 30px;
+		display: none;
+		@media (max-width: $desktop-sm) {
+			display: block;
+		}
+		.swiper {
+			overflow: visible;
+			.swiper-slide {
+				height: auto;
+			}
+		}
+	}
+	.btn-mob {
+		display: none;
+		margin-top: 30px;
+		@media (max-width: $tab) {
+			display: block;
 		}
 	}
 }

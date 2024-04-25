@@ -55,6 +55,8 @@ import { Title } from '@/shared/ui';
 }
 </style>
 <style lang="scss" scoped>
+@import '@/shared/styles/vars';
+
 .footer {
 	background: var(--gray-color);
 	.footer-inner {
@@ -63,13 +65,25 @@ import { Title } from '@/shared/ui';
 		display: flex;
 		flex-direction: column;
 		gap: 146px;
+		@media (max-width: $tab) {
+			padding-top: 50px;
+			padding-bottom: 32px;
+			gap: 50px;
+		}
 		.top {
 			display: flex;
 			justify-content: space-between;
 			align-items: flex-start;
+			@media (max-width: $tab) {
+				flex-direction: column;
+				gap: 20px;
+			}
 			h3 {
 				text-align: right;
 				color: var(--white-color);
+				@media (max-width: $tab) {
+					text-align: left;
+				}
 			}
 		}
 		.bottom {
@@ -77,17 +91,31 @@ import { Title } from '@/shared/ui';
 			grid-template-columns: repeat(4, 1fr);
 			gap: 30px;
 			align-items: flex-end;
+			@media (max-width: $desktop-sm) {
+				grid-template-columns: repeat(2, 1fr);
+			}
+			@media (max-width: $tab) {
+				grid-template-columns: repeat(1, 1fr);
+			}
 			.policy {
 				color: var(--white-color);
 				font-weight: 600;
 				font-size: 15px;
 				line-height: 19px;
+				@media (max-width: $tab) {
+					font-size: 13px;
+					line-height: 16px;
+				}
 			}
 			.info {
 				color: var(--white-color);
 				font-weight: 600;
 				font-size: 15px;
 				line-height: 19px;
+				@media (max-width: $tab) {
+					font-size: 13px;
+					line-height: 16px;
+				}
 			}
 			.documents {
 				display: flex;
@@ -98,6 +126,10 @@ import { Title } from '@/shared/ui';
 					font-size: 15px;
 					line-height: 19px;
 					transition: var(--trs-300);
+					@media (max-width: $tab) {
+						font-size: 13px;
+						line-height: 16px;
+					}
 					&:hover {
 						color: var(--pink-back-color);
 					}
@@ -113,7 +145,10 @@ import { Title } from '@/shared/ui';
 					font-size: 15px;
 					line-height: 19px;
 					transition: var(--trs-300);
-
+					@media (max-width: $tab) {
+						font-size: 13px;
+						line-height: 16px;
+					}
 					&:hover {
 						color: var(--pink-back-color);
 					}

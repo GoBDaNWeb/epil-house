@@ -28,6 +28,8 @@ defineProps(['rating']);
 </template>
 
 <style lang="scss" scoped>
+@import '@/shared/styles/vars';
+
 .rating-item {
 	background: var(--white-color);
 	border-radius: 15px;
@@ -61,6 +63,9 @@ defineProps(['rating']);
 			align-items: center;
 			justify-content: center;
 			margin-top: 35px;
+			@media (max-width: $tab) {
+				margin-top: 20px;
+			}
 		}
 		p {
 			text-align: center;
@@ -69,6 +74,11 @@ defineProps(['rating']);
 			line-height: 19px;
 			margin-top: 10px;
 			margin-bottom: 33px;
+			@media (max-width: $tab) {
+				font-size: 12px;
+				line-height: 16px;
+				margin-bottom: 20px;
+			}
 		}
 		button {
 			margin: auto;

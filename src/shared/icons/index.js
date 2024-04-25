@@ -6,7 +6,9 @@ import CloseIcon from './CloseIcon.vue';
 import DownloadIcon from './DownloadIcon.vue';
 import InfoIcon from './InfoIcon.vue';
 import LogoIcon from './LogoIcon.vue';
+import MailIcon from './MailIcon.vue';
 import ParadigmaIcon from './ParadigmaIcon.vue';
+import PhoneIcon from './PhoneIcon.vue';
 import PlusIcon from './PlusIcon.vue';
 import TourIcon from './TourIcon.vue';
 import WhatsappIcon from './WhatsappIcon.vue';
@@ -23,5 +25,7 @@ export {
 	TourIcon,
 	ParadigmaIcon,
 	CloseIcon,
-	ArrowDownIcon
+	ArrowDownIcon,
+	PhoneIcon,
+	MailIcon
 };

@@ -31,6 +31,20 @@ defineProps(['imgs', 'title', 'titleVariant']);
 					:next="next"
 					:spaceBetween="30"
 					:allowTouchMove="true"
+					:pagination="null"
+					:breakpoints="{
+						0: {
+							slidesPerView: 1.2,
+							spaceBetween: 20
+						},
+						767: {
+							slidesPerView: 2.2
+						},
+						1024: {
+							slidesPerView: 2.5,
+							spaceBetween: 30
+						}
+					}"
 				>
 					<SwiperSlide v-for="(img, index) in imgs" :key="index">
 						<div class="image-wrapper">
@@ -44,11 +58,14 @@ defineProps(['imgs', 'title', 'titleVariant']);
 </template>
 
 <style lang="scss" scoped>
+@import '@/shared/styles/vars';
+
 .gallery {
 	.top {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+		h4,
 		h3 {
 			text-align: left;
 		}
@@ -63,6 +80,9 @@ defineProps(['imgs', 'title', 'titleVariant']);
 			&:nth-child(2n + 1) {
 				.image-wrapper {
 					padding-bottom: 100%;
+					@media (max-width: $tab) {
+						padding-bottom: 75%;
+					}
 				}
 			}
 			&:nth-child(2n + 2) {

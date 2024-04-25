@@ -14,6 +14,8 @@ defineProps(['breadcrumbs']);
 </template>
 
 <style lang="scss" scoped>
+@import '@/shared/styles/vars';
+
 .breadcrumbs {
 	margin-bottom: 30px;
 	display: flex;
@@ -24,6 +26,9 @@ defineProps(['breadcrumbs']);
 	scrollbar-width: thin;
 	scrollbar-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
 	height: 100%;
+	@media(max-width: $tab) {
+		display: none;
+	}
 	&::-webkit-scrollbar {
 		width: 0px;
 	}

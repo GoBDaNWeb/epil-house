@@ -61,18 +61,30 @@ import { Title } from '@/shared/ui';
 </template>
 
 <style lang="scss" scoped>
+@import '@/shared/styles/vars';
+
 .service-about {
 	padding-top: 100px;
+	@media (max-width: $tab) {
+		padding-top: 80px;
+	}
 	.service-about-inner {
 		display: grid;
 		grid-template-columns: 0.4fr 1fr;
 		gap: 30px;
+		@media (max-width: $tab-sm) {
+			grid-template-columns: 1fr;
+			gap: 20px;
+		}
 		.title-block {
 			position: relative;
 			h4 {
 				text-align: left;
 				position: sticky;
 				top: 150px;
+				@media (max-width: $tab) {
+					top: 100px;
+				}
 			}
 		}
 		.text-block {
@@ -84,6 +96,10 @@ import { Title } from '@/shared/ui';
 					font-weight: 400;
 					font-size: 16px;
 					line-height: 22px;
+					@media (max-width: $tab) {
+						font-size: 15px;
+						line-height: 21px;
+					}
 				}
 			}
 			.recommendations {
@@ -91,6 +107,13 @@ import { Title } from '@/shared/ui';
 				grid-template-columns: repeat(2, 1fr);
 				gap: 30px;
 				margin-top: 50px;
+				@media (max-width: $desktop-md-2) {
+					grid-template-columns: repeat(1, 1fr);
+				}
+				@media (max-width: $tab) {
+					margin-top: 30px;
+					gap: 10px;
+				}
 				.recommendations-item {
 					border: 1px solid var(--gray-line-color);
 					border-radius: 15px;
@@ -99,6 +122,11 @@ import { Title } from '@/shared/ui';
 					display: flex;
 					flex-direction: column;
 					gap: 25px;
+					width: 100%;
+					@media (max-width: $tab) {
+						padding: 30px 20px;
+						gap: 20px;
+					}
 					ul {
 						display: flex;
 						flex-direction: column;
@@ -109,6 +137,10 @@ import { Title } from '@/shared/ui';
 							font-weight: 400;
 							font-size: 16px;
 							line-height: 22px;
+							@media (max-width: $tab) {
+								font-size: 15px;
+								line-height: 21px;
+							}
 							&:before {
 								content: '';
 								position: absolute;

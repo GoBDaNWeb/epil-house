@@ -12,11 +12,33 @@ import { contactsList } from '@/shared/config';
 	</div>
 </template>
 
+<style lang="scss">
+.contacts-list {
+	.contacts-list-inner {
+		.contacts-item {
+			.info {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				.address {
+					text-align: center;
+				}
+			}
+		}
+	}
+}
+</style>
 <style lang="scss" scoped>
+@import '@/shared/styles/vars';
+
 .contacts-list {
 	margin-top: 40px;
 	padding-bottom: 117px;
 	position: relative;
+	@media (max-width: $tab) {
+		margin-top: 50px;
+		padding-bottom: 80px;
+	}
 	&::after {
 		content: '';
 		position: absolute;
@@ -30,6 +52,10 @@ import { contactsList } from '@/shared/config';
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
 		gap: 26px;
+		@media (max-width: $tab) {
+			grid-template-columns: repeat(1, 1fr);
+			gap: 50px;
+		}
 	}
 }
 </style>

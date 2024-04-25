@@ -4,12 +4,14 @@ import { onMounted, ref, watch } from 'vue';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
-import { Navigation } from 'swiper/modules';
+import 'swiper/css/pagination';
+import { Navigation, Pagination } from 'swiper/modules';
 
 const props = defineProps([
 	'prev',
 	'next',
 	'navigation',
+	'pagination',
 	'spaceBetween',
 	'slidesPerView',
 	'breakpoints',
@@ -19,11 +21,7 @@ const props = defineProps([
 	'setSwiperRef'
 ]);
 
-const modules = ref([Navigation]);
-const navigationObj = ref({
-	prevEl: props.prev,
-	nextEl: props.next
-});
+const modules = ref([Navigation, Pagination]);
 </script>
 
 <template>
@@ -34,6 +32,10 @@ const navigationObj = ref({
 		:navigation="{
 			prevEl: prev,
 			nextEl: next
+		}"
+		:pagination="{
+			el: pagination,
+			clickable: true
 		}"
 		:modules="modules"
 		class="swiper"

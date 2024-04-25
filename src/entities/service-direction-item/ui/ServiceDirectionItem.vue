@@ -53,6 +53,8 @@ defineProps(['service']);
 }
 </style>
 <style lang="scss" scoped>
+@import '@/shared/styles/vars';
+
 .service-direction-item {
 	height: 100%;
 	display: flex;
@@ -78,6 +80,9 @@ defineProps(['service']);
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
+		@media (max-width: $tab) {
+			padding-bottom: 35px;
+		}
 		.text {
 			h5 {
 				transition: var(--trs-300);
@@ -87,6 +92,11 @@ defineProps(['service']);
 				font-size: 16px;
 				line-height: 22px;
 				font-weight: 400;
+				@media (max-width: $tab) {
+					margin-top: 20px;
+					font-size: 15px;
+					line-height: 21px;
+				}
 			}
 		}
 
@@ -95,12 +105,19 @@ defineProps(['service']);
 			align-items: center;
 			gap: 15px;
 			margin-top: 30px;
+			@media (max-width: $tab) {
+				margin-top: 20px;
+			}
 			p {
 				font-size: 15px;
 				line-height: 19px;
 				font-weight: 600;
 				text-transform: uppercase;
 				transition: var(--trs-300);
+				@media (max-width: $tab) {
+					font-size: 13px;
+					line-height: 16px;
+				}
 			}
 		}
 	}

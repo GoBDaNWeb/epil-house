@@ -18,35 +18,46 @@ const next = ref(null);
 
 <template>
 	<div class="training">
-		<div class="top container">
-			<Title variant="h3">обучение</Title>
-			<div class="navigation">
-				<Button variable="outline"> все курсы <ArrowRightIcon /> </Button>
-				<div class="swiper-navigation">
-					<button ref="prev"><ArrowLeftIcon /></button>
-					<button ref="next"><ArrowRightIcon /></button>
+		<div class="container">
+			<div class="top">
+				<Title variant="h3">обучение</Title>
+				<div class="navigation">
+					<Button variable="outline"> все курсы <ArrowRightIcon /> </Button>
+					<div class="swiper-navigation">
+						<button ref="prev"><ArrowLeftIcon /></button>
+						<button ref="next"><ArrowRightIcon /></button>
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="training-swiper-wrapper">
-			<Swiper
-				:slides-per-view="1.5"
-				:centered-slides="false"
-				:prev="prev"
-				:next="next"
-				:spaceBetween="0"
-				:allowTouchMove="true"
-			>
-				<SwiperSlide v-for="(training, index) in trainingList" :key="index">
-					<TrainingItem :training="training" />
-				</SwiperSlide>
-			</Swiper>
+			<div class="training-swiper-wrapper">
+				<Swiper
+					:slides-per-view="1.3"
+					:centered-slides="false"
+					:prev="prev"
+					:next="next"
+					:spaceBetween="0"
+					:allowTouchMove="true"
+					:pagination="null"
+					:breakpoints="{ 0: { slidesPerView: 1.1 } }"
+				>
+					<SwiperSlide v-for="(training, index) in trainingList" :key="index">
+						<TrainingItem :training="training" />
+					</SwiperSlide>
+				</Swiper>
+			</div>
+			<div class="btn-mob">
+				<Button variable="outline"> все курсы <ArrowRightIcon /> </Button>
+			</div>
 		</div>
 	</div>
 </template>
 
 <style lang="scss" scoped>
+@import '@/shared/styles/vars';
+
 .training {
+	overflow: hidden;
+
 	.top {
 		display: flex;
 		align-items: center;
@@ -58,10 +69,27 @@ const next = ref(null);
 			display: flex;
 			align-items: center;
 			gap: 30px;
+			@media (max-width: $tab) {
+				display: none;
+			}
 		}
 	}
 	.training-swiper-wrapper {
 		margin-top: 30px;
+		@media (max-width: $tab) {
+			margin-right: -20px;
+			margin-left: -20px;
+		}
+		.swiper {
+			overflow: visible;
+		}
+	}
+	.btn-mob {
+		display: none;
+		margin-top: 20px;
+		@media (max-width: $tab) {
+			display: block;
+		}
 	}
 }
 </style>
