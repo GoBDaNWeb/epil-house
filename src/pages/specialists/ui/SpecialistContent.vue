@@ -93,6 +93,10 @@ const isActiveTab = index => {
 				margin-top: 40px;
 				margin-bottom: 20px;
 				@media (max-width: $tab) {
+					padding-left: 20px;
+					padding-right: 20px;
+					margin-left: -20px;
+					margin-right: -20px;
 					flex-wrap: nowrap;
 					overflow: auto;
 					scrollbar-width: thin;

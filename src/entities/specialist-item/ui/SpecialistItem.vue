@@ -16,7 +16,7 @@ const hadleOpenSpecialistModal = () => {
 };
 const hadleOpenOrderModal = () => {
 	orderModal.handleOpenModal();
-	specialistModal.setInfo(props.specialist);
+	orderModal.setSpecialist(props.specialist);
 };
 </script>
 

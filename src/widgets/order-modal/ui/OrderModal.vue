@@ -11,6 +11,9 @@ import { Button, DatePicker, Input, Select, Textarea, Title } from '@/shared/ui'
 
 import { selectList } from '../config';
 
+const orderModal = useOrderModalStore();
+const successModal = useSuccessModalStore();
+
 const format = date => {
 	const day = date.getDate();
 	const month = date.getMonth() + 1;
@@ -23,15 +26,15 @@ const formValues = reactive({
 	nameValue: '',
 	phoneValue: '',
 	serviceValue: '',
-	specialistValue: '',
+	specialistValue: orderModal.specialist ? orderModal.specialist.name : '',
 	dateValue: ''
 });
-const orderModal = useOrderModalStore();
-const successModal = useSuccessModalStore();
 
 watch(
 	() => orderModal.modalActive,
 	() => {
+		console.log(orderModal.specialist);
+
 		if (orderModal.modalActive) {
 			document.body.style.overflow = 'hidden';
 		} else {
@@ -69,7 +72,7 @@ const handleSubmitForm = () => {
 						v-model="formValues.specialistValue"
 						:options="selectList"
 						name="specialist"
-						placeholder="Выберите мастера"
+						:placeholder="orderModal.specialist ? orderModal.specialist.name : 'Выберите мастера'"
 					/>
 					<VueDatePicker
 						:format="format"

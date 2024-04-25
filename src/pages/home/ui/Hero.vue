@@ -125,7 +125,7 @@ onMounted(() => {
 					@media (max-width: $tab-sm) {
 						width: 100% !important;
 						& > .image-wrapper {
-							padding-bottom: 100% !important;
+							padding-bottom: 125% !important;
 							height: auto !important;
 						}
 					}

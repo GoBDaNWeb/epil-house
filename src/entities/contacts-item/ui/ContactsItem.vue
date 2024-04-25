@@ -131,6 +131,7 @@ defineProps(['contact']);
 			display: flex;
 			align-items: center;
 			justify-content: center;
+			text-transform: uppercase;
 			margin-top: 15px;
 			transition: var(--trs-300);
 			&:hover {

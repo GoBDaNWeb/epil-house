@@ -12,7 +12,7 @@ export const useOrderModalStore = defineStore('order-modal', {
 			this.modalActive = !this.modalActive;
 		},
 		setSpecialist(specialist) {
-			this.specialistInfo = specialist;
+			this.specialist = specialist;
 		}
 	}
 });
