@@ -2,21 +2,23 @@
 import { SwiperSlide } from 'swiper/vue';
 import { onMounted, ref, watch } from 'vue';
 
-import { TRUE } from 'sass';
-
 import { Swiper } from '@/widgets/swiper';
+
+import { useSuccessModalStore } from '@/entities/success-modal-store';
 
 import { Breadcrumbs, Button, Input, Title } from '@/shared/ui';
 
 const phone = ref('');
 const phoneError = ref(false);
+const successModal = useSuccessModalStore();
 
 watch(phone, () => {
 	phoneError.value = false;
 });
 const handleSuccessForm = () => {
 	if (!phoneError.value) {
-		console.log('success');
+		successModal.handleOpenModal();
+		phone.value = '';
 	}
 };
 
@@ -94,6 +96,7 @@ defineProps(['breadcrumbs', 'title', 'text', 'btnText', 'imgs', 'hasForm']);
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		overflow: hidden;
 
 		p {
 			max-width: 909px;

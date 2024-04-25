@@ -52,7 +52,12 @@ defineProps(['specialist']);
 						<img :src="specialist.img" alt="specialist" />
 					</div>
 					<div class="address">
-						{{ specialist.address }}
+						<p>
+							{{ specialist.address1 }}
+						</p>
+						<p>
+							{{ specialist.address2 }}
+						</p>
 					</div>
 					<Button variable="primary" @click="handleOpenOrderModal">записаться</Button>
 				</div>
@@ -145,10 +150,14 @@ defineProps(['specialist']);
 			.address {
 				margin-top: 30px;
 				margin-bottom: 25px;
-				color: var(--pink-color);
-				font-weight: 400;
-				font-size: 16px;
-				line-height: 22px;
+				display: flex;
+				flex-direction: column;
+				p {
+					color: var(--pink-color);
+					font-weight: 400;
+					font-size: 16px;
+					line-height: 22px;
+				}
 			}
 		}
 		.info {

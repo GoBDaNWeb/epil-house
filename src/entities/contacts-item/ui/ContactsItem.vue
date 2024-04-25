@@ -20,7 +20,7 @@ defineProps(['contact']);
 				<p>{{ contact.end }}</p>
 			</div>
 			<div class="address">{{ contact.address }}</div>
-			<a href="#" target="_blank" class="map-link">на карте</a>
+			<a :href="contact.url" target="_blank" class="map-link">на карте</a>
 		</div>
 	</div>
 </template>
@@ -132,6 +132,11 @@ defineProps(['contact']);
 			align-items: center;
 			justify-content: center;
 			margin-top: 15px;
+			transition: var(--trs-300);
+			&:hover {
+				color: var(--white-color);
+				background: var(--pink-color);
+			}
 			@media (max-width: $tab) {
 				margin-top: 10px;
 				font-size: 13px;

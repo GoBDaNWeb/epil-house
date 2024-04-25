@@ -1,4 +1,5 @@
 <script setup>
+import { useWindowSize } from '@vueuse/core';
 import { SwiperSlide } from 'swiper/vue';
 import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
@@ -11,8 +12,9 @@ import { PATH_PAGE } from '@/shared/config';
 import { ArrowLeftIcon, ArrowRightIcon } from '@/shared/icons';
 import { Button, Title } from '@/shared/ui';
 
-import { stockList } from '../config';
+import { stockItem, stockList, stockList2 } from '../config';
 
+const { width } = useWindowSize();
 const router = useRouter();
 const prev = ref(null);
 const next = ref(null);
@@ -32,35 +34,41 @@ const next = ref(null);
 				</div>
 			</div>
 		</div>
-		<div class="stocks-swiper-wrapper container">
-			<Swiper
-				:slides-per-view="'auto'"
-				:centered-slides="false"
-				:prev="prev"
-				:next="next"
-				:spaceBetween="30"
-				:allowTouchMove="true"
-				:pagination="null"
-				:breakpoints="{
-					0: {
-						slidesPerView: 1.2,
-						spaceBetween: 20
-					},
-					1024: {
-						slidesPerView: 'auto',
-						spaceBetween: 30
-					}
-				}"
-			>
-				<SwiperSlide
-					v-for="(stock, index) in stockList"
-					:key="index"
-					:class="stock.content ? 'full' : ''"
+		<div class="stocks-swiper-container container">
+			<div class="big-stock-wrapper">
+				<StockItem :stock="stockItem" />
+			</div>
+			<div class="stocks-swiper-wrapper">
+				<Swiper
+					:slides-per-view="'auto'"
+					:centered-slides="false"
+					:prev="prev"
+					:next="next"
+					:spaceBetween="30"
+					:allowTouchMove="true"
+					:pagination="null"
+					:breakpoints="{
+						0: {
+							slidesPerView: 1.2,
+							spaceBetween: 20
+						},
+						1024: {
+							slidesPerView: 'auto',
+							spaceBetween: 30
+						}
+					}"
 				>
-					<StockItem :stock="stock" />
-				</SwiperSlide>
-			</Swiper>
+					<SwiperSlide
+						v-for="(stock, index) in width <= 1024 ? stockList2 : stockList"
+						:key="index"
+						:class="stock.content ? 'full' : ''"
+					>
+						<StockItem :stock="stock" />
+					</SwiperSlide>
+				</Swiper>
+			</div>
 		</div>
+
 		<div class="btn-mob container">
 			<Button @click="router.push(PATH_PAGE.stocks)" variable="outline">
 				все акции <ArrowRightIcon />
@@ -98,28 +106,44 @@ const next = ref(null);
 			}
 		}
 	}
-	.stocks-swiper-wrapper {
+	.stocks-swiper-container {
+		display: flex;
+		align-items: stretch;
+		gap: 30px;
 		margin-top: 30px;
-
-		.swiper {
+		.big-stock-wrapper {
 			@media (max-width: $tab) {
-				overflow: visible;
+				display: none;
 			}
-			.swiper-slide.full {
-				width: 675px;
+		}
+		.stocks-swiper-wrapper {
+			width: 50%;
+			height: auto;
+			@media (max-width: $tab) {
+				width: 100%;
+			}
+			.swiper {
+				height: 100%;
 				@media (max-width: $tab) {
-					width: auto;
+					overflow: visible;
 				}
-			}
-			.swiper-slide {
-				height: auto;
-				width: 322px;
-				@media (max-width: $tab) {
-					width: auto;
+				.swiper-slide.full {
+					width: 675px;
+					@media (max-width: $tab) {
+						width: auto;
+					}
+				}
+				.swiper-slide {
+					height: auto;
+					width: 322px;
+					@media (max-width: $tab) {
+						width: auto;
+					}
 				}
 			}
 		}
 	}
+
 	.btn-mob {
 		display: none;
 		margin-top: 20px;

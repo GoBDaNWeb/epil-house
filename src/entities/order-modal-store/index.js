@@ -4,12 +4,15 @@ import { defineStore } from 'pinia';
 
 export const useOrderModalStore = defineStore('order-modal', {
 	state: () => {
-		return { modalActive: false };
+		return { modalActive: false, specialist: {} };
 	},
 
 	actions: {
 		handleOpenModal() {
 			this.modalActive = !this.modalActive;
+		},
+		setSpecialist(specialist) {
+			this.specialistInfo = specialist;
 		}
 	}
 });

@@ -13,15 +13,19 @@ import { contactsList } from '@/shared/config';
 </template>
 
 <style lang="scss">
+@import '@/shared/styles/vars';
+
 .contacts-list {
 	.contacts-list-inner {
 		.contacts-item {
-			.info {
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-				.address {
-					text-align: center;
+			@media (max-width: $tab) {
+				.info {
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					.address {
+						text-align: center;
+					}
 				}
 			}
 		}

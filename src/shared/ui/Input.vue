@@ -47,7 +47,7 @@ defineExpose({ value });
 	border-color: var(--pink-back-color) !important;
 }
 .input.file {
-	border-color: var(--gray-color);
+	border: 1px solid var(--gray-color);
 	display: flex;
 	align-items: center;
 	justify-content: center;

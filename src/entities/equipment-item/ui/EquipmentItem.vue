@@ -1,4 +1,6 @@
 <script setup>
+import { RouterLink } from 'vue-router';
+
 import { Badge, Title } from '@/shared/ui';
 
 defineProps(['equipment']);
@@ -12,8 +14,10 @@ defineProps(['equipment']);
 		<div class="content">
 			<Title variant="h5">{{ equipment.title }}</Title>
 			<div class="text" v-html="equipment.text"></div>
-			<div class="badges" v-if="equipment.badges">
-				<Badge v-for="badge in equipment.badges" :key="badge">{{ badge }}</Badge>
+			<div class="links" v-if="equipment.links">
+				<RouterLink :to="link.url" v-for="(link, index) in equipment.links" :key="index">{{
+					link.title
+				}}</RouterLink>
 			</div>
 		</div>
 	</div>
@@ -117,11 +121,40 @@ defineProps(['equipment']);
 				line-height: 22px;
 			}
 		}
-		.badges {
+		.links {
 			display: flex;
 			align-items: center;
 			gap: 5px;
 			margin-top: 35px;
+			a {
+				border-radius: 10px;
+				border: 1px solid var(--gray-color);
+				height: 50px;
+				padding: 0 35px;
+				text-align: center;
+				font-weight: 600;
+				font-size: 15px;
+				text-transform: uppercase;
+				line-height: 19px;
+				display: flex;
+				align-items: center;
+				gap: 10px;
+				transition: var(--trs-300);
+				color: var(--gray-color);
+				@media (max-width: $tab) {
+					font-size: 13px;
+					line-height: 16px;
+				}
+
+				&:hover {
+					background: var(--pink-color);
+					border-color: var(--pink-color);
+					color: var(--white-color);
+				}
+				&:active {
+					box-shadow: var(--shadow-inset);
+				}
+			}
 		}
 	}
 }

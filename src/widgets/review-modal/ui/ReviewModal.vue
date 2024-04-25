@@ -41,6 +41,7 @@ const handleChangeFile = e => {
 	if (!files.length) {
 		return;
 	}
+	console.log(files[0]);
 	formValues.fileNameValue = files[0].name;
 	formValues.fileValue = files[0];
 };

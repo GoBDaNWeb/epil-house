@@ -248,7 +248,8 @@ onMounted(() => {
 					font-size: 20px;
 					line-height: 23px;
 					text-align: center;
-					max-width: 200px;
+					max-width: 220px;
+					text-transform: uppercase;
 					@media (max-width: $tab) {
 						font-size: 16px;
 						line-height: 18px;

@@ -1,12 +1,22 @@
 <script setup>
 import { reactive } from 'vue';
 
+import { useSuccessModalStore } from '@/entities/success-modal-store';
+
 import { Button, Input, Title } from '@/shared/ui';
+
+const successModal = useSuccessModalStore();
 
 const formValues = reactive({
 	nameValue: '',
 	phoneValue: ''
 });
+
+const handleSuccessForm = () => {
+	successModal.handleOpenModal();
+	formValues.nameValue = '';
+	formValues.phoneValue = '';
+};
 </script>
 
 <template>
@@ -23,7 +33,7 @@ const formValues = reactive({
 				</div>
 			</div>
 			<div class="form-block">
-				<form>
+				<form @submit.prevent="handleSuccessForm">
 					<div class="form-info">
 						<div class="info-item">
 							<span> 9 600 руб. </span>

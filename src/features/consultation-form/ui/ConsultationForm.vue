@@ -1,7 +1,11 @@
 <script setup>
 import { ref, watch } from 'vue';
 
+import { useSuccessModalStore } from '@/entities/success-modal-store';
+
 import { Button, Input, Title } from '@/shared/ui';
+
+const successModal = useSuccessModalStore();
 
 const phone = ref('');
 const phoneError = ref(false);
@@ -14,7 +18,7 @@ watch([phone, name], () => {
 });
 const handleSuccessForm = () => {
 	if (!phoneError.value) {
-		console.log('success');
+		successModal.handleOpenModal();
 	}
 };
 
@@ -36,7 +40,7 @@ const handleSetError = () => {
 			</div>
 			<form @submit.prevent="handleSuccessForm">
 				<div class="inputs">
-					<Input v-model="name" :error="nameError" placeholder="Ваше имя" />
+					<Input v-model="name" :error="nameError" type="text" placeholder="Ваше имя" />
 					<Input v-model="phone" :error="phoneError" type="tel" placeholder="+7 (ХХХ) ХХХ-ХХ-ХХ" />
 					<Button variable="primary" @click="handleSetError">отправить</Button>
 				</div>
@@ -127,7 +131,7 @@ const handleSetError = () => {
 				gap: 30px;
 				@media (max-width: $desktop-sm) {
 					gap: 15px;
-					grid-template-columns: 1fr 0.65fr;
+					grid-template-columns: 1fr;
 				}
 				@media (max-width: $tab) {
 					width: 100%;

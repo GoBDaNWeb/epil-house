@@ -33,7 +33,10 @@ const handleOpenModal = () => {
 			<div class="text-wrapper">
 				<div class="title" v-html="stock.title"></div>
 				<div class="text" v-html="stock.text"></div>
-				<div class="sm-text" v-if="stock.smText">{{ stock.smText }}</div>
+				<div class="address" v-if="stock.address1">
+					<p>{{ stock.address1 }}</p>
+					<p v-if="stock.address2">{{ stock.address2 }}</p>
+				</div>
 				<div class="price" v-if="stock.currentPrice || stock.oldPrice">
 					<p>{{ stock.currentPrice }}</p>
 					<span>{{ stock.oldPrice }}</span>
@@ -159,14 +162,20 @@ const handleOpenModal = () => {
 		.title {
 			margin-bottom: 15px;
 		}
-		.sm-text {
+		.address {
 			margin-top: 20px;
-			color: var(--pink-color);
-			font-weight: 400;
-			font-size: 14px;
-			line-height: 16px;
-			max-width: 250px;
+
+			display: flex;
+			flex-direction: column;
+			p {
+				color: var(--pink-color);
+				font-weight: 400;
+				font-size: 14px;
+				line-height: 16px;
+				max-width: 250px;
+			}
 		}
+
 		.price {
 			display: flex;
 			align-items: baseline;

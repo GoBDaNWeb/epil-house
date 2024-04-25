@@ -24,8 +24,7 @@ const formValues = reactive({
 	phoneValue: '',
 	serviceValue: '',
 	specialistValue: '',
-	dateValue: '',
-	timeValue: ''
+	dateValue: ''
 });
 const orderModal = useOrderModalStore();
 const successModal = useSuccessModalStore();
@@ -54,7 +53,7 @@ const handleSubmitForm = () => {
 				<Button variable="square" @click.stop="orderModal.handleOpenModal"><CloseIcon /></Button>
 			</div>
 			<div class="order-modal-content" @click.stop>
-				<Title variant="h4">онлайн запись</Title>
+				<Title variant="h4">запись в салон</Title>
 				<form @submit.prevent="handleSubmitForm()">
 					<div class="row">
 						<Input v-model="formValues.nameValue" type="text" placeholder="Ваше имя" />
@@ -72,25 +71,18 @@ const handleSubmitForm = () => {
 						name="specialist"
 						placeholder="Выберите мастера"
 					/>
-					<div class="row">
-						<VueDatePicker
-							:format="format"
-							placeholder="Выбрать дату"
-							v-model="formValues.dateValue"
-							auto-apply
-							:time-picker="false"
-						>
-							<template #input-icon>
-								<img class="input-slot-image" src="/images/date.svg" />
-							</template>
-						</VueDatePicker>
-						<Select
-							v-model="formValues.timeValue"
-							:options="selectList"
-							name="time"
-							placeholder="Выбрать время"
-						/>
-					</div>
+					<VueDatePicker
+						:format="format"
+						placeholder="Выбрать дату"
+						v-model="formValues.dateValue"
+						auto-apply
+						:time-picker="false"
+					>
+						<template #input-icon>
+							<img class="input-slot-image" src="/images/date.svg" />
+						</template>
+					</VueDatePicker>
+
 					<Textarea placeholder="Комментарий" />
 					<div class="row">
 						<Button variable="primary">отправить</Button>
