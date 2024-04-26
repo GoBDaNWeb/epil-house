@@ -11,36 +11,45 @@ import { specialistsList } from '../config';
 const props = defineProps(['currentTabs']);
 
 const currentSpecialists = ref([]);
+const showMore = ref(true);
 
-const handleShowSpecialist = tabs => {
-	if (props.currentTabs.length === 0) {
-		return true;
+const handleShowSpecialist = () => {
+	if (props.currentTabs.length > 0) {
+		props.currentTabs.forEach(tab => {
+			const filtered = specialistsList.filter(specialist => {
+				return specialist.tab.includes(tab.toString());
+			});
+			currentSpecialists.value = filtered;
+		});
+	} else {
+		currentSpecialists.value = specialistsList;
 	}
-	const filtered = tabs.filter(tab => {
-		return props.currentTabs.includes(+tab);
-	});
-	return filtered.length > 0;
-};
-
-const handleLoadMore = () => {
-	const length = currentSpecialists.value.length;
-	currentSpecialists.value = [...specialistsList.slice(0, length + 4)];
 };
 
 const handleShowMoreBtn = () => {
-	return (
-		currentSpecialists.value.length < specialistsList.length ||
-		currentSpecialists.value.length === 0
-	);
+	if (
+		currentSpecialists.value.length <= specialistsList.length ||
+		currentSpecialists.value.length === 0 ||
+		currentSpecialists.value.length < 12
+	) {
+		showMore.value = false;
+	} else {
+		showMore.value = true;
+	}
 };
-
+const handleLoadMore = () => {
+	const length = currentSpecialists.value.length;
+	currentSpecialists.value = [...specialistsList.slice(0, length + 4)];
+	handleShowMoreBtn();
+};
 onMounted(() => {
 	currentSpecialists.value = [...specialistsList.slice(0, 12)];
 });
 watch(
 	() => props.currentTabs,
 	() => {
-		currentSpecialists.value = [...specialistsList.slice(0, 12)];
+		handleShowSpecialist();
+		handleShowMoreBtn();
 	}
 );
 </script>
@@ -52,11 +61,10 @@ watch(
 				v-for="(specialist, index) in currentSpecialists"
 				:key="index"
 				:specialist="specialist"
-				v-show="handleShowSpecialist(specialist.tab)"
 			/>
 		</div>
 		<div class="navigation">
-			<Button variable="outline" @click="handleLoadMore" v-show="handleShowMoreBtn()">
+			<Button variable="outline" @click="handleLoadMore" v-show="showMore">
 				показать ещё
 				<ArrowDownIcon />
 			</Button>

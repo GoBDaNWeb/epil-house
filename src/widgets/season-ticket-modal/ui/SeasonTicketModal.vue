@@ -6,17 +6,41 @@ import { useSuccessModalStore } from '@/entities/success-modal-store';
 
 import { CloseIcon } from '@/shared/icons';
 import { Button, Input, Radio, Textarea, Title } from '@/shared/ui';
+import { hasError, setError } from '@/shared/utils';
 
 import { procedureList } from '../config';
 
 const seasonTicketModal = useSeasonTicketModalStore();
 const successModal = useSuccessModalStore();
 
+const formErrors = reactive({
+	nameError: false,
+	phoneError: false
+});
 const formValues = reactive({
 	nameValue: '',
 	phoneValue: '',
 	procedureValue: ''
 });
+
+const handleSetError = () => {
+	formErrors.phoneError = setError(formValues.phoneValue);
+	formErrors.nameError = setError(formValues.nameValue);
+};
+
+const handleSubmitForm = () => {
+	if (!hasError(formErrors)) {
+		seasonTicketModal.handleOpenModal();
+		successModal.handleOpenModal();
+	}
+};
+
+watch(
+	() => [formValues.phoneValue, formValues.nameValue],
+	() => {
+		handleSetError();
+	}
+);
 
 watch(
 	() => seasonTicketModal.modalActive,
@@ -28,11 +52,6 @@ watch(
 		}
 	}
 );
-
-const handleSubmitForm = () => {
-	seasonTicketModal.handleOpenModal();
-	successModal.handleOpenModal();
-};
 </script>
 
 <template>
@@ -66,15 +85,25 @@ const handleSubmitForm = () => {
 						</Radio>
 					</div>
 					<div class="row">
-						<Input v-model="formValues.nameValue" type="text" placeholder="Ваше имя" />
-						<Input v-model="formValues.phoneValue" type="tel" placeholder="+7 (ХХХ) ХХХ-ХХ-ХХ" />
+						<Input
+							v-model="formValues.nameValue"
+							:error="formErrors.nameError"
+							type="text"
+							placeholder="Ваше имя"
+						/>
+						<Input
+							v-model="formValues.phoneValue"
+							:error="formErrors.phoneError"
+							type="tel"
+							placeholder="+7 (ХХХ) ХХХ-ХХ-ХХ"
+						/>
 					</div>
 					<Textarea
 						placeholder="Укажите желаемые услуги, которые необходимо включить в абонемент"
 					/>
 
 					<div class="row">
-						<Button variable="primary">отправить</Button>
+						<Button variable="primary" @click="handleSetError">отправить</Button>
 						<p>
 							Нажимая кнопку «Отправить» вы даёте своё согласие с
 							<a href="#" target="_blank"> политикой обработки персональных данных </a>

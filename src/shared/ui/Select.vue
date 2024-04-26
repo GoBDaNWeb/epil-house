@@ -1,10 +1,9 @@
 <script setup>
 import { computed, ref } from 'vue';
 
-const props = defineProps(['options', 'modelValue', 'placeholder']);
+const props = defineProps(['options', 'modelValue', 'placeholder', 'error']);
 const selected = ref(null);
 const isActive = ref(null);
-
 const selectedValue = ref('');
 
 const emit = defineEmits(['update:modelValue']);
@@ -29,7 +28,11 @@ const handleSelectValue = index => {
 </script>
 
 <template>
-	<div class="selector" @mouseleave="handleCloseSelect" :class="isActive ? 'active' : ''">
+	<div
+		class="selector"
+		@mouseleave="handleCloseSelect"
+		:class="`${isActive ? 'active' : ''} ${error ? 'error' : ''}`"
+	>
 		<button type="button" @click="handleOpenSelect" class="selector-btn">
 			<p>{{ selectedValue ? selectedValue : placeholder }}</p>
 			<span>
@@ -87,6 +90,11 @@ const handleSelectValue = index => {
 		opacity: 1;
 		pointer-events: all;
 		transform: translateY(0);
+	}
+}
+.selector.error {
+	.selector-btn {
+		border-color: var(--pink-back-color);
 	}
 }
 .selector {

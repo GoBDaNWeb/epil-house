@@ -9,6 +9,7 @@ import { useSuccessModalStore } from '@/entities/success-modal-store';
 
 import { CloseIcon } from '@/shared/icons';
 import { Button, DatePicker, Input, Select, Textarea, Title } from '@/shared/ui';
+import { hasError, setError } from '@/shared/utils';
 
 import { selectList } from '../config';
 
@@ -24,6 +25,13 @@ const format = date => {
 	return `${day}.${month}.${year}`;
 };
 
+const formErrors = reactive({
+	nameError: false,
+	phoneError: false,
+	serviceError: false,
+	specialistError: false,
+	dateError: false
+});
 const formValues = reactive({
 	nameValue: '',
 	phoneValue: '',
@@ -32,11 +40,37 @@ const formValues = reactive({
 	dateValue: ''
 });
 
+const handleSetError = () => {
+	formErrors.phoneError = setError(formValues.phoneValue);
+	formErrors.nameError = setError(formValues.nameValue);
+	formErrors.serviceError = setError(formValues.serviceValue);
+	formErrors.specialistError = setError(formValues.specialistValue);
+	formErrors.dateError = setError(formValues.dateValue);
+};
+
+const handleSubmitForm = () => {
+	if (!hasError(formErrors)) {
+		orderModal.handleOpenModal();
+		successModal.handleOpenModal();
+	}
+};
+
+watch(
+	() => [
+		formValues.phoneValue,
+		formValues.nameValue,
+		formValues.serviceValue,
+		formValues.specialistValue,
+		formValues.dateValue
+	],
+	() => {
+		handleSetError();
+	}
+);
+
 watch(
 	() => orderModal.modalActive,
 	() => {
-		console.log(orderModal.specialist);
-
 		if (orderModal.modalActive) {
 			document.body.style.overflow = 'hidden';
 		} else {
@@ -44,11 +78,6 @@ watch(
 		}
 	}
 );
-
-const handleSubmitForm = () => {
-	orderModal.handleOpenModal();
-	successModal.handleOpenModal();
-};
 </script>
 
 <template>
@@ -61,19 +90,31 @@ const handleSubmitForm = () => {
 				<Title variant="h4">запись в салон</Title>
 				<form @submit.prevent="handleSubmitForm()">
 					<div class="row">
-						<Input v-model="formValues.nameValue" type="text" placeholder="Ваше имя" />
-						<Input v-model="formValues.phoneValue" type="tel" placeholder="+7 (ХХХ) ХХХ-ХХ-ХХ" />
+						<Input
+							v-model="formValues.nameValue"
+							:error="formErrors.nameError"
+							type="text"
+							placeholder="Ваше имя"
+						/>
+						<Input
+							v-model="formValues.phoneValue"
+							:error="formErrors.phoneError"
+							type="tel"
+							placeholder="+7 (ХХХ) ХХХ-ХХ-ХХ"
+						/>
 					</div>
 					<Select
 						v-model="formValues.serviceValue"
 						:options="selectList"
 						name="service"
+						:error="formErrors.serviceError"
 						:placeholder="serviceStore.service.title || 'Выберите услугу'"
 					/>
 					<Select
 						v-model="formValues.specialistValue"
 						:options="selectList"
 						name="specialist"
+						:error="formErrors.specialistError"
 						:placeholder="orderModal.specialist.name || 'Выберите мастера'"
 					/>
 					<VueDatePicker
@@ -82,6 +123,7 @@ const handleSubmitForm = () => {
 						v-model="formValues.dateValue"
 						auto-apply
 						:time-picker="false"
+						:class="formErrors.dateError ? 'error' : ''"
 					>
 						<template #input-icon>
 							<img class="input-slot-image" src="/images/date.svg" />
@@ -90,7 +132,7 @@ const handleSubmitForm = () => {
 
 					<Textarea placeholder="Комментарий" />
 					<div class="row">
-						<Button variable="primary">отправить</Button>
+						<Button variable="primary" @click="handleSetError">отправить</Button>
 						<p>
 							Нажимая кнопку «Отправить» вы даёте своё согласие с
 							<a href="#" target="_blank"> политикой обработки персональных данных </a>

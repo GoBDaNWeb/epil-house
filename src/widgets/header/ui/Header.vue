@@ -33,7 +33,8 @@ const handleBeigeHeader = () => {
 		route.name === 'contacts' ||
 		route.name === 'price' ||
 		route.name === 'equipments' ||
-		route.name === 'specialists'
+		route.name === 'specialists' ||
+		route.name === 'stocks'
 	) {
 		beige.value = true;
 	} else {

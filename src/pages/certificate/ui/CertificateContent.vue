@@ -1,10 +1,20 @@
 <script setup>
 import { reactive, ref, watch } from 'vue';
 
+import { useSuccessModalStore } from '@/entities/success-modal-store';
+
 import { Button, Input, Radio, Title } from '@/shared/ui';
+import { clearFields, hasError, setError } from '@/shared/utils';
 
 import { addressList, nominalList } from '../config';
 
+const successModal = useSuccessModalStore();
+
+const formErrors = reactive({
+	nameError: '',
+	emailError: '',
+	phoneError: ''
+});
 const formValues = reactive({
 	nominalValue: nominalList[0],
 	ownNominalValue: '',
@@ -13,6 +23,25 @@ const formValues = reactive({
 	emailValue: '',
 	phoneValue: ''
 });
+
+const handleSetError = () => {
+	formErrors.phoneError = setError(formValues.phoneValue);
+	formErrors.nameError = setError(formValues.nameValue);
+	formErrors.emailError = setError(formValues.emailValue);
+};
+
+const handleSubmitForm = () => {
+	if (!hasError(formErrors)) {
+		successModal.handleOpenModal();
+	}
+};
+
+watch(
+	() => [formValues.phoneValue, formValues.nameValue, formValues.emailValue],
+	() => {
+		handleSetError();
+	}
+);
 
 watch(
 	() => formValues.ownNominalValue,
@@ -35,7 +64,7 @@ watch(
 <template>
 	<div class="certificate-content">
 		<div class="certificate-content-inner container">
-			<form>
+			<form @submit.prevent="handleSubmitForm()">
 				<Title variant="h5">
 					Сертификат будет действовать <br />
 					<span>3 месяца с момента выдачи</span>
@@ -74,13 +103,28 @@ watch(
 				<div class="data">
 					<Title variant="h6">данные покупателя</Title>
 					<div class="data-inputs">
-						<Input v-model="formValues.nameValue" type="text" placeholder="Ваше имя" />
+						<Input
+							v-model="formValues.nameValue"
+							:error="formErrors.nameError"
+							type="text"
+							placeholder="Ваше имя"
+						/>
 						<div class="row">
-							<Input v-model="formValues.emailValue" type="text" placeholder="E-mail" />
-							<Input v-model="formValues.phoneValue" type="tel" placeholder="+7 (ХХХ) ХХХ-ХХ-ХХ" />
+							<Input
+								v-model="formValues.emailValue"
+								:error="formErrors.emailError"
+								type="text"
+								placeholder="E-mail"
+							/>
+							<Input
+								v-model="formValues.phoneValue"
+								:error="formErrors.phoneError"
+								type="tel"
+								placeholder="+7 (ХХХ) ХХХ-ХХ-ХХ"
+							/>
 						</div>
 						<div class="row">
-							<Button variable="primary">заказать сертификат</Button>
+							<Button variable="primary" @click="handleSetError">заказать сертификат</Button>
 							<p>
 								Нажимая кнопку «Заказать сертификат» вы даёте своё согласие с
 								<a href="#" target="_blank">политикой обработки персональных данных</a>

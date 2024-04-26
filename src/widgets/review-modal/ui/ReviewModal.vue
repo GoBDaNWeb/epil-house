@@ -6,20 +6,59 @@ import { useSuccessModalStore } from '@/entities/success-modal-store';
 
 import { CloseIcon } from '@/shared/icons';
 import { Button, Input, Select, Textarea, Title } from '@/shared/ui';
+import { hasError, setError } from '@/shared/utils';
 
 import { selectList } from '../config';
 
 const reviewModal = useReviewModalStore();
 const successModal = useSuccessModalStore();
 
-const filesList = ref([]);
-
+const formErrors = reactive({
+	nameError: '',
+	phoneError: '',
+	courseError: ''
+});
 const formValues = reactive({
 	nameValue: '',
 	phoneValue: '',
 	courseValue: '',
 	fileValue: ''
 });
+
+const handleSetError = () => {
+	formErrors.phoneError = setError(formValues.phoneValue);
+	formErrors.nameError = setError(formValues.nameValue);
+	formErrors.courseError = setError(formValues.courseValue);
+};
+
+const handleSubmitForm = () => {
+	if (!hasError(formErrors)) {
+		reviewModal.handleOpenModal();
+		successModal.handleOpenModal();
+	}
+};
+
+const handleChangeFile = e => {
+	var files = e.target.files || e.dataTransfer.files;
+	if (!files.length) {
+		return;
+	}
+	formValues.fileValue = [...formValues.fileValue, ...files];
+};
+
+const clearFile = file => {
+	const filtered = formValues.fileValue.filter(fileItem => {
+		return fileItem.name !== file.name;
+	});
+	formValues.fileValue = filtered;
+};
+
+watch(
+	() => [formValues.phoneValue, formValues.nameValue, formValues.courseValue],
+	() => {
+		handleSetError();
+	}
+);
 
 watch(
 	() => reviewModal.modalActive,
@@ -31,27 +70,6 @@ watch(
 		}
 	}
 );
-
-const handleSubmitForm = () => {
-	// reviewModal.handleOpenModal();
-	// successModal.handleOpenModal();
-};
-
-const handleChangeFile = e => {
-	var files = e.target.files || e.dataTransfer.files;
-	if (!files.length) {
-		return;
-	}
-	formValues.fileValue = [...formValues.fileValue, ...files];
-	console.log(formValues.fileValue);
-};
-
-const clearFile = file => {
-	const filtered = formValues.fileValue.filter(fileItem => {
-		return fileItem.name !== file.name;
-	});
-	formValues.fileValue = filtered;
-};
 </script>
 
 <template>
@@ -70,12 +88,23 @@ const clearFile = file => {
 				<Title variant="h4">Оставить отзыв</Title>
 				<form @submit.prevent="handleSubmitForm()">
 					<div class="row">
-						<Input v-model="formValues.nameValue" type="text" placeholder="Ваше имя" />
-						<Input v-model="formValues.phoneValue" type="tel" placeholder="+7 (ХХХ) ХХХ-ХХ-ХХ" />
+						<Input
+							v-model="formValues.nameValue"
+							:error="formErrors.nameError"
+							type="text"
+							placeholder="Ваше имя"
+						/>
+						<Input
+							v-model="formValues.phoneValue"
+							:error="formErrors.phoneError"
+							type="tel"
+							placeholder="+7 (ХХХ) ХХХ-ХХ-ХХ"
+						/>
 					</div>
 					<Select
 						v-model="formValues.courseValue"
 						:options="selectList"
+						:error="formErrors.courseError"
 						name="course"
 						placeholder="Выберите курс"
 					/>
@@ -90,7 +119,7 @@ const clearFile = file => {
 						</div>
 					</div>
 					<div class="row">
-						<Button variable="primary">отправить</Button>
+						<Button variable="primary" @click="handleSetError">отправить</Button>
 						<p>
 							Нажимая кнопку «Отправить» вы даёте своё согласие с
 							<a href="#" target="_blank"> политикой обработки персональных данных </a>

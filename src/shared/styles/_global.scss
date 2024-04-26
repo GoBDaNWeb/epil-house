@@ -19,6 +19,14 @@ body {
 	font-optical-sizing: auto;
 	color: var(--gray-color);
 }
+
+.dp__main.error {
+	.dp__input_wrap {
+		input {
+			border-color: var(--pink-back-color);
+		}
+	}
+}
 .dp__input_wrap {
 	input {
 		border: none;
