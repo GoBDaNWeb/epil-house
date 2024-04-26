@@ -38,6 +38,7 @@ const next = ref(null);
 					:spaceBetween="0"
 					:allowTouchMove="true"
 					:pagination="null"
+					:scrollbar="null"
 					:breakpoints="{ 0: { slidesPerView: 1.1 } }"
 				>
 					<SwiperSlide v-for="(training, index) in trainingList" :key="index">

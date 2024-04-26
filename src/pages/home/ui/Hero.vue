@@ -4,13 +4,16 @@ import { onMounted, ref } from 'vue';
 
 import { Swiper } from '@/widgets/swiper';
 
+import { ArrowLeftIcon, ArrowRightIcon } from '@/shared/icons';
 import { Title } from '@/shared/ui';
 
 import { advantages, heroSwiper } from '../config';
 
 const swiperRef = ref(null);
-const paginationHero = ref(null);
+const scrollbar = ref(null);
 const paginationAdvantages = ref(null);
+const prev = ref(null);
+const next = ref(null);
 const setSwiperRef = swiper => {
 	swiperRef.value = swiper;
 };
@@ -27,12 +30,13 @@ onMounted(() => {
 				<Swiper
 					:slides-per-view="'auto'"
 					:centered-slides="true"
-					:prev="null"
-					:next="null"
+					:prev="prev"
+					:next="next"
 					:spaceBetween="10"
 					:allowTouchMove="false"
 					:setSwiperRef="setSwiperRef"
-					:pagination="paginationHero"
+					:pagination="false"
+					:scrollbar="scrollbar"
 					:breakpoints="{
 						0: {
 							slidesPerView: 1,
@@ -58,8 +62,15 @@ onMounted(() => {
 							</p>
 						</div>
 					</SwiperSlide>
+					<div class="navigation container">
+						<div ref="scrollbar" class="swiper-scrollbar"></div>
+
+						<div class="swiper-navigation">
+							<button ref="prev"><ArrowLeftIcon /></button>
+							<button ref="next"><ArrowRightIcon /></button>
+						</div>
+					</div>
 				</Swiper>
-				<div ref="paginationHero" class="swiper-pagination"></div>
 			</div>
 		</div>
 		<div class="advantages container">
@@ -72,6 +83,7 @@ onMounted(() => {
 					:spaceBetween="20"
 					:allowTouchMove="false"
 					:pagination="paginationAdvantages"
+					:scrollbar="null"
 					:breakpoints="{
 						0: {
 							slidesPerView: 2,
@@ -83,7 +95,7 @@ onMounted(() => {
 						},
 						1024: {
 							slidesPerView: 4,
-							allowTouchMove: false
+							allowTouchMove: true
 						}
 					}"
 				>
@@ -117,6 +129,13 @@ onMounted(() => {
 				margin-left: 20px;
 			}
 			.swiper {
+				.navigation {
+					display: flex;
+					align-items: flex-start;
+					.swiper-navigation {
+						margin-top: 20px;
+					}
+				}
 				.swiper-slide {
 					height: auto;
 					display: flex;

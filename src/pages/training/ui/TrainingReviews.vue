@@ -41,6 +41,7 @@ const pagination = ref(null);
 					:spaceBetween="30"
 					:allowTouchMove="true"
 					:pagination="pagination"
+					:scrollbar="null"
 					:breakpoints="{
 						0: {
 							slidesPerView: 1,

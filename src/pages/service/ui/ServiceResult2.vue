@@ -31,6 +31,7 @@ const next = ref(null);
 					:next="next"
 					:spaceBetween="30"
 					:allowTouchMove="true"
+					:scrollbar="null"
 					:breakpoints="{
 						0: {
 							slidesPerView: 1,

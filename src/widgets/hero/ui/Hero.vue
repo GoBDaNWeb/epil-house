@@ -57,6 +57,7 @@ defineProps(['breadcrumbs', 'title', 'text', 'btnText', 'imgs', 'hasForm']);
 					:spaceBetween="10"
 					:allowTouchMove="true"
 					:setSwiperRef="setSwiperRef"
+					:scrollbar="null"
 					:breakpoints="{
 						0: {
 							slidesPerView: 1,

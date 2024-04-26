@@ -50,6 +50,7 @@ const pagination = ref(null);
 				:next="next"
 				:spaceBetween="0"
 				:allowTouchMove="true"
+				:scrollbar="null"
 				:pagination="pagination"
 			>
 				<SwiperSlide v-for="(img, index) in aboutSwiper" :key="index">

@@ -47,6 +47,7 @@ const next = ref(null);
 					:spaceBetween="30"
 					:allowTouchMove="true"
 					:pagination="null"
+					:scrollbar="null"
 					:breakpoints="{
 						0: {
 							slidesPerView: 1.2,

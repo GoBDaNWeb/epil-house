@@ -90,6 +90,7 @@ defineProps(['specialist']);
 								:next="next"
 								:spaceBetween="30"
 								:allowTouchMove="true"
+								:scrollbar="null"
 							>
 								<SwiperSlide v-for="(certificate, index) in specialist.certificates" :key="index">
 									<div class="image-wrapper">

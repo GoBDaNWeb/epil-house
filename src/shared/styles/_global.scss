@@ -73,6 +73,17 @@ body {
 		background: var(--pink-light-back-color);
 	}
 }
+.swiper-scrollbar.swiper-scrollbar-horizontal {
+	position: relative;
+	margin-top: 20px;
+	max-width: 205px;
+	margin: 20px auto 0;
+	height: 10px;
+	background: var(--white-color);
+	.swiper-scrollbar-drag {
+		background: var(--pink-color);
+	}
+}
 .swiper-pagination {
 	align-items: center;
 	justify-content: center;
