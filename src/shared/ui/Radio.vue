@@ -36,6 +36,8 @@ watch(
 </template>
 
 <style lang="scss" scoped>
+@import '@/shared/styles/vars';
+
 .custom-radio.active {
 	background: var(--pink-color);
 	border-color: var(--pink-color);
@@ -54,6 +56,13 @@ watch(
 	padding: 0 20px;
 	cursor: pointer;
 	transition: var(--trs-300);
+	white-space: nowrap;
+	@media (max-width: $tab) {
+		height: 31px;
+		padding: 0 15px;
+		font-size: 15px;
+		line-height: 21px;
+	}
 	input {
 		display: none;
 	}

@@ -32,7 +32,7 @@ defineExpose({ value });
 		@input="$emit('update:modelValue', $event.target.value)"
 	/>
 	<label v-else-if="type === 'file'" class="input file">
-		<input :class="error ? 'error' : ''" :type="type" />
+		<input :class="error ? 'error' : ''" :type="type" multiple />
 		<p>{{ placeholder }}</p>
 	</label>
 </template>
@@ -82,7 +82,7 @@ defineExpose({ value });
 .input {
 	outline: none;
 	background: var(--white-color);
-	border: none;
+	border: 1px solid rgba(0, 0, 0, 0);
 	font-size: 16px;
 	line-height: 20px;
 	font-weight: 400;
@@ -91,5 +91,6 @@ defineExpose({ value });
 	height: 50px;
 	border-radius: 10px;
 	color: var(--gray-color);
+	transition: var(--trs-300);
 }
 </style>

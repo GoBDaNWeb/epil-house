@@ -4,6 +4,7 @@ import '@vuepic/vue-datepicker/dist/main.css';
 import { reactive, watch } from 'vue';
 
 import { useOrderModalStore } from '@/entities/order-modal-store';
+import { useServiceStore } from '@/entities/service-store';
 import { useSuccessModalStore } from '@/entities/success-modal-store';
 
 import { CloseIcon } from '@/shared/icons';
@@ -11,6 +12,7 @@ import { Button, DatePicker, Input, Select, Textarea, Title } from '@/shared/ui'
 
 import { selectList } from '../config';
 
+const serviceStore = useServiceStore();
 const orderModal = useOrderModalStore();
 const successModal = useSuccessModalStore();
 
@@ -25,8 +27,8 @@ const format = date => {
 const formValues = reactive({
 	nameValue: '',
 	phoneValue: '',
-	serviceValue: '',
-	specialistValue: orderModal.specialist ? orderModal.specialist.name : '',
+	serviceValue: serviceStore.service.title || '',
+	specialistValue: orderModal.specialist.name || '',
 	dateValue: ''
 });
 
@@ -66,13 +68,13 @@ const handleSubmitForm = () => {
 						v-model="formValues.serviceValue"
 						:options="selectList"
 						name="service"
-						placeholder="Выберите услугу"
+						:placeholder="serviceStore.service.title || 'Выберите услугу'"
 					/>
 					<Select
 						v-model="formValues.specialistValue"
 						:options="selectList"
 						name="specialist"
-						:placeholder="orderModal.specialist ? orderModal.specialist.name : 'Выберите мастера'"
+						:placeholder="orderModal.specialist.name || 'Выберите мастера'"
 					/>
 					<VueDatePicker
 						:format="format"
@@ -101,6 +103,8 @@ const handleSubmitForm = () => {
 </template>
 
 <style lang="scss" scoped>
+@import '@/shared/styles/vars';
+
 .order-modal {
 	position: fixed;
 	top: 0;
@@ -115,6 +119,13 @@ const handleSubmitForm = () => {
 		position: absolute;
 		top: 30px;
 		right: 30px;
+		@media (max-width: $tab) {
+			top: 20px;
+			right: 20px;
+		}
+		@media (max-width: $pre-mob) {
+			z-index: 2;
+		}
 	}
 	.order-modal-content {
 		width: 50vw;
@@ -129,6 +140,16 @@ const handleSubmitForm = () => {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
+		@media (max-width: $tab) {
+			padding: 20px;
+		}
+		@media (max-width: $tab-sm) {
+			width: 65vw;
+		}
+		@media (max-width: $pre-mob) {
+			width: 100vw;
+			border-radius: 0;
+		}
 		h4 {
 			text-align: left;
 		}
@@ -137,10 +158,18 @@ const handleSubmitForm = () => {
 			display: flex;
 			flex-direction: column;
 			gap: 30px;
+			@media (max-width: $tab) {
+				gap: 20px;
+				margin-top: 30px;
+			}
 			.row {
 				display: grid;
 				grid-template-columns: repeat(2, 1fr);
 				gap: 30px;
+				@media (max-width: $tab) {
+					grid-template-columns: repeat(1, 1fr);
+					gap: 20px;
+				}
 				.selector {
 					z-index: 8;
 				}

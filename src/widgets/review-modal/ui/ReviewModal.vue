@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, watch } from 'vue';
+import { reactive, ref, watch } from 'vue';
 
 import { useReviewModalStore } from '@/entities/review-modal-store';
 import { useSuccessModalStore } from '@/entities/success-modal-store';
@@ -12,12 +12,13 @@ import { selectList } from '../config';
 const reviewModal = useReviewModalStore();
 const successModal = useSuccessModalStore();
 
+const filesList = ref([]);
+
 const formValues = reactive({
 	nameValue: '',
 	phoneValue: '',
 	courseValue: '',
-	fileValue: '',
-	fileNameValue: ''
+	fileValue: ''
 });
 
 watch(
@@ -32,8 +33,8 @@ watch(
 );
 
 const handleSubmitForm = () => {
-	reviewModal.handleOpenModal();
-	successModal.handleOpenModal();
+	// reviewModal.handleOpenModal();
+	// successModal.handleOpenModal();
 };
 
 const handleChangeFile = e => {
@@ -41,14 +42,15 @@ const handleChangeFile = e => {
 	if (!files.length) {
 		return;
 	}
-	console.log(files[0]);
-	formValues.fileNameValue = files[0].name;
-	formValues.fileValue = files[0];
+	formValues.fileValue = [...formValues.fileValue, ...files];
+	console.log(formValues.fileValue);
 };
 
-const clearFile = () => {
-	formValues.fileNameValue = '';
-	formValues.fileValue = '';
+const clearFile = file => {
+	const filtered = formValues.fileValue.filter(fileItem => {
+		return fileItem.name !== file.name;
+	});
+	formValues.fileValue = filtered;
 };
 </script>
 
@@ -80,9 +82,11 @@ const clearFile = () => {
 					<Textarea placeholder="Ваш отзыв" />
 					<div class="row file">
 						<Input @change="handleChangeFile" type="file" placeholder="выбрать фото" />
-						<div class="file-wrapper" v-if="formValues.fileNameValue">
-							<Button @click="clearFile"><CloseIcon /></Button>
-							<p>{{ formValues.fileNameValue }}</p>
+						<div class="file-wrapper-container" v-if="formValues.fileValue">
+							<div class="file-wrapper" v-for="file in formValues.fileValue" :key="file.name">
+								<Button @click="clearFile(file)" type="button"><CloseIcon /></Button>
+								<p>{{ file.name }}</p>
+							</div>
 						</div>
 					</div>
 					<div class="row">
@@ -99,6 +103,8 @@ const clearFile = () => {
 </template>
 
 <style lang="scss" scoped>
+@import '@/shared/styles/vars';
+
 .review-modal {
 	position: fixed;
 	top: 0;
@@ -113,6 +119,13 @@ const clearFile = () => {
 		position: absolute;
 		top: 30px;
 		right: 30px;
+		@media (max-width: $tab) {
+			top: 20px;
+			right: 20px;
+		}
+		@media (max-width: $pre-mob) {
+			z-index: 2;
+		}
 	}
 	.review-modal-content {
 		width: 50vw;
@@ -127,6 +140,16 @@ const clearFile = () => {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
+		@media (max-width: $tab) {
+			padding: 20px;
+		}
+		@media (max-width: $tab-sm) {
+			width: 65vw;
+		}
+		@media (max-width: $pre-mob) {
+			width: 100vw;
+			border-radius: 0;
+		}
 		h4 {
 			text-align: left;
 		}
@@ -135,10 +158,19 @@ const clearFile = () => {
 			display: flex;
 			flex-direction: column;
 			gap: 30px;
+			@media (max-width: $tab) {
+				gap: 20px;
+				margin-top: 30px;
+			}
 			.row.file {
 				display: flex;
 				align-items: center;
 				gap: 30px;
+				@media (max-width: $tab) {
+					flex-direction: column;
+					align-items: flex-start;
+					gap: 20px;
+				}
 				label {
 					max-width: 205px;
 					width: 100%;
@@ -153,6 +185,10 @@ const clearFile = () => {
 				display: grid;
 				grid-template-columns: repeat(2, 1fr);
 				gap: 30px;
+				@media (max-width: $tab) {
+					grid-template-columns: repeat(1, 1fr);
+					gap: 20px;
+				}
 				.selector {
 					z-index: 8;
 				}

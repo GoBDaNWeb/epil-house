@@ -43,6 +43,8 @@ watch(
 </template>
 
 <style lang="scss" scoped>
+@import '@/shared/styles/vars';
+
 .success-modal {
 	position: fixed;
 	top: 0;
@@ -57,6 +59,13 @@ watch(
 		position: absolute;
 		top: 30px;
 		right: 30px;
+		@media (max-width: $tab) {
+			top: 20px;
+			right: 20px;
+		}
+		@media (max-width: $pre-mob) {
+			z-index: 2;
+		}
 	}
 	.success-modal-content {
 		width: 50vw;
@@ -71,6 +80,16 @@ watch(
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
+		@media (max-width: $tab) {
+			padding: 20px;
+		}
+		@media (max-width: $tab-sm) {
+			width: 65vw;
+		}
+		@media (max-width: $pre-mob) {
+			width: 100vw;
+			border-radius: 0;
+		}
 		h4 {
 			text-align: left;
 		}
@@ -79,6 +98,10 @@ watch(
 			font-weight: 400;
 			font-size: 20px;
 			line-height: 28px;
+			@media (max-width: $tab) {
+				font-size: 15px;
+				line-height: 21px;
+			}
 		}
 	}
 }

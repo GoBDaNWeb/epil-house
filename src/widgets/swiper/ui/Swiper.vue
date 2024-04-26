@@ -5,8 +5,7 @@ import { onMounted, ref, watch } from 'vue';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import 'swiper/css/scrollbar';
-import { Navigation, Pagination, Scrollbar } from 'swiper/modules';
+import { Navigation, Pagination } from 'swiper/modules';
 
 const props = defineProps([
 	'prev',
@@ -19,13 +18,10 @@ const props = defineProps([
 	'centeredSlides',
 	'loop',
 	'allowTouchMove',
-	'setSwiperRef',
-	'scrollbar'
+	'setSwiperRef'
 ]);
 
-const modules = ref([Navigation, Pagination, Scrollbar]);
-
-const scrollbarObj = props.scrollbar ? { hide: false } : null;
+const modules = ref([Navigation, Pagination]);
 </script>
 
 <template>
@@ -40,10 +36,6 @@ const scrollbarObj = props.scrollbar ? { hide: false } : null;
 		:pagination="{
 			el: pagination,
 			clickable: true
-		}"
-		:scrollbar="{
-			el: scrollbar,
-			hide: false
 		}"
 		:modules="modules"
 		class="swiper"

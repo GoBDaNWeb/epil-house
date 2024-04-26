@@ -42,7 +42,7 @@ import { Title } from '@/shared/ui';
 
 	.about {
 		display: flex;
-		align-items: center;
+		align-items: flex-start;
 		gap: 52px;
 		justify-content: center;
 		margin-top: 105px;

@@ -48,6 +48,13 @@ defineProps(['specialist']);
 			</div>
 			<div class="specialist-modal-content" @click.stop>
 				<div class="image-block">
+					<div class="mob-info">
+						<Title variant="h3">{{ specialist.name }}</Title>
+						<div class="about">
+							<p>{{ specialist.experience }}</p>
+							<p>{{ specialist.post }}</p>
+						</div>
+					</div>
 					<div class="image-wrapper">
 						<img :src="specialist.img" alt="specialist" />
 					</div>
@@ -91,6 +98,17 @@ defineProps(['specialist']);
 								:spaceBetween="30"
 								:allowTouchMove="true"
 								:scrollbar="null"
+								:pagination="null"
+								:breakpoints="{
+									0: {
+										slidesPerView: 1.4,
+										spaceBetween: 20
+									},
+									767: {
+										slidesPerView: 2,
+										spaceBetween: 30
+									}
+								}"
 							>
 								<SwiperSlide v-for="(certificate, index) in specialist.certificates" :key="index">
 									<div class="image-wrapper">
@@ -107,6 +125,8 @@ defineProps(['specialist']);
 </template>
 
 <style lang="scss" scoped>
+@import '@/shared/styles/vars';
+
 .specialist-modal {
 	position: fixed;
 	top: 0;
@@ -121,9 +141,16 @@ defineProps(['specialist']);
 		position: absolute;
 		top: 30px;
 		right: 30px;
+		@media (max-width: $tab) {
+			top: 20px;
+			right: 20px;
+		}
+		@media (max-width: $pre-mob) {
+			z-index: 2;
+		}
 	}
 	.specialist-modal-content {
-		width: 65vw;
+		width: 75vw;
 		background: var(--white-color);
 		padding: 30px;
 		border-radius: 0 20px 20px 0;
@@ -135,12 +162,55 @@ defineProps(['specialist']);
 		grid-template-columns: 0.4fr 1fr;
 		gap: 30px;
 		transition: var(--trs-300);
+		@media (max-width: $tab) {
+			padding: 20px;
+			display: flex;
+			flex-direction: column;
+			gap: 50px;
+			overflow-y: auto;
+			overflow-x: hidden;
+		}
+		@media (max-width: $pre-mob) {
+			width: 100vw;
+			border-radius: 0;
+		}
 		.image-block {
+			@media (max-width: $tab) {
+				margin-top: 70px;
+			}
+			.mob-info {
+				margin-bottom: 30px;
+				display: none;
+				@media (max-width: $tab) {
+					display: block;
+				}
+				h3 {
+					text-align: left;
+				}
+				.about {
+					margin-top: 15px;
+
+					p {
+						font-weight: 400;
+						font-size: 16px;
+						line-height: 22px;
+					}
+				}
+			}
 			.image-wrapper {
 				padding-bottom: 125%;
 				position: relative;
 				overflow: hidden;
 				border-radius: 20px;
+				@media (max-width: $tab) {
+					padding-bottom: 75%;
+				}
+				@media (max-width: $tab) {
+					padding-bottom: 100%;
+				}
+				@media (max-width: $pre-mob) {
+					padding-bottom: 125%;
+				}
 				img {
 					position: absolute;
 					width: 100%;
@@ -167,14 +237,27 @@ defineProps(['specialist']);
 			scrollbar-color: rgba(73, 84, 104, 0.3) rgba(0, 0, 0, 0);
 			height: 100%;
 			padding-right: 20px;
+			@media (max-width: $tab) {
+				overflow: visible;
+				padding-right: 0;
+			}
+			@media (max-width: $pre-mob) {
+				width: 100%;
+			}
 			&::-webkit-scrollbar {
 				height: 0px;
 			}
 			h3 {
 				text-align: left;
+				@media (max-width: $tab) {
+					display: none;
+				}
 			}
 			.about {
 				margin-top: 25px;
+				@media (max-width: $tab) {
+					display: none;
+				}
 				p {
 					font-weight: 400;
 					font-size: 16px;
@@ -183,17 +266,32 @@ defineProps(['specialist']);
 			}
 			.specialist-about {
 				margin-top: 50px;
+				@media (max-width: $tab) {
+					margin-top: 0;
+				}
+				h5 {
+					@media (max-width: $tab) {
+						font-size: 24px;
+						line-height: 26px;
+					}
+				}
 				p {
 					font-weight: 400;
 					font-size: 16px;
 					line-height: 22px;
 					margin-top: 30px;
+					@media (max-width: $tab) {
+						margin-top: 25px;
+					}
 				}
 				ul {
 					margin-top: 30px;
 					display: flex;
 					flex-direction: column;
 					gap: 10px;
+					@media (max-width: $tab) {
+						margin-top: 25px;
+					}
 					li {
 						padding-left: 33px;
 						position: relative;
@@ -215,6 +313,16 @@ defineProps(['specialist']);
 			}
 			.specialist-certificates {
 				margin-top: 65px;
+				overflow: hidden;
+				@media (max-width: $tab) {
+					padding-bottom: 50px;
+				}
+				h5 {
+					@media (max-width: $tab) {
+						font-size: 24px;
+						line-height: 26px;
+					}
+				}
 				.top {
 					display: flex;
 					align-items: center;

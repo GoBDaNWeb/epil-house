@@ -35,6 +35,10 @@ body {
 		height: 21px;
 		top: 24px;
 	}
+	input::placeholder {
+		color: var(--gray-color);
+		opacity: 1;
+	}
 	.dp__clear_icon {
 		display: none;
 	}

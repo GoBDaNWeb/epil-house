@@ -87,6 +87,8 @@ const handleSubmitForm = () => {
 </template>
 
 <style lang="scss" scoped>
+@import '@/shared/styles/vars';
+
 .season-ticket-modal {
 	position: fixed;
 	top: 0;
@@ -101,6 +103,13 @@ const handleSubmitForm = () => {
 		position: absolute;
 		top: 30px;
 		right: 30px;
+		@media (max-width: $tab) {
+			top: 20px;
+			right: 20px;
+		}
+		@media (max-width: $pre-mob) {
+			z-index: 2;
+		}
 	}
 	.season-ticket-modal-content {
 		width: 50vw;
@@ -115,10 +124,24 @@ const handleSubmitForm = () => {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
+		@media (max-width: $tab) {
+			padding: 20px;
+		}
+		@media (max-width: $tab-sm) {
+			width: 65vw;
+		}
+		@media (max-width: $pre-mob) {
+			width: 100vw;
+			border-radius: 0;
+		}
 		.image-wrapper {
 			width: 200px;
 			height: 155px;
 			position: relative;
+			@media (max-width: $tab) {
+				width: 150px;
+				height: 116px;
+			}
 			img {
 				position: absolute;
 				width: 100%;
@@ -134,23 +157,13 @@ const handleSubmitForm = () => {
 			display: flex;
 			flex-direction: column;
 			gap: 30px;
-			.row.file {
-				display: flex;
-				align-items: center;
-				gap: 30px;
-				label {
-					max-width: 205px;
-					width: 100%;
-				}
-			}
-			.file-wrapper {
-				display: flex;
-				align-items: center;
-				gap: 18px;
+			@media (max-width: $tab) {
+				gap: 20px;
+				margin-top: 30px;
 			}
 			.radio-row {
-				display: grid;
-				grid-template-columns: repeat(3, 1fr);
+				display: flex;
+				flex-wrap: wrap;
 				align-items: center;
 				max-width: 80%;
 				gap: 10px;
@@ -162,6 +175,10 @@ const handleSubmitForm = () => {
 				display: grid;
 				grid-template-columns: repeat(2, 1fr);
 				gap: 30px;
+				@media (max-width: $tab) {
+					grid-template-columns: repeat(1, 1fr);
+					gap: 20px;
+				}
 				.selector {
 					z-index: 8;
 				}

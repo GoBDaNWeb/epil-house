@@ -4,16 +4,13 @@ import { onMounted, ref } from 'vue';
 
 import { Swiper } from '@/widgets/swiper';
 
-import { ArrowLeftIcon, ArrowRightIcon } from '@/shared/icons';
 import { Title } from '@/shared/ui';
 
 import { advantages, heroSwiper } from '../config';
 
 const swiperRef = ref(null);
-const scrollbar = ref(null);
+const paginationHero = ref(null);
 const paginationAdvantages = ref(null);
-const prev = ref(null);
-const next = ref(null);
 const setSwiperRef = swiper => {
 	swiperRef.value = swiper;
 };
@@ -28,22 +25,21 @@ onMounted(() => {
 			<Title variant="h1">Сеть салонов красоты «Эпилхаус»</Title>
 			<div class="hero-swiper-wrapper">
 				<Swiper
-					:slides-per-view="'auto'"
+					:slides-per-view="5"
 					:centered-slides="true"
-					:prev="prev"
-					:next="next"
+					:prev="null"
+					:next="null"
 					:spaceBetween="10"
 					:allowTouchMove="false"
 					:setSwiperRef="setSwiperRef"
-					:pagination="false"
-					:scrollbar="scrollbar"
+					:pagination="paginationHero"
 					:breakpoints="{
 						0: {
 							slidesPerView: 1,
 							allowTouchMove: true
 						},
 						767: {
-							slidesPerView: 'auto',
+							slidesPerView: 5,
 							allowTouchMove: false
 						}
 					}"
@@ -62,15 +58,8 @@ onMounted(() => {
 							</p>
 						</div>
 					</SwiperSlide>
-					<div class="navigation container">
-						<div ref="scrollbar" class="swiper-scrollbar"></div>
-
-						<div class="swiper-navigation">
-							<button ref="prev"><ArrowLeftIcon /></button>
-							<button ref="next"><ArrowRightIcon /></button>
-						</div>
-					</div>
 				</Swiper>
+				<div ref="paginationHero" class="swiper-pagination"></div>
 			</div>
 		</div>
 		<div class="advantages container">
@@ -83,7 +72,6 @@ onMounted(() => {
 					:spaceBetween="20"
 					:allowTouchMove="false"
 					:pagination="paginationAdvantages"
-					:scrollbar="null"
 					:breakpoints="{
 						0: {
 							slidesPerView: 2,
@@ -95,7 +83,7 @@ onMounted(() => {
 						},
 						1024: {
 							slidesPerView: 4,
-							allowTouchMove: true
+							allowTouchMove: false
 						}
 					}"
 				>
@@ -129,18 +117,22 @@ onMounted(() => {
 				margin-left: 20px;
 			}
 			.swiper {
-				.navigation {
-					display: flex;
-					align-items: flex-start;
-					.swiper-navigation {
-						margin-top: 20px;
-					}
+				.swiper-slide-next,
+				.swiper-slide-prev {
+					transform: scale(1) !important;
+					opacity: 1 !important;
+				}
+				.swiper-slide-active {
+					transform: scale(1) !important;
+					opacity: 1 !important;
 				}
 				.swiper-slide {
 					height: auto;
 					display: flex;
-					align-items: flex-end;
+					align-items: center;
 					position: relative;
+					transform: scale(0.9);
+					opacity: 0.7;
 					@media (max-width: $tab-sm) {
 						width: 100% !important;
 						& > .image-wrapper {
@@ -149,10 +141,9 @@ onMounted(() => {
 						}
 					}
 					&:nth-child(1) {
-						width: 205px;
-
+						width: 440px;
 						.image-wrapper {
-							height: 300px;
+							height: 400px;
 						}
 					}
 					&:nth-child(2) {
@@ -169,16 +160,15 @@ onMounted(() => {
 						}
 					}
 					&:nth-child(4) {
-						width: 205px;
-
+						width: 440px;
 						.image-wrapper {
-							height: 300px;
+							height: 400px;
 						}
 					}
 					&:nth-child(5) {
 						width: 440px;
 						.image-wrapper {
-							height: 440px;
+							height: 400px;
 						}
 					}
 					.image-wrapper {
