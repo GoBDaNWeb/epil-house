@@ -30,7 +30,7 @@ const autoplayObj = props.autoplay
 			disableOnInteraction: false
 		}
 	: {
-			delay: 1000000000000,
+			delay: 1000000000,
 			disableOnInteraction: false
 		};
 console.log(autoplayObj);

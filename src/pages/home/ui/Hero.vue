@@ -41,6 +41,17 @@ const setSwiperRef = swiper => {
 							allowTouchMove: true
 						},
 						767: {
+							slidesPerView: 1.5,
+							allowTouchMove: true
+						},
+						1024: {
+							slidesPerView: 2.5
+						},
+						1280: {
+							slidesPerView: 3,
+							allowTouchMove: true
+						},
+						1600: {
 							slidesPerView: 4.5,
 							allowTouchMove: true
 						}
@@ -83,6 +94,7 @@ const setSwiperRef = swiper => {
 					:spaceBetween="20"
 					:allowTouchMove="false"
 					:pagination="paginationAdvantages"
+					:autoplay="null"
 					:breakpoints="{
 						0: {
 							slidesPerView: 2,
@@ -151,14 +163,22 @@ const setSwiperRef = swiper => {
 					display: flex;
 					justify-content: center;
 					margin-left: 90px;
+					@media (max-width: $tab) {
+						margin-left: 0;
+					}
 				}
 				.swiper-navigation {
 					display: flex;
+					@media (max-width: $tab) {
+						display: none;
+					}
 				}
 			}
 			.swiper {
-				height: 600px;
-
+				height: 650px;
+				@media (max-width: $tab-sm) {
+					height: auto;
+				}
 				.swiper-slide-next,
 				.swiper-slide-prev {
 					// width: 205px !important;
@@ -167,7 +187,7 @@ const setSwiperRef = swiper => {
 					// }
 					// width: 205px !important;
 					& > .image-wrapper {
-						padding-bottom: 125% !important;
+						height: 520px !important;
 					}
 				}
 				.swiper-slide-active {
@@ -176,7 +196,7 @@ const setSwiperRef = swiper => {
 					// 	height: 550px !important;
 					// }
 					& > .image-wrapper {
-						padding-bottom: 145% !important;
+						height: 640px !important;
 					}
 					.season-ticket {
 						opacity: 1 !important;
@@ -191,7 +211,7 @@ const setSwiperRef = swiper => {
 					transition: var(--trs-600);
 					// width: 440px;
 					& > .image-wrapper {
-						padding-bottom: 100%;
+						height: 415px;
 						// height: 400px;
 						transition: var(--trs-600);
 					}
