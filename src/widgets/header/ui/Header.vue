@@ -139,7 +139,7 @@ window.addEventListener('scroll', controlNavbar);
 	}
 	.header-inner {
 		display: flex;
-		align-items: flex-end;
+		align-items: center;
 		justify-content: space-between;
 		height: 100%;
 		@media (max-width: $tab) {
@@ -149,10 +149,7 @@ window.addEventListener('scroll', controlNavbar);
 			display: flex;
 			align-items: center;
 			gap: 30px;
-			padding-bottom: 13px;
-			@media (max-width: $tab) {
-				padding-bottom: 0;
-			}
+
 			nav {
 				display: flex;
 				align-items: center;
@@ -198,19 +195,14 @@ window.addEventListener('scroll', controlNavbar);
 			display: none;
 			align-items: center;
 			gap: 5px;
-			padding-bottom: 13px;
 			@media (max-width: $desktop-sm) {
 				display: flex;
-			}
-			@media (max-width: $tab) {
-				padding-bottom: 0;
 			}
 		}
 		.info {
 			display: flex;
 			align-items: center;
 			gap: 30px;
-			padding-bottom: 13px;
 			@media (max-width: $desktop-sm) {
 				display: none;
 			}

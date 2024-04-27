@@ -120,7 +120,7 @@ watch(
 					/>
 					<VueDatePicker
 						:format="format"
-						placeholder="Выбрать дату"
+						placeholder="Выбрать желаемую дату"
 						v-model="formValues.dateValue"
 						auto-apply
 						:time-picker="false"

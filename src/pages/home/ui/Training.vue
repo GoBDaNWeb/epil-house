@@ -1,6 +1,7 @@
 <script setup>
 import { SwiperSlide } from 'swiper/vue';
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 import { Swiper } from '@/widgets/swiper';
 
@@ -12,6 +13,8 @@ import { Button, Title } from '@/shared/ui';
 
 import { trainingList } from '../config';
 
+const router = useRouter();
+
 const prev = ref(null);
 const next = ref(null);
 </script>
@@ -22,7 +25,9 @@ const next = ref(null);
 			<div class="top">
 				<Title variant="h3">обучение</Title>
 				<div class="navigation">
-					<Button variable="outline"> все курсы <ArrowRightIcon /> </Button>
+					<Button variable="outline" @click="router.push(PATH_PAGE.training)">
+						все курсы <ArrowRightIcon />
+					</Button>
 					<div class="swiper-navigation">
 						<button ref="prev"><ArrowLeftIcon /></button>
 						<button ref="next"><ArrowRightIcon /></button>

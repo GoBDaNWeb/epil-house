@@ -29,7 +29,7 @@ export const equipmentsList = [
 				url: `${PATH_PAGE.services}/injectable-cosmetology/biorevitalization`
 			}
 		],
-		tab: ['0']
+		tab: ['0', '2']
 	},
 	{
 		img: '/images/equipments/3.jpg',
@@ -42,7 +42,7 @@ export const equipmentsList = [
 				url: `${PATH_PAGE.services}/injectable-cosmetology/biorevitalization`
 			}
 		],
-		tab: ['0', '1']
+		tab: ['0', '1', '2']
 	},
 	{
 		img: '/images/equipments/4.jpg',
@@ -72,7 +72,7 @@ export const equipmentsList = [
 				url: `${PATH_PAGE.services}/injectable-cosmetology/biorevitalization`
 			}
 		],
-		tab: ['0']
+		tab: ['0', '2']
 	},
 	{
 		img: '/images/equipments/6.jpg',
