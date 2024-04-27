@@ -85,6 +85,7 @@ body {
 		background: var(--pink-light-back-color);
 	}
 }
+
 .swiper-scrollbar.swiper-scrollbar-horizontal {
 	position: relative;
 	margin-top: 20px;
@@ -94,6 +95,40 @@ body {
 	background: var(--white-color);
 	.swiper-scrollbar-drag {
 		background: var(--pink-color);
+	}
+}
+
+.swiper-pagination-progress {
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	margin-top: 20px;
+	position: relative;
+	max-width: 205px;
+	height: 10px;
+	.swiper-pagination-bullet-active {
+		background: var(--pink-color) !important;
+		z-index: 2;
+		width: 0;
+		animation: slidein 4600ms linear 0ms infinite;
+	}
+	.swiper-pagination-bullet {
+		background: var(--white-color);
+		opacity: 1;
+		transition: var(--trs-300);
+		width: 100%;
+		position: absolute;
+		top: 0;
+		border-radius: 99px;
+		left: 0;
+	}
+}
+@keyframes slidein {
+	from {
+		width: 0;
+	}
+	to {
+		width: 100%;
 	}
 }
 .swiper-pagination {

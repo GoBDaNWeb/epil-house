@@ -10,16 +10,13 @@ import { Title } from '@/shared/ui';
 import { advantages, heroSwiper } from '../config';
 
 const swiperRef = ref(null);
-const paginationHero = ref(null);
 const next = ref(null);
 const prev = ref(null);
+const paginationHero = ref(null);
 const paginationAdvantages = ref(null);
 const setSwiperRef = swiper => {
 	swiperRef.value = swiper;
 };
-// onMounted(() => {
-// 	swiperRef.value.activeIndex = 3;
-// });
 </script>
 
 <template>
@@ -28,7 +25,7 @@ const setSwiperRef = swiper => {
 			<Title variant="h1">Сеть салонов красоты «Эпилхаус»</Title>
 			<div class="hero-swiper-wrapper">
 				<Swiper
-					:slides-per-view="5"
+					:slides-per-view="4.5"
 					:centered-slides="true"
 					:prev="prev"
 					:next="next"
@@ -37,13 +34,14 @@ const setSwiperRef = swiper => {
 					:setSwiperRef="setSwiperRef"
 					:pagination="paginationHero"
 					:loop="true"
+					:autoplay="4600"
 					:breakpoints="{
 						0: {
 							slidesPerView: 1,
 							allowTouchMove: true
 						},
 						767: {
-							slidesPerView: 5,
+							slidesPerView: 4.5,
 							allowTouchMove: true
 						}
 					}"
@@ -60,11 +58,19 @@ const setSwiperRef = swiper => {
 						</div>
 					</SwiperSlide>
 				</Swiper>
-				<div class="swiper-navigation">
-					<button ref="prev"><ArrowLeftIcon /></button>
-					<button ref="next"><ArrowRightIcon /></button>
+				<div class="navigation container">
+					<div class="pagination-wrapper">
+						<div ref="paginationHero" class="swiper-pagination-progress"></div>
+					</div>
+					<!-- <div class="timer-wrapper">
+						<div class="timer"></div>
+					</div> -->
+
+					<div class="swiper-navigation">
+						<button ref="prev"><ArrowLeftIcon /></button>
+						<button ref="next"><ArrowRightIcon /></button>
+					</div>
 				</div>
-				<div ref="paginationHero" class="swiper-pagination"></div>
 			</div>
 		</div>
 		<div class="advantages container">
@@ -136,8 +142,23 @@ const setSwiperRef = swiper => {
 				margin-right: 20px;
 				margin-left: 20px;
 			}
+			.navigation {
+				display: flex;
+				margin-top: 20px;
+				justify-content: space-between;
+				.pagination-wrapper {
+					width: 100%;
+					display: flex;
+					justify-content: center;
+					margin-left: 90px;
+				}
+				.swiper-navigation {
+					display: flex;
+				}
+			}
 			.swiper {
-				height: 550px;
+				height: 600px;
+
 				.swiper-slide-next,
 				.swiper-slide-prev {
 					// width: 205px !important;
@@ -309,6 +330,14 @@ const setSwiperRef = swiper => {
 				}
 			}
 		}
+	}
+}
+@keyframes slidein {
+	from {
+		width: 0;
+	}
+	to {
+		width: 100%;
 	}
 }
 </style>
