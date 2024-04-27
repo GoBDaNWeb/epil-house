@@ -4,6 +4,7 @@ import { RouterView, useRoute } from 'vue-router';
 
 import { Footer } from '@/widgets/footer';
 import { Header } from '@/widgets/header';
+import { MapModal } from '@/widgets/map-modal';
 import { Menu } from '@/widgets/menu';
 import { OrderModal } from '@/widgets/order-modal';
 import { ReviewModal } from '@/widgets/review-modal';
@@ -36,4 +37,5 @@ watch(router, () => {
 	<SuccessModal />
 	<ReviewModal />
 	<SeasonTicketModal />
+	<MapModal />
 </template>

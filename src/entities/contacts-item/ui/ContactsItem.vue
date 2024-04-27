@@ -1,8 +1,17 @@
 <script setup>
+import { useMapModalStore } from '@/entities/map-modal-store';
+
 import { TourIcon } from '@/shared/icons';
 import { Button, Title } from '@/shared/ui';
 
-defineProps(['contact']);
+const props = defineProps(['contact']);
+
+const mapModal = useMapModalStore();
+
+const handleOpenMap = () => {
+	mapModal.setMapInfo(props.contact);
+	mapModal.handleOpenModal();
+};
 </script>
 
 <template>
@@ -20,7 +29,7 @@ defineProps(['contact']);
 				<p>{{ contact.end }}</p>
 			</div>
 			<div class="address">{{ contact.address }}</div>
-			<a :href="contact.url" target="_blank" class="map-link">на карте</a>
+			<button @click="handleOpenMap" target="_blank" class="map-link">на карте</button>
 		</div>
 	</div>
 </template>
