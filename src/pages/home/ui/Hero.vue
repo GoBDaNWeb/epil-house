@@ -186,11 +186,6 @@ const setSwiperRef = swiper => {
 				}
 				.swiper-slide-next,
 				.swiper-slide-prev {
-					// width: 205px !important;
-					// & > .image-wrapper {
-					// 	height: 300px !important;
-					// }
-					// width: 205px !important;
 					& > .image-wrapper {
 						height: 520px !important;
 						@media (max-width: $desktop-md) {
@@ -202,10 +197,6 @@ const setSwiperRef = swiper => {
 					}
 				}
 				.swiper-slide-active {
-					// width: 440px !important;
-					// & > .image-wrapper {
-					// 	height: 550px !important;
-					// }
 					& > .image-wrapper {
 						height: 640px !important;
 						@media (max-width: $desktop-md) {
@@ -226,7 +217,6 @@ const setSwiperRef = swiper => {
 					align-items: flex-end;
 					position: relative;
 					transition: var(--trs-600);
-					// width: 440px;
 					& > .image-wrapper {
 						height: 415px;
 						@media (max-width: $desktop-md) {
@@ -235,7 +225,6 @@ const setSwiperRef = swiper => {
 						@media (max-width: $desktop-sm) {
 							height: 215px;
 						}
-						// height: 400px;
 						transition: var(--trs-600);
 					}
 					@media (max-width: $tab-sm) {
@@ -245,37 +234,6 @@ const setSwiperRef = swiper => {
 							height: auto !important;
 						}
 					}
-					// &:nth-child(1) {
-					// 	width: 440px;
-					// 	.image-wrapper {
-					// 		height: 400px;
-					// 	}
-					// }
-					// &:nth-child(2) {
-					// 	width: 440px;
-					// 	.image-wrapper {
-					// 		height: 400px;
-					// 	}
-					// }
-					// &:nth-child(3) {
-					// 	width: 440px;
-
-					// 	.image-wrapper {
-					// 		height: 550px;
-					// 	}
-					// }
-					// &:nth-child(4) {
-					// 	width: 440px;
-					// 	.image-wrapper {
-					// 		height: 400px;
-					// 	}
-					// }
-					// &:nth-child(5) {
-					// 	width: 440px;
-					// 	.image-wrapper {
-					// 		height: 400px;
-					// 	}
-					// }
 					.image-wrapper {
 						border-radius: 20px;
 						overflow: hidden;
@@ -297,7 +255,7 @@ const setSwiperRef = swiper => {
 						display: flex;
 						gap: 20px;
 						align-items: center;
-						padding: 30px;
+						padding: 15px 30px;
 						border-radius: 15px;
 						opacity: 0;
 						transition: var(--trs-100);
@@ -317,12 +275,16 @@ const setSwiperRef = swiper => {
 						}
 						p {
 							font-weight: 600;
-							font-size: 20px;
-							line-height: 23px;
+							font-size: 16px;
+							line-height: 18px;
 							text-transform: uppercase;
+							@media (max-width: $desktop-md) {
+								font-size: 14px;
+								line-height: 16px;
+							}
 							@media (max-width: $tab) {
-								font-size: 16px;
-								line-height: 18px;
+								font-size: 14px;
+								line-height: 16px;
 							}
 							span {
 								color: var(--pink-color);
