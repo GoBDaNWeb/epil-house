@@ -73,9 +73,6 @@ const setSwiperRef = swiper => {
 					<div class="pagination-wrapper">
 						<div ref="paginationHero" class="swiper-pagination-progress"></div>
 					</div>
-					<!-- <div class="timer-wrapper">
-						<div class="timer"></div>
-					</div> -->
 
 					<div class="swiper-navigation">
 						<button ref="prev"><ArrowLeftIcon /></button>
