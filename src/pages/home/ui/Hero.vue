@@ -17,9 +17,9 @@ const paginationAdvantages = ref(null);
 const setSwiperRef = swiper => {
 	swiperRef.value = swiper;
 };
-onMounted(() => {
-	swiperRef.value.activeIndex = 2;
-});
+// onMounted(() => {
+// 	swiperRef.value.activeIndex = 3;
+// });
 </script>
 
 <template>
@@ -28,7 +28,7 @@ onMounted(() => {
 			<Title variant="h1">Сеть салонов красоты «Эпилхаус»</Title>
 			<div class="hero-swiper-wrapper">
 				<Swiper
-					:slides-per-view="'auto'"
+					:slides-per-view="5"
 					:centered-slides="true"
 					:prev="prev"
 					:next="next"
@@ -43,7 +43,7 @@ onMounted(() => {
 							allowTouchMove: true
 						},
 						767: {
-							slidesPerView: 'auto',
+							slidesPerView: 5,
 							allowTouchMove: true
 						}
 					}"
@@ -140,15 +140,22 @@ onMounted(() => {
 				height: 550px;
 				.swiper-slide-next,
 				.swiper-slide-prev {
-					width: 205px !important;
+					// width: 205px !important;
+					// & > .image-wrapper {
+					// 	height: 300px !important;
+					// }
+					// width: 205px !important;
 					& > .image-wrapper {
-						height: 300px !important;
+						padding-bottom: 125% !important;
 					}
 				}
 				.swiper-slide-active {
-					width: 440px !important;
+					// width: 440px !important;
+					// & > .image-wrapper {
+					// 	height: 550px !important;
+					// }
 					& > .image-wrapper {
-						height: 550px !important;
+						padding-bottom: 145% !important;
 					}
 					.season-ticket {
 						opacity: 1 !important;
@@ -160,10 +167,11 @@ onMounted(() => {
 					display: flex;
 					align-items: flex-end;
 					position: relative;
-					width: 440px;
 					transition: var(--trs-600);
+					// width: 440px;
 					& > .image-wrapper {
-						height: 400px;
+						padding-bottom: 100%;
+						// height: 400px;
 						transition: var(--trs-600);
 					}
 					@media (max-width: $tab-sm) {
