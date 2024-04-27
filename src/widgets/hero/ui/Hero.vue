@@ -35,11 +35,11 @@ const setSwiperRef = swiper => {
 watch(phone, () => {
 	phoneError.value = false;
 });
-onMounted(() => {
-	if (swiperRef.value) {
-		swiperRef.value.activeIndex = 1;
-	}
-});
+// onMounted(() => {
+// 	if (swiperRef.value) {
+// 		swiperRef.value.activeIndex = 1;
+// 	}
+// });
 defineProps(['breadcrumbs', 'title', 'text', 'btnText', 'imgs', 'hasForm']);
 </script>
 
