@@ -37,6 +37,7 @@ const modules = ref([Navigation, Pagination]);
 			el: pagination,
 			clickable: true
 		}"
+		:speed="600"
 		:modules="modules"
 		class="swiper"
 		@swiper="setSwiperRef"

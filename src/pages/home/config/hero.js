@@ -1,43 +1,43 @@
 export const heroSwiper = [
 	{
 		img: '/images/home/hero/1.jpg',
-		content: false
+		content: 'Абонементы <br> на 3/6/12 процедур <br> <span>со скидкой 20%</span>'
 	},
 	{
 		img: '/images/home/hero/2.jpg',
-		content: false
+		content: 'Абонементы <br> на 3/6/12 процедур <br> <span>со скидкой 20%</span>'
 	},
 	{
 		img: '/images/home/hero/3.jpg',
-		content: true
+		content: 'Абонементы <br> на 3/6/12 процедур <br> <span>со скидкой 20%</span>'
 	},
 	{
 		img: '/images/home/hero/4.jpg',
-		content: false
+		content: 'Абонементы <br> на 3/6/12 процедур <br> <span>со скидкой 20%</span>'
 	},
 	{
 		img: '/images/home/hero/5.jpg',
-		content: false
+		content: 'Абонементы <br> на 3/6/12 процедур <br> <span>со скидкой 20%</span>'
 	},
 	{
 		img: '/images/home/hero/1.jpg',
-		content: false
+		content: 'Абонементы <br> на 3/6/12 процедур <br> <span>со скидкой 20%</span>'
 	},
 	{
 		img: '/images/home/hero/2.jpg',
-		content: false
+		content: 'Абонементы <br> на 3/6/12 процедур <br> <span>со скидкой 20%</span>'
 	},
 	{
 		img: '/images/home/hero/3.jpg',
-		content: true
+		content: 'Абонементы <br> на 3/6/12 процедур <br> <span>со скидкой 20%</span>'
 	},
 	{
 		img: '/images/home/hero/4.jpg',
-		content: false
+		content: 'Абонементы <br> на 3/6/12 процедур <br> <span>со скидкой 20%</span>'
 	},
 	{
 		img: '/images/home/hero/5.jpg',
-		content: false
+		content: 'Абонементы <br> на 3/6/12 процедур <br> <span>со скидкой 20%</span>'
 	}
 ];
 export const advantages = [

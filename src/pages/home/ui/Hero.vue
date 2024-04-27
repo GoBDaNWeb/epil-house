@@ -4,12 +4,15 @@ import { onMounted, ref } from 'vue';
 
 import { Swiper } from '@/widgets/swiper';
 
+import { ArrowLeftIcon, ArrowRightIcon } from '@/shared/icons';
 import { Title } from '@/shared/ui';
 
 import { advantages, heroSwiper } from '../config';
 
 const swiperRef = ref(null);
 const paginationHero = ref(null);
+const next = ref(null);
+const prev = ref(null);
 const paginationAdvantages = ref(null);
 const setSwiperRef = swiper => {
 	swiperRef.value = swiper;
@@ -25,22 +28,23 @@ onMounted(() => {
 			<Title variant="h1">Сеть салонов красоты «Эпилхаус»</Title>
 			<div class="hero-swiper-wrapper">
 				<Swiper
-					:slides-per-view="5"
+					:slides-per-view="'auto'"
 					:centered-slides="true"
-					:prev="null"
-					:next="null"
+					:prev="prev"
+					:next="next"
 					:spaceBetween="10"
 					:allowTouchMove="false"
 					:setSwiperRef="setSwiperRef"
 					:pagination="paginationHero"
+					:loop="true"
 					:breakpoints="{
 						0: {
 							slidesPerView: 1,
 							allowTouchMove: true
 						},
 						767: {
-							slidesPerView: 5,
-							allowTouchMove: false
+							slidesPerView: 'auto',
+							allowTouchMove: true
 						}
 					}"
 				>
@@ -52,13 +56,14 @@ onMounted(() => {
 							<div class="image-wrapper">
 								<img src="/images/home/hero/season-ticket.jpg" alt="season-ticket" />
 							</div>
-							<p>
-								Абонементы <br />на 3/6/12 процедур <br />
-								<span> со скидкой 20% </span>
-							</p>
+							<p v-html="slide.content"></p>
 						</div>
 					</SwiperSlide>
 				</Swiper>
+				<div class="swiper-navigation">
+					<button ref="prev"><ArrowLeftIcon /></button>
+					<button ref="next"><ArrowRightIcon /></button>
+				</div>
 				<div ref="paginationHero" class="swiper-pagination"></div>
 			</div>
 		</div>
@@ -102,6 +107,21 @@ onMounted(() => {
 	</div>
 </template>
 
+<style lang="scss">
+.hero {
+	.hero-main {
+		.hero-swiper-wrapper {
+			.season-ticket {
+				p {
+					span {
+						color: var(--pink-color);
+					}
+				}
+			}
+		}
+	}
+}
+</style>
 <style lang="scss" scoped>
 @import '@/shared/styles/vars';
 .hero {
@@ -117,22 +137,35 @@ onMounted(() => {
 				margin-left: 20px;
 			}
 			.swiper {
+				height: 550px;
 				.swiper-slide-next,
 				.swiper-slide-prev {
-					transform: scale(1) !important;
-					opacity: 1 !important;
+					width: 205px !important;
+					& > .image-wrapper {
+						height: 300px !important;
+					}
 				}
 				.swiper-slide-active {
-					transform: scale(1) !important;
-					opacity: 1 !important;
+					width: 440px !important;
+					& > .image-wrapper {
+						height: 550px !important;
+					}
+					.season-ticket {
+						opacity: 1 !important;
+						transition: var(--trs-600);
+					}
 				}
 				.swiper-slide {
 					height: auto;
 					display: flex;
-					align-items: center;
+					align-items: flex-end;
 					position: relative;
-					transform: scale(0.9);
-					opacity: 0.7;
+					width: 440px;
+					transition: var(--trs-600);
+					& > .image-wrapper {
+						height: 400px;
+						transition: var(--trs-600);
+					}
 					@media (max-width: $tab-sm) {
 						width: 100% !important;
 						& > .image-wrapper {
@@ -140,37 +173,37 @@ onMounted(() => {
 							height: auto !important;
 						}
 					}
-					&:nth-child(1) {
-						width: 440px;
-						.image-wrapper {
-							height: 400px;
-						}
-					}
-					&:nth-child(2) {
-						width: 440px;
-						.image-wrapper {
-							height: 400px;
-						}
-					}
-					&:nth-child(3) {
-						width: 440px;
+					// &:nth-child(1) {
+					// 	width: 440px;
+					// 	.image-wrapper {
+					// 		height: 400px;
+					// 	}
+					// }
+					// &:nth-child(2) {
+					// 	width: 440px;
+					// 	.image-wrapper {
+					// 		height: 400px;
+					// 	}
+					// }
+					// &:nth-child(3) {
+					// 	width: 440px;
 
-						.image-wrapper {
-							height: 550px;
-						}
-					}
-					&:nth-child(4) {
-						width: 440px;
-						.image-wrapper {
-							height: 400px;
-						}
-					}
-					&:nth-child(5) {
-						width: 440px;
-						.image-wrapper {
-							height: 400px;
-						}
-					}
+					// 	.image-wrapper {
+					// 		height: 550px;
+					// 	}
+					// }
+					// &:nth-child(4) {
+					// 	width: 440px;
+					// 	.image-wrapper {
+					// 		height: 400px;
+					// 	}
+					// }
+					// &:nth-child(5) {
+					// 	width: 440px;
+					// 	.image-wrapper {
+					// 		height: 400px;
+					// 	}
+					// }
 					.image-wrapper {
 						border-radius: 20px;
 						overflow: hidden;
@@ -194,6 +227,8 @@ onMounted(() => {
 						align-items: center;
 						padding: 30px;
 						border-radius: 15px;
+						opacity: 0;
+						transition: var(--trs-100);
 						@media (max-width: $tab) {
 							padding: 20px;
 							gap: 10px;

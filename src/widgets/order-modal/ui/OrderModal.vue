@@ -1,7 +1,7 @@
 <script setup>
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
-import { reactive, watch } from 'vue';
+import { onMounted, reactive, watch } from 'vue';
 
 import { useOrderModalStore } from '@/entities/order-modal-store';
 import { useServiceStore } from '@/entities/service-store';
@@ -9,7 +9,7 @@ import { useSuccessModalStore } from '@/entities/success-modal-store';
 
 import { CloseIcon } from '@/shared/icons';
 import { Button, DatePicker, Input, Select, Textarea, Title } from '@/shared/ui';
-import { hasError, setError } from '@/shared/utils';
+import { clearError, hasError, setError } from '@/shared/utils';
 
 import { selectList } from '../config';
 
@@ -35,7 +35,7 @@ const formErrors = reactive({
 const formValues = reactive({
 	nameValue: '',
 	phoneValue: '',
-	serviceValue: serviceStore.service.title || '',
+	serviceValue: '',
 	specialistValue: orderModal.specialist.name || '',
 	dateValue: ''
 });
@@ -73,6 +73,7 @@ watch(
 	() => {
 		if (orderModal.modalActive) {
 			document.body.style.overflow = 'hidden';
+			formValues.serviceValue = serviceStore.service.title || '';
 		} else {
 			document.body.removeAttribute('style');
 		}
