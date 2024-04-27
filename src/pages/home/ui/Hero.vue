@@ -45,10 +45,10 @@ const setSwiperRef = swiper => {
 							allowTouchMove: true
 						},
 						1024: {
-							slidesPerView: 2.5
+							slidesPerView: 3.5
 						},
 						1280: {
-							slidesPerView: 3,
+							slidesPerView: 4.5,
 							allowTouchMove: true
 						},
 						1600: {
@@ -94,7 +94,6 @@ const setSwiperRef = swiper => {
 					:spaceBetween="20"
 					:allowTouchMove="false"
 					:pagination="paginationAdvantages"
-					:autoplay="null"
 					:breakpoints="{
 						0: {
 							slidesPerView: 2,
@@ -176,6 +175,12 @@ const setSwiperRef = swiper => {
 			}
 			.swiper {
 				height: 650px;
+				@media (max-width: $desktop-md) {
+					height: 520px;
+				}
+				@media (max-width: $desktop-sm) {
+					height: 420px;
+				}
 				@media (max-width: $tab-sm) {
 					height: auto;
 				}
@@ -188,6 +193,12 @@ const setSwiperRef = swiper => {
 					// width: 205px !important;
 					& > .image-wrapper {
 						height: 520px !important;
+						@media (max-width: $desktop-md) {
+							height: 420px !important;
+						}
+						@media (max-width: $desktop-sm) {
+							height: 320px !important;
+						}
 					}
 				}
 				.swiper-slide-active {
@@ -197,6 +208,12 @@ const setSwiperRef = swiper => {
 					// }
 					& > .image-wrapper {
 						height: 640px !important;
+						@media (max-width: $desktop-md) {
+							height: 520px !important;
+						}
+						@media (max-width: $desktop-sm) {
+							height: 420px !important;
+						}
 					}
 					.season-ticket {
 						opacity: 1 !important;
@@ -212,6 +229,12 @@ const setSwiperRef = swiper => {
 					// width: 440px;
 					& > .image-wrapper {
 						height: 415px;
+						@media (max-width: $desktop-md) {
+							height: 315px;
+						}
+						@media (max-width: $desktop-sm) {
+							height: 215px;
+						}
 						// height: 400px;
 						transition: var(--trs-600);
 					}
