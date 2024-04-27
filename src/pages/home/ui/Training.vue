@@ -8,6 +8,7 @@ import { Swiper } from '@/widgets/swiper';
 import { StockItem } from '@/entities/stock-item';
 import { TrainingItem } from '@/entities/training-item';
 
+import { PATH_PAGE } from '@/shared/config';
 import { ArrowLeftIcon, ArrowRightIcon } from '@/shared/icons';
 import { Button, Title } from '@/shared/ui';
 

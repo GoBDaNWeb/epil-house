@@ -33,6 +33,9 @@ watch(
 				<Title variant="h4">
 					{{ modal.mapInfo.title }}
 				</Title>
+				<Title variant="h6">
+					{{ modal.mapInfo.address }}
+				</Title>
 				<Map :coords="modal.mapInfo.coords" :id="modal.mapInfo.id" />
 			</div>
 		</div>
@@ -84,7 +87,11 @@ watch(
 		}
 
 		h4 {
+			margin-bottom: 20px;
+		}
+		h6 {
 			margin-bottom: 30px;
+			text-align: center;
 		}
 	}
 }
