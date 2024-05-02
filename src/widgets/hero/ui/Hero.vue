@@ -167,8 +167,10 @@ defineProps(['breadcrumbs', 'title', 'text', 'btnText', 'imgs', 'hasForm']);
 		.hero-swiper-wrapper {
 			margin-top: 50px;
 			width: 100%;
+
 			@media (max-width: $tab-sm) {
 				width: 100%;
+				padding: 0 20px;
 			}
 			.navigation {
 				display: flex;
@@ -225,7 +227,7 @@ defineProps(['breadcrumbs', 'title', 'text', 'btnText', 'imgs', 'hasForm']);
 					}
 					.season-ticket {
 						opacity: 1 !important;
-						transition: var(--trs-600);
+						transition: height var(--trs-600);
 					}
 				}
 				.swiper-slide {
@@ -233,7 +235,7 @@ defineProps(['breadcrumbs', 'title', 'text', 'btnText', 'imgs', 'hasForm']);
 					display: flex;
 					align-items: flex-end;
 					position: relative;
-					transition: var(--trs-600);
+					transition: height var(--trs-600);
 					& > .image-wrapper {
 						height: 415px;
 						@media (max-width: $desktop-md) {
@@ -242,7 +244,7 @@ defineProps(['breadcrumbs', 'title', 'text', 'btnText', 'imgs', 'hasForm']);
 						@media (max-width: $desktop-sm) {
 							height: 215px;
 						}
-						transition: var(--trs-600);
+						transition: height var(--trs-600);
 					}
 					@media (max-width: $tab-sm) {
 						width: 100% !important;
