@@ -7,7 +7,7 @@ export const servicesDirectionList = [
 		services: [
 			{
 				img: '/images/service-directions/1.jpg',
-				title: 'Биоревитализация',
+				title: 'Биоревит&shy;ализация',
 				text: 'В стоимость услуги сопутствующие одноразовые материалы.',
 				url: `${PATH_PAGE.services}/injectable-cosmetology/biorevitalization`
 			},

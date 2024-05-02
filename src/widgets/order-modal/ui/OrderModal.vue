@@ -167,7 +167,7 @@ watch(
 			right: 20px;
 		}
 		@media (max-width: $pre-mob) {
-			z-index: 2;
+			z-index: 150;
 		}
 	}
 	.order-modal-content {
@@ -192,6 +192,9 @@ watch(
 		@media (max-width: $pre-mob) {
 			width: 100vw;
 			border-radius: 0;
+			overflow-y: auto;
+			overflow-x: hidden;
+			justify-content: flex-start;
 		}
 		h4 {
 			text-align: left;

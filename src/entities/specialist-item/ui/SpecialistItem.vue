@@ -1,4 +1,7 @@
 <script setup>
+import { watch } from 'vue';
+import { useRoute } from 'vue-router';
+
 import { useOrderModalStore } from '@/entities/order-modal-store';
 import { useSpecialistModalStore } from '@/entities/specialist-modal-store';
 
@@ -6,7 +9,7 @@ import { InfoIcon } from '@/shared/icons';
 import { Button, Title } from '@/shared/ui';
 
 const props = defineProps(['specialist']);
-
+const route = useRoute();
 const specialistModal = useSpecialistModalStore();
 const orderModal = useOrderModalStore();
 
@@ -18,6 +21,10 @@ const hadleOpenOrderModal = () => {
 	orderModal.handleOpenModal();
 	orderModal.setSpecialist(props.specialist);
 };
+
+watch(route.path, () => {
+	orderModal.setSpecialist(null);
+});
 </script>
 
 <template>

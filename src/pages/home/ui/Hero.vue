@@ -142,6 +142,9 @@ const setSwiperRef = swiper => {
 	padding-top: 170px;
 	background: var(--beige-back-color);
 	border-radius: 0 0 20px 20px;
+	@media (max-width: $tab) {
+		padding-top: 100px;
+	}
 	.hero-main {
 		.hero-swiper-wrapper {
 			margin-top: 30px;

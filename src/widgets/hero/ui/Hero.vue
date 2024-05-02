@@ -128,7 +128,12 @@ defineProps(['breadcrumbs', 'title', 'text', 'btnText', 'imgs', 'hasForm']);
 		flex-direction: column;
 		align-items: center;
 		overflow: hidden;
-
+		h1 {
+			@media (max-width: $mob) {
+				font-size: 28px;
+				line-height: 30px;
+			}
+		}
 		p {
 			max-width: 909px;
 			font-weight: 400;

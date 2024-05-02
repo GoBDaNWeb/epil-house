@@ -15,9 +15,9 @@ defineProps(['equipment']);
 			<Title variant="h5">{{ equipment.title }}</Title>
 			<div class="text" v-html="equipment.text"></div>
 			<div class="links" v-if="equipment.links">
-				<RouterLink :to="link.url" v-for="(link, index) in equipment.links" :key="index">{{
-					link.title
-				}}</RouterLink>
+				<RouterLink :to="link.url" v-for="(link, index) in equipment.links" :key="index">
+					{{ link.title }}
+				</RouterLink>
 			</div>
 		</div>
 	</div>
@@ -134,7 +134,6 @@ defineProps(['equipment']);
 				text-align: center;
 				font-weight: 600;
 				font-size: 15px;
-				text-transform: uppercase;
 				line-height: 19px;
 				display: flex;
 				align-items: center;
@@ -144,6 +143,8 @@ defineProps(['equipment']);
 				@media (max-width: $tab) {
 					font-size: 13px;
 					line-height: 16px;
+					padding: 0 15px;
+					height: 31px;
 				}
 
 				&:hover {

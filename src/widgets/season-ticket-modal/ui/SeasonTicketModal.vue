@@ -162,6 +162,9 @@ watch(
 		@media (max-width: $pre-mob) {
 			width: 100vw;
 			border-radius: 0;
+			overflow-y: auto;
+			overflow-x: hidden;
+			justify-content: flex-start;
 		}
 		.image-wrapper {
 			width: 200px;
@@ -170,6 +173,8 @@ watch(
 			@media (max-width: $tab) {
 				width: 150px;
 				height: 116px;
+				min-width: 150px;
+				min-height: 116px;
 			}
 			img {
 				position: absolute;

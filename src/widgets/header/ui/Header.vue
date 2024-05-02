@@ -34,7 +34,8 @@ const handleBeigeHeader = () => {
 		route.name === 'price' ||
 		route.name === 'equipments' ||
 		route.name === 'specialists' ||
-		route.name === 'stocks'
+		route.name === 'stocks' ||
+		route.name === 'certificate'
 	) {
 		beige.value = true;
 	} else {
@@ -84,12 +85,10 @@ window.addEventListener('scroll', controlNavbar);
 				</div>
 			</div>
 			<div class="info-mob">
-				<Button :variable="active || beige ? 'square-beige' : 'square-white'"
-					><a href="#"><PhoneIcon /></a
-				></Button>
-				<Button variable="square-primary">
-					<a href="#"><MailIcon /></a
-				></Button>
+				<Button :variable="active || beige ? 'square-beige' : 'square-white'">
+					<PhoneIcon />
+				</Button>
+				<Button variable="square-primary" @click="modal.handleOpenModal"> <MailIcon /></Button>
 			</div>
 		</div>
 	</header>

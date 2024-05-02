@@ -12,9 +12,13 @@ import { SeasonTicketModal } from '@/widgets/season-ticket-modal';
 import { SpecialistModal } from '@/widgets/specialist-modal';
 import { SuccessModal } from '@/widgets/success-modal';
 
+import { useOrderModalStore } from '@/entities/order-modal-store';
+import { useServiceStore } from '@/entities/service-store';
 import { useSpecialistModalStore } from '@/entities/specialist-modal-store';
 
+const serviceStore = useServiceStore();
 const modal = useSpecialistModalStore();
+const orderModal = useOrderModalStore();
 
 const router = useRoute();
 
@@ -24,6 +28,8 @@ watch(router, () => {
 		left: 0,
 		behavior: 'instant'
 	});
+	orderModal.setSpecialist({});
+	serviceStore.setService({});
 });
 </script>
 
