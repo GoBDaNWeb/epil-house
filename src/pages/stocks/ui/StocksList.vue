@@ -9,15 +9,43 @@ import { scroll } from '@/shared/utils';
 
 import { stockList, tabs } from '../config';
 
-const currentTab = reactive({ tab: 0 });
+const currentTab = reactive({ tab: [0] });
 const { width } = useWindowSize();
 
 const handleSelectTab = index => {
-	currentTab.tab = index;
+	if (!currentTab.tab.includes(index)) {
+		currentTab.tab.push(index);
+
+		const filterTabs = currentTab.tab.filter((tab, index, self) => {
+			return self.indexOf(tab) === index;
+		});
+		currentTab.tab = [...filterTabs];
+	} else {
+		if (currentTab.tab.length > 1) {
+			const filterTabs = currentTab.tab.filter(tab => {
+				return tab !== index;
+			});
+			currentTab.tab = [...filterTabs];
+		} else {
+			return;
+		}
+	}
 };
 
 const hadleShowStocks = tab => {
-	return tab.includes(currentTab.tab.toString());
+	const filtered = currentTab.tab.filter(tabItem => {
+		return tab.includes(tabItem.toString());
+	});
+	if (filtered.length > 0) {
+		return true;
+	} else {
+		return false;
+	}
+	return currentTab.tab.includes(+tab);
+};
+
+const isActiveTab = index => {
+	return currentTab.tab.includes(index);
 };
 </script>
 
@@ -29,7 +57,7 @@ const hadleShowStocks = tab => {
 					v-for="tab in tabs"
 					:key="tab.tab"
 					@click="handleSelectTab(tab.tab)"
-					:isActive="currentTab.tab === tab.tab"
+					:isActive="isActiveTab(tab.tab)"
 				>
 					{{ tab.title }}
 				</Tab>
