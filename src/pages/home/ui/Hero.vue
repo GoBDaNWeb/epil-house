@@ -83,7 +83,7 @@ const setSwiperRef = swiper => {
 		</div>
 		<div class="advantages container">
 			<Title variant="h4">преимущества</Title>
-			<div class="advantages-swiper-swarpper">
+			<div class="advantages-swiper-wrapper">
 				<Swiper
 					:slides-per-view="4"
 					:prev="null"
@@ -208,7 +208,7 @@ const setSwiperRef = swiper => {
 					}
 					.season-ticket {
 						opacity: 1 !important;
-						transition: var(--trs-600);
+						transition: height var(--trs-600);
 					}
 				}
 				.swiper-slide {
@@ -216,7 +216,7 @@ const setSwiperRef = swiper => {
 					display: flex;
 					align-items: flex-end;
 					position: relative;
-					transition: var(--trs-600);
+					transition: height var(--trs-600);
 					& > .image-wrapper {
 						height: 415px;
 						@media (max-width: $desktop-md) {
@@ -225,7 +225,7 @@ const setSwiperRef = swiper => {
 						@media (max-width: $desktop-sm) {
 							height: 215px;
 						}
-						transition: var(--trs-600);
+						transition: height var(--trs-600);
 					}
 					@media (max-width: $tab-sm) {
 						width: 100% !important;
@@ -258,7 +258,7 @@ const setSwiperRef = swiper => {
 						padding: 15px 30px;
 						border-radius: 15px;
 						opacity: 0;
-						transition: var(--trs-100);
+						transition:  var(--trs-100);
 						@media (max-width: $tab) {
 							padding: 20px;
 							gap: 10px;
@@ -302,7 +302,7 @@ const setSwiperRef = swiper => {
 			margin-top: 80px;
 			padding-bottom: 80px;
 		}
-		.advantages-swiper-swarpper {
+		.advantages-swiper-wrapper {
 			margin-top: 37px;
 			@media (max-width: $tab) {
 				margin-top: 30px;

@@ -56,6 +56,12 @@ window.addEventListener('scroll', controlNavbar);
 <template>
 	<header :class="{ active: active, beige: beige }" class="header">
 		<div class="header-inner container">
+			<div class="info-mob">
+				<Button :variable="active || beige ? 'square-beige' : 'square-white'">
+					<PhoneIcon />
+				</Button>
+				<Button variable="square-primary" @click="modal.handleOpenModal"> <MailIcon /></Button>
+			</div>
 			<div class="navigation">
 				<div class="burger">
 					<Button
@@ -84,12 +90,14 @@ window.addEventListener('scroll', controlNavbar);
 					<Button variable="primary" @click="modal.handleOpenModal">записаться</Button>
 				</div>
 			</div>
-			<div class="info-mob">
-				<Button :variable="active || beige ? 'square-beige' : 'square-white'">
-					<PhoneIcon />
-				</Button>
-				<Button variable="square-primary" @click="modal.handleOpenModal"> <MailIcon /></Button>
-			</div>
+			<div class="burger-mob">
+					<Button
+						@click="menu.handleOpenMenu"
+						:variable="active || beige ? 'burger-beige' : 'burger'"
+					>
+						<BurgerIcon />
+					</Button>
+				</div>
 		</div>
 	</header>
 </template>
@@ -148,7 +156,11 @@ window.addEventListener('scroll', controlNavbar);
 			display: flex;
 			align-items: center;
 			gap: 30px;
-
+			.burger {
+				@media (max-width: $desktop-sm) {
+					display: none;
+				}
+			}
 			nav {
 				display: flex;
 				align-items: center;
@@ -216,7 +228,14 @@ window.addEventListener('scroll', controlNavbar);
 				align-items: center;
 				gap: 5px;
 			}
+			
 		}
+		.burger-mob {
+				display: none;
+				@media (max-width: $desktop-sm) {
+				display: block;
+			}
+			}
 	}
 }
 </style>
