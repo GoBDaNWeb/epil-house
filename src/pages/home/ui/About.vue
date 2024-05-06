@@ -81,6 +81,8 @@ import { Title } from '@/shared/ui';
 					gap: 30px;
 				}
 				h3 {
+					font-size: 45px;
+					line-height: 45px;
 					@media (max-width: 1439px) {
 						font-size: 30px;
 						line-height: 30px;
@@ -131,6 +133,8 @@ import { Title } from '@/shared/ui';
 					h3 {
 						text-align: left;
 						margin-bottom: 46px;
+						font-size: 45px;
+						line-height: 45px;
 						@media (max-width: 1439px) {
 							font-size: 30px;
 							line-height: 30px;
