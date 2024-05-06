@@ -4,6 +4,8 @@ import { ref, watch } from 'vue';
 
 import { Swiper } from '@/widgets/swiper';
 
+import { Fancybox } from '@/widgets/fancybox';
+
 import { useOrderModalStore } from '@/entities/order-modal-store';
 import { useSpecialistModalStore } from '@/entities/specialist-modal-store';
 
@@ -89,34 +91,36 @@ defineProps(['specialist']);
 								<button ref="next"><ArrowRightIcon /></button>
 							</div>
 						</div>
-						<div class="specialist-certificates-swiper-wrapper">
-							<Swiper
-								:slides-per-view="2"
-								:centered-slides="false"
-								:prev="prev"
-								:next="next"
-								:spaceBetween="30"
-								:allowTouchMove="true"
-								:scrollbar="null"
-								:pagination="null"
-								:breakpoints="{
-									0: {
-										slidesPerView: 1.4,
-										spaceBetween: 20
-									},
-									767: {
-										slidesPerView: 2,
-										spaceBetween: 30
-									}
-								}"
-							>
-								<SwiperSlide v-for="(certificate, index) in specialist.certificates" :key="index">
-									<div class="image-wrapper">
-										<img :src="certificate" alt="certificate" />
-									</div>
-								</SwiperSlide>
-							</Swiper>
-						</div>
+						<Fancybox>
+							<div class="specialist-certificates-swiper-wrapper">
+								<Swiper
+									:slides-per-view="2"
+									:centered-slides="false"
+									:prev="prev"
+									:next="next"
+									:spaceBetween="30"
+									:allowTouchMove="true"
+									:scrollbar="null"
+									:pagination="null"
+									:breakpoints="{
+										0: {
+											slidesPerView: 1.4,
+											spaceBetween: 20
+										},
+										767: {
+											slidesPerView: 2,
+											spaceBetween: 30
+										}
+									}"
+								>
+									<SwiperSlide v-for="(certificate, index) in specialist.certificates" :key="index">
+										<a :href="certificate" class="image-wrapper" data-fancybox="certificate">
+											<img :src="certificate" alt="certificate" />
+										</a>
+									</SwiperSlide>
+								</Swiper>
+							</div>
+						</Fancybox>
 					</div>
 				</div>
 			</div>
@@ -338,6 +342,7 @@ defineProps(['specialist']);
 						.image-wrapper {
 							position: relative;
 							padding-bottom: 100%;
+							display: block;
 							img {
 								width: 100%;
 								height: 100%;

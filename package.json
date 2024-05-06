@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fancyapps/ui": "^5.0.36",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@vuepic/vue-datepicker": "^8.5.0",
     "@vueuse/core": "^10.9.0",
