@@ -1,7 +1,7 @@
 <script setup>
 import { computed, ref } from 'vue';
 
-const props = defineProps(['options', 'modelValue', 'placeholder', 'error']);
+const props = defineProps(['options', 'modelValue', 'placeholder', 'error', 'name']);
 const selected = ref(null);
 const isActive = ref(null);
 const selectedValue = ref('');
