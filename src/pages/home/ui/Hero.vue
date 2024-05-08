@@ -2,10 +2,8 @@
 import { SwiperSlide } from 'swiper/vue';
 import { onMounted, ref } from 'vue';
 
-import { Swiper } from '@/widgets/swiper';
-
 import { ArrowLeftIcon, ArrowRightIcon } from '@/shared/icons';
-import { Title } from '@/shared/ui';
+import { Swiper, Title } from '@/shared/ui';
 
 import { advantages, heroSwiper } from '../config';
 
@@ -258,7 +256,7 @@ const setSwiperRef = swiper => {
 						padding: 15px 30px;
 						border-radius: 15px;
 						opacity: 0;
-						transition:  var(--trs-100);
+						transition: var(--trs-100);
 						@media (max-width: $tab) {
 							padding: 20px;
 							gap: 10px;

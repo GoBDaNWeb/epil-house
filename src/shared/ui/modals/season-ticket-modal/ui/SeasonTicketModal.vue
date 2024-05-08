@@ -1,79 +1,50 @@
 <script setup>
-import VueDatePicker from '@vuepic/vue-datepicker';
-import '@vuepic/vue-datepicker/dist/main.css';
-import { onMounted, reactive, watch } from 'vue';
-
-import { useOrderModalStore } from '@/entities/order-modal-store';
-import { useServiceStore } from '@/entities/service-store';
-import { useSuccessModalStore } from '@/entities/success-modal-store';
+import { reactive, watch } from 'vue';
 
 import { CloseIcon } from '@/shared/icons';
-import { Button, DatePicker, Input, Select, Textarea, Title } from '@/shared/ui';
-import { clearError, hasError, setError } from '@/shared/utils';
+import { Button, Input, Radio, Textarea, Title, useSuccessModalStore } from '@/shared/ui';
+import { hasError, setError } from '@/shared/utils';
 
-import { selectList } from '../config';
+import { procedureList } from '../config';
+import { useSeasonTicketModalStore } from '../model';
 
-const serviceStore = useServiceStore();
-const orderModal = useOrderModalStore();
+const seasonTicketModal = useSeasonTicketModalStore();
 const successModal = useSuccessModalStore();
-
-const format = date => {
-	const day = date.getDate();
-	const month = date.getMonth() + 1;
-	const year = date.getFullYear();
-
-	return `${day}.${month}.${year}`;
-};
 
 const formErrors = reactive({
 	nameError: false,
-	phoneError: false,
-	serviceError: false,
-	specialistError: false,
-	dateError: false
+	phoneError: false
 });
 const formValues = reactive({
 	nameValue: '',
 	phoneValue: '',
-	serviceValue: '',
-	specialistValue: orderModal.specialist.name || '',
-	dateValue: ''
+	procedureValue: ''
 });
 
 const handleSetError = () => {
 	formErrors.phoneError = setError(formValues.phoneValue);
 	formErrors.nameError = setError(formValues.nameValue);
-	formErrors.serviceError = setError(formValues.serviceValue);
-	formErrors.specialistError = setError(formValues.specialistValue);
-	formErrors.dateError = setError(formValues.dateValue);
 };
 
 const handleSubmitForm = () => {
 	if (!hasError(formErrors)) {
-		orderModal.handleOpenModal();
+		seasonTicketModal.handleOpenModal();
 		successModal.handleOpenModal();
 	}
 };
 
 watch(
-	() => [
-		formValues.phoneValue,
-		formValues.nameValue,
-		formValues.serviceValue,
-		formValues.specialistValue,
-		formValues.dateValue
-	],
+	() => [formValues.phoneValue, formValues.nameValue],
 	() => {
 		handleSetError();
 	}
 );
 
 watch(
-	() => orderModal.modalActive,
+	() => seasonTicketModal.modalActive,
 	() => {
-		if (orderModal.modalActive) {
+		if (seasonTicketModal.modalActive) {
 			document.body.style.overflow = 'hidden';
-			formValues.serviceValue = serviceStore.service.title || '';
 		} else {
 			document.body.removeAttribute('style');
 		}
@@ -83,13 +54,34 @@ watch(
 
 <template>
 	<transition name="modal">
-		<div class="order-modal" v-if="orderModal.modalActive" @click.stop="orderModal.handleOpenModal">
+		<div
+			class="season-ticket-modal"
+			@click.stop="seasonTicketModal.handleOpenModal"
+			v-if="seasonTicketModal.modalActive"
+		>
 			<div class="close-btn">
-				<Button variable="square" @click.stop="orderModal.handleOpenModal"><CloseIcon /></Button>
+				<Button variable="square" @click.stop="seasonTicketModal.handleOpenModal">
+					<CloseIcon />
+				</Button>
 			</div>
-			<div class="order-modal-content" @click.stop>
-				<Title variant="h4">запись в салон</Title>
+			<div class="season-ticket-modal-content" @click.stop>
+				<div class="image-wrapper">
+					<img src="/images/ticket.png" alt="ticket" />
+				</div>
+				<Title variant="h4">заказать абонемент</Title>
 				<form @submit.prevent="handleSubmitForm()">
+					<div class="radio-row">
+						<Radio
+							v-model="formValues.procedureValue"
+							v-for="(procedure, index) in procedureList"
+							:key="index"
+							name="procedure"
+							:value="procedure"
+							:checked="index === 0"
+						>
+							{{ procedure }}
+						</Radio>
+					</div>
 					<div class="row">
 						<Input
 							v-model="formValues.nameValue"
@@ -104,34 +96,10 @@ watch(
 							placeholder="+7 (ХХХ) ХХХ-ХХ-ХХ"
 						/>
 					</div>
-					<Select
-						v-model="formValues.serviceValue"
-						:options="selectList"
-						name="service"
-						:error="formErrors.serviceError"
-						:placeholder="serviceStore.service.title || 'Выберите услугу'"
+					<Textarea
+						placeholder="Укажите желаемые услуги, которые необходимо включить в абонемент"
 					/>
-					<Select
-						v-model="formValues.specialistValue"
-						:options="selectList"
-						name="specialist"
-						:error="formErrors.specialistError"
-						:placeholder="orderModal.specialist.name || 'Выберите мастера'"
-					/>
-					<VueDatePicker
-						:format="format"
-						placeholder="Выбрать желаемую дату"
-						v-model="formValues.dateValue"
-						auto-apply
-						:time-picker="false"
-						:class="formErrors.dateError ? 'error' : ''"
-					>
-						<template #input-icon>
-							<img class="input-slot-image" src="/images/date.svg" />
-						</template>
-					</VueDatePicker>
 
-					<Textarea placeholder="Комментарий" />
 					<div class="row">
 						<Button variable="primary" @click="handleSetError">отправить</Button>
 						<p>
@@ -148,7 +116,7 @@ watch(
 <style lang="scss" scoped>
 @import '@/shared/styles/vars';
 
-.order-modal {
+.season-ticket-modal {
 	position: fixed;
 	top: 0;
 	bottom: 0;
@@ -167,10 +135,10 @@ watch(
 			right: 20px;
 		}
 		@media (max-width: $pre-mob) {
-			z-index: 150;
+			z-index: 2;
 		}
 	}
-	.order-modal-content {
+	.season-ticket-modal-content {
 		width: 50vw;
 		background: var(--white-color);
 		padding: 30px;
@@ -196,6 +164,23 @@ watch(
 			overflow-x: hidden;
 			justify-content: flex-start;
 		}
+		.image-wrapper {
+			width: 200px;
+			height: 155px;
+			position: relative;
+			@media (max-width: $tab) {
+				width: 150px;
+				height: 116px;
+				min-width: 150px;
+				min-height: 116px;
+			}
+			img {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				object-fit: contain;
+			}
+		}
 		h4 {
 			text-align: left;
 		}
@@ -207,6 +192,16 @@ watch(
 			@media (max-width: $tab) {
 				gap: 20px;
 				margin-top: 30px;
+			}
+			.radio-row {
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;
+				max-width: 80%;
+				gap: 10px;
+				.custom-radio {
+					height: 50px;
+				}
 			}
 			.row {
 				display: grid;
@@ -228,6 +223,7 @@ watch(
 					}
 				}
 			}
+
 			input {
 				border: 1px solid var(--gray-line-color);
 			}
@@ -246,7 +242,7 @@ watch(
 .modal-enter-from,
 .modal-leave-to {
 	opacity: 0;
-	.order-modal-content {
+	.season-ticket-modal-content {
 		transform: translateX(-100%);
 	}
 }

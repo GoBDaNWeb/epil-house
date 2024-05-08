@@ -3,14 +3,12 @@ import { SwiperSlide } from 'swiper/vue';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
-import { Swiper } from '@/widgets/swiper';
-
 import { StockItem } from '@/entities/stock-item';
 import { TrainingItem } from '@/entities/training-item';
 
 import { PATH_PAGE } from '@/shared/config';
 import { ArrowLeftIcon, ArrowRightIcon } from '@/shared/icons';
-import { Button, Title } from '@/shared/ui';
+import { Button, Swiper, Title } from '@/shared/ui';
 
 import { trainingList } from '../config';
 

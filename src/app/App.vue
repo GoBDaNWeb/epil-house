@@ -4,20 +4,26 @@ import { RouterView, useRoute } from 'vue-router';
 
 import { Footer } from '@/widgets/footer';
 import { Header } from '@/widgets/header';
-import { MapModal } from '@/widgets/map-modal';
 import { Menu } from '@/widgets/menu';
-import { OrderModal } from '@/widgets/order-modal';
-import { ReviewModal } from '@/widgets/review-modal';
-import { SeasonTicketModal } from '@/widgets/season-ticket-modal';
-import { SpecialistModal } from '@/widgets/specialist-modal';
-import { SuccessModal } from '@/widgets/success-modal';
 
-import { useOrderModalStore } from '@/entities/order-modal-store';
+import { Map } from '@/entities/map';
 import { useServiceStore } from '@/entities/service-store';
-import { useSpecialistModalStore } from '@/entities/specialist-modal-store';
 
+import {
+	MapModal,
+	OrderModal,
+	ReviewModal,
+	SeasonTicketModal,
+	SpecialistModal,
+	SuccessModal,
+	useMapModalStore,
+	useOrderModalStore,
+	useSpecialistModalStore
+} from '@/shared/ui';
+
+const mapModal = useMapModalStore();
 const serviceStore = useServiceStore();
-const modal = useSpecialistModalStore();
+const specialistModal = useSpecialistModalStore();
 const orderModal = useOrderModalStore();
 
 const router = useRoute();
@@ -38,10 +44,14 @@ watch(router, () => {
 	<Menu />
 	<RouterView />
 	<Footer />
-	<SpecialistModal :specialist="modal.specialistInfo" />
+	<SpecialistModal :specialist="specialistModal.specialistInfo" />
 	<OrderModal />
 	<SuccessModal />
 	<ReviewModal />
 	<SeasonTicketModal />
-	<MapModal />
+	<MapModal>
+		<template #map>
+			<Map :coords="mapModal.mapInfo.coords" :id="mapModal.mapInfo.id" />
+		</template>
+	</MapModal>
 </template>

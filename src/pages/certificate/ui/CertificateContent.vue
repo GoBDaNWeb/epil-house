@@ -1,9 +1,7 @@
 <script setup>
 import { reactive, ref, watch } from 'vue';
 
-import { useSuccessModalStore } from '@/entities/success-modal-store';
-
-import { Button, Input, Radio, Title } from '@/shared/ui';
+import { Button, Input, Radio, Title, useSuccessModalStore } from '@/shared/ui';
 import { clearFields, hasError, setError } from '@/shared/utils';
 
 import { addressList, nominalList } from '../config';

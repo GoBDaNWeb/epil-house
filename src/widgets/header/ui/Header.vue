@@ -3,11 +3,10 @@ import { onMounted, ref, watch } from 'vue';
 import { RouterLink, useRoute } from 'vue-router';
 
 import { useMenuStore } from '@/entities/menu-store';
-import { useOrderModalStore } from '@/entities/order-modal-store';
 
 import { PATH_PAGE } from '@/shared/config';
 import { BurgerIcon, LogoIcon, MailIcon, PhoneIcon, WhatsappIcon } from '@/shared/icons';
-import { Button } from '@/shared/ui';
+import { Button, useOrderModalStore } from '@/shared/ui';
 
 import { routes } from '../config';
 
@@ -91,13 +90,13 @@ window.addEventListener('scroll', controlNavbar);
 				</div>
 			</div>
 			<div class="burger-mob">
-					<Button
-						@click="menu.handleOpenMenu"
-						:variable="active || beige ? 'burger-beige' : 'burger'"
-					>
-						<BurgerIcon />
-					</Button>
-				</div>
+				<Button
+					@click="menu.handleOpenMenu"
+					:variable="active || beige ? 'burger-beige' : 'burger'"
+				>
+					<BurgerIcon />
+				</Button>
+			</div>
 		</div>
 	</header>
 </template>
@@ -228,14 +227,13 @@ window.addEventListener('scroll', controlNavbar);
 				align-items: center;
 				gap: 5px;
 			}
-			
 		}
 		.burger-mob {
-				display: none;
-				@media (max-width: $desktop-sm) {
+			display: none;
+			@media (max-width: $desktop-sm) {
 				display: block;
 			}
-			}
+		}
 	}
 }
 </style>

@@ -3,13 +3,11 @@ import { SwiperSlide } from 'swiper/vue';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
-import { Swiper } from '@/widgets/swiper';
-
 import { SpecialistItem } from '@/entities/specialist-item';
 
 import { PATH_PAGE } from '@/shared/config';
 import { ArrowLeftIcon, ArrowRightIcon } from '@/shared/icons';
-import { Button, Title } from '@/shared/ui';
+import { Button, Swiper, Title } from '@/shared/ui';
 
 import { specialistsList } from '../config';
 

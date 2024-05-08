@@ -2,16 +2,10 @@
 import { SwiperSlide } from 'swiper/vue';
 import { ref, watch } from 'vue';
 
-import { Swiper } from '@/widgets/swiper';
+import { ArrowLeftIcon, ArrowRightIcon, CloseIcon } from '@/shared/icons';
+import { Button, Fancybox, Swiper, Title, useOrderModalStore } from '@/shared/ui';
 
-import { Fancybox } from '@/widgets/fancybox';
-
-import { useOrderModalStore } from '@/entities/order-modal-store';
-import { useSpecialistModalStore } from '@/entities/specialist-modal-store';
-
-import { ArrowLeftIcon, ArrowRightIcon } from '@/shared/icons';
-import { CloseIcon } from '@/shared/icons';
-import { Button, Title } from '@/shared/ui';
+import { useSpecialistModalStore } from '../model';
 
 const specialistModal = useSpecialistModalStore();
 const orderModal = useOrderModalStore();

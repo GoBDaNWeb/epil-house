@@ -1,7 +1,6 @@
 <script setup>
-import { useMapModalStore } from '@/entities/map-modal-store';
-
 import { TourIcon } from '@/shared/icons';
+import { useMapModalStore } from '@/shared/ui';
 import { Button, Title } from '@/shared/ui';
 
 const props = defineProps(['contact']);

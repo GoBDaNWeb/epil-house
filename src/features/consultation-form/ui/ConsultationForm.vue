@@ -1,9 +1,7 @@
 <script setup>
 import { ref, watch } from 'vue';
 
-import { useSuccessModalStore } from '@/entities/success-modal-store';
-
-import { Button, Input, Title } from '@/shared/ui';
+import { Button, Input, Title, useSuccessModalStore } from '@/shared/ui';
 
 const successModal = useSuccessModalStore();
 

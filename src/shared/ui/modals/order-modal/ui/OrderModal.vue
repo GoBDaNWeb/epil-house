@@ -1,70 +1,86 @@
 <script setup>
-import { reactive, ref, watch } from 'vue';
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css';
+import { onMounted, reactive, watch } from 'vue';
 
-import { useReviewModalStore } from '@/entities/review-modal-store';
-import { useSuccessModalStore } from '@/entities/success-modal-store';
+import { useServiceStore } from '@/entities/service-store';
 
 import { CloseIcon } from '@/shared/icons';
-import { Button, Input, Select, Textarea, Title } from '@/shared/ui';
-import { hasError, setError } from '@/shared/utils';
+import {
+	Button,
+	DatePicker,
+	Input,
+	Select,
+	Textarea,
+	Title,
+	useSuccessModalStore
+} from '@/shared/ui';
+import { clearError, hasError, setError } from '@/shared/utils';
 
 import { selectList } from '../config';
+import { useOrderModalStore } from '../model';
 
-const reviewModal = useReviewModalStore();
+const serviceStore = useServiceStore();
+const orderModal = useOrderModalStore();
 const successModal = useSuccessModalStore();
 
+const format = date => {
+	const day = date.getDate();
+	const month = date.getMonth() + 1;
+	const year = date.getFullYear();
+
+	return `${day}.${month}.${year}`;
+};
+
 const formErrors = reactive({
-	nameError: '',
-	phoneError: '',
-	courseError: ''
+	nameError: false,
+	phoneError: false,
+	serviceError: false,
+	specialistError: false,
+	dateError: false
 });
 const formValues = reactive({
 	nameValue: '',
 	phoneValue: '',
-	courseValue: '',
-	fileValue: ''
+	serviceValue: '',
+	specialistValue: orderModal.specialist.name || '',
+	dateValue: ''
 });
 
 const handleSetError = () => {
 	formErrors.phoneError = setError(formValues.phoneValue);
 	formErrors.nameError = setError(formValues.nameValue);
-	formErrors.courseError = setError(formValues.courseValue);
+	formErrors.serviceError = setError(formValues.serviceValue);
+	formErrors.specialistError = setError(formValues.specialistValue);
+	formErrors.dateError = setError(formValues.dateValue);
 };
 
 const handleSubmitForm = () => {
 	if (!hasError(formErrors)) {
-		reviewModal.handleOpenModal();
+		orderModal.handleOpenModal();
 		successModal.handleOpenModal();
 	}
 };
 
-const handleChangeFile = e => {
-	var files = e.target.files || e.dataTransfer.files;
-	if (!files.length) {
-		return;
-	}
-	formValues.fileValue = [...formValues.fileValue, ...files];
-};
-
-const clearFile = file => {
-	const filtered = formValues.fileValue.filter(fileItem => {
-		return fileItem.name !== file.name;
-	});
-	formValues.fileValue = filtered;
-};
-
 watch(
-	() => [formValues.phoneValue, formValues.nameValue, formValues.courseValue],
+	() => [
+		formValues.phoneValue,
+		formValues.nameValue,
+		formValues.serviceValue,
+		formValues.specialistValue,
+		formValues.dateValue
+	],
 	() => {
 		handleSetError();
 	}
 );
 
 watch(
-	() => reviewModal.modalActive,
+	() => orderModal.modalActive,
 	() => {
-		if (reviewModal.modalActive) {
+		if (orderModal.modalActive) {
 			document.body.style.overflow = 'hidden';
+			formValues.serviceValue = serviceStore.service.title || '';
 		} else {
 			document.body.removeAttribute('style');
 		}
@@ -74,18 +90,12 @@ watch(
 
 <template>
 	<transition name="modal">
-		<div
-			class="review-modal"
-			@click.stop="reviewModal.handleOpenModal"
-			v-if="reviewModal.modalActive"
-		>
+		<div class="order-modal" v-if="orderModal.modalActive" @click.stop="orderModal.handleOpenModal">
 			<div class="close-btn">
-				<Button variable="square" @click.stop="reviewModal.handleOpenModal">
-					<CloseIcon />
-				</Button>
+				<Button variable="square" @click.stop="orderModal.handleOpenModal"><CloseIcon /></Button>
 			</div>
-			<div class="review-modal-content" @click.stop>
-				<Title variant="h4">Оставить отзыв</Title>
+			<div class="order-modal-content" @click.stop>
+				<Title variant="h4">запись в салон</Title>
 				<form @submit.prevent="handleSubmitForm()">
 					<div class="row">
 						<Input
@@ -102,22 +112,33 @@ watch(
 						/>
 					</div>
 					<Select
-						v-model="formValues.courseValue"
+						v-model="formValues.serviceValue"
 						:options="selectList"
-						:error="formErrors.courseError"
-						name="course"
-						placeholder="Выберите курс"
+						name="service"
+						:error="formErrors.serviceError"
+						:placeholder="serviceStore.service.title || 'Выберите услугу'"
 					/>
-					<Textarea placeholder="Ваш отзыв" />
-					<div class="row file">
-						<Input @change="handleChangeFile" type="file" placeholder="выбрать фото" />
-						<div class="file-wrapper-container" v-if="formValues.fileValue">
-							<div class="file-wrapper" v-for="file in formValues.fileValue" :key="file.name">
-								<Button @click="clearFile(file)" type="button"><CloseIcon /></Button>
-								<p>{{ file.name }}</p>
-							</div>
-						</div>
-					</div>
+					<Select
+						v-model="formValues.specialistValue"
+						:options="selectList"
+						name="specialist"
+						:error="formErrors.specialistError"
+						:placeholder="orderModal.specialist.name || 'Выберите мастера'"
+					/>
+					<VueDatePicker
+						:format="format"
+						placeholder="Выбрать желаемую дату"
+						v-model="formValues.dateValue"
+						auto-apply
+						:time-picker="false"
+						:class="formErrors.dateError ? 'error' : ''"
+					>
+						<template #input-icon>
+							<img class="input-slot-image" src="/images/date.svg" />
+						</template>
+					</VueDatePicker>
+
+					<Textarea placeholder="Комментарий" />
 					<div class="row">
 						<Button variable="primary" @click="handleSetError">отправить</Button>
 						<p>
@@ -134,7 +155,7 @@ watch(
 <style lang="scss" scoped>
 @import '@/shared/styles/vars';
 
-.review-modal {
+.order-modal {
 	position: fixed;
 	top: 0;
 	bottom: 0;
@@ -153,10 +174,10 @@ watch(
 			right: 20px;
 		}
 		@media (max-width: $pre-mob) {
-			z-index: 2;
+			z-index: 150;
 		}
 	}
-	.review-modal-content {
+	.order-modal-content {
 		width: 50vw;
 		background: var(--white-color);
 		padding: 30px;
@@ -194,25 +215,6 @@ watch(
 				gap: 20px;
 				margin-top: 30px;
 			}
-			.row.file {
-				display: flex;
-				align-items: center;
-				gap: 30px;
-				@media (max-width: $tab) {
-					flex-direction: column;
-					align-items: flex-start;
-					gap: 20px;
-				}
-				label {
-					max-width: 205px;
-					width: 100%;
-				}
-			}
-			.file-wrapper {
-				display: flex;
-				align-items: center;
-				gap: 18px;
-			}
 			.row {
 				display: grid;
 				grid-template-columns: repeat(2, 1fr);
@@ -233,7 +235,6 @@ watch(
 					}
 				}
 			}
-
 			input {
 				border: 1px solid var(--gray-line-color);
 			}
@@ -252,7 +253,7 @@ watch(
 .modal-enter-from,
 .modal-leave-to {
 	opacity: 0;
-	.review-modal-content {
+	.order-modal-content {
 		transform: translateX(-100%);
 	}
 }

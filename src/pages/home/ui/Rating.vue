@@ -1,11 +1,9 @@
 <script setup>
 import { SwiperSlide } from 'swiper/vue';
 
-import { Swiper } from '@/widgets/swiper';
-
 import { RatingItem } from '@/entities/rating-item';
 
-import { Title } from '@/shared/ui';
+import { Swiper, Title } from '@/shared/ui';
 
 import { ratingList } from '../config';
 </script>

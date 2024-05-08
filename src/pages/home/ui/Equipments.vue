@@ -2,13 +2,11 @@
 import { SwiperSlide } from 'swiper/vue';
 import { useRouter } from 'vue-router';
 
-import { Swiper } from '@/widgets/swiper';
-
 import { EquipmentItem } from '@/entities/equipment-item';
 
 import { PATH_PAGE } from '@/shared/config';
 import { ArrowRightIcon } from '@/shared/icons';
-import { Button, Title } from '@/shared/ui';
+import { Button, Swiper, Title } from '@/shared/ui';
 
 import { equipments, equipmentsMob } from '../config';
 

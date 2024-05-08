@@ -2,12 +2,8 @@
 import { SwiperSlide } from 'swiper/vue';
 import { onMounted, ref, watch } from 'vue';
 
-import { Swiper } from '@/widgets/swiper';
-
-import { useSuccessModalStore } from '@/entities/success-modal-store';
-
 import { ArrowLeftIcon, ArrowRightIcon } from '@/shared/icons';
-import { Breadcrumbs, Button, Input, Title } from '@/shared/ui';
+import { Breadcrumbs, Button, Input, Swiper, Title, useSuccessModalStore } from '@/shared/ui';
 
 const phone = ref('');
 const phoneError = ref(false);

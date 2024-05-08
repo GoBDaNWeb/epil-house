@@ -1,8 +1,5 @@
 <script setup>
-import { useOrderModalStore } from '@/entities/order-modal-store';
-import { useSeasonTicketModalStore } from '@/entities/season-ticket-modal-store';
-
-import { Button } from '@/shared/ui';
+import { Button, useOrderModalStore, useSeasonTicketModalStore } from '@/shared/ui';
 
 const seasonTicketModal = useSeasonTicketModalStore();
 const orderModal = useOrderModalStore();

@@ -1,12 +1,12 @@
 <script setup>
 import { watch } from 'vue';
 
-import { useSuccessModalStore } from '@/entities/success-modal-store';
-
 import { CloseIcon } from '@/shared/icons';
 import { Button, Title } from '@/shared/ui';
 
-const modal = useSuccessModalStore();
+import { useMapModalStore } from '../model';
+
+const modal = useMapModalStore();
 
 watch(
 	() => modal.modalActive,
@@ -22,21 +22,20 @@ watch(
 
 <template>
 	<transition name="modal">
-		<div class="success-modal" @click.stop="modal.handleOpenModal" v-if="modal.modalActive">
+		<div class="map-modal" @click.stop="modal.handleOpenModal" v-if="modal.modalActive">
 			<div class="close-btn">
 				<Button variable="square" @click.stop="modal.handleOpenModal">
 					<CloseIcon />
 				</Button>
 			</div>
-			<div class="success-modal-content" @click.stop>
+			<div class="map-modal-content" @click.stop>
 				<Title variant="h4">
-					ваша заявка <br />
-					успешно отправлена
+					{{ modal.mapInfo.title }}
 				</Title>
-				<p>
-					Наш менеджер свяжется с вами в ближайшее время и рассчитает стоимость абонемента со
-					скидкой 20%
-				</p>
+				<Title variant="h6">
+					{{ modal.mapInfo.address }}
+				</Title>
+				<slot name="map" />
 			</div>
 		</div>
 	</transition>
@@ -45,7 +44,7 @@ watch(
 <style lang="scss" scoped>
 @import '@/shared/styles/vars';
 
-.success-modal {
+.map-modal {
 	position: fixed;
 	top: 0;
 	bottom: 0;
@@ -62,12 +61,10 @@ watch(
 		@media (max-width: $tab) {
 			top: 20px;
 			right: 20px;
-		}
-		@media (max-width: $pre-mob) {
 			z-index: 2;
 		}
 	}
-	.success-modal-content {
+	.map-modal-content {
 		width: 50vw;
 		background: var(--white-color);
 		padding: 30px;
@@ -84,24 +81,16 @@ watch(
 			padding: 20px;
 		}
 		@media (max-width: $tab-sm) {
-			width: 65vw;
-		}
-		@media (max-width: $pre-mob) {
 			width: 100vw;
 			border-radius: 0;
 		}
+
 		h4 {
-			text-align: left;
+			margin-bottom: 20px;
 		}
-		p {
-			margin-top: 30px;
-			font-weight: 400;
-			font-size: 20px;
-			line-height: 28px;
-			@media (max-width: $tab) {
-				font-size: 15px;
-				line-height: 21px;
-			}
+		h6 {
+			margin-bottom: 30px;
+			text-align: center;
 		}
 	}
 }
@@ -114,7 +103,7 @@ watch(
 .modal-enter-from,
 .modal-leave-to {
 	opacity: 0;
-	.success-modal-content {
+	.map-modal-content {
 		transform: translateX(-100%);
 	}
 }

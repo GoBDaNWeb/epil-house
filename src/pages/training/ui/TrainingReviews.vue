@@ -2,13 +2,10 @@
 import { SwiperSlide } from 'swiper/vue';
 import { ref } from 'vue';
 
-import { Swiper } from '@/widgets/swiper';
-
 import { ReviewItem } from '@/entities/review-item';
-import { useReviewModalStore } from '@/entities/review-modal-store';
 
 import { ArrowLeftIcon, ArrowRightIcon } from '@/shared/icons';
-import { Button, Title } from '@/shared/ui';
+import { Button, Swiper, Title, useReviewModalStore } from '@/shared/ui';
 
 import { reviewsList } from '../config';
 

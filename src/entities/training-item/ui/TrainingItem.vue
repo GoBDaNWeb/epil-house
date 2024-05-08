@@ -1,8 +1,6 @@
 <script setup>
-import { useOrderModalStore } from '@/entities/order-modal-store';
-
 import { DownloadIcon } from '@/shared/icons';
-import { Button, Title } from '@/shared/ui';
+import { Button, Title, useOrderModalStore } from '@/shared/ui';
 
 const modal = useOrderModalStore();
 defineProps(['training']);

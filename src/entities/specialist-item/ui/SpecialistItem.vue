@@ -2,11 +2,8 @@
 import { watch } from 'vue';
 import { useRoute } from 'vue-router';
 
-import { useOrderModalStore } from '@/entities/order-modal-store';
-import { useSpecialistModalStore } from '@/entities/specialist-modal-store';
-
 import { InfoIcon } from '@/shared/icons';
-import { Button, Title } from '@/shared/ui';
+import { Button, Title, useOrderModalStore, useSpecialistModalStore } from '@/shared/ui';
 
 const props = defineProps(['specialist']);
 const route = useRoute();

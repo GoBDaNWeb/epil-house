@@ -2,10 +2,8 @@
 import { SwiperSlide } from 'swiper/vue';
 import { ref } from 'vue';
 
-import { Swiper } from '@/widgets/swiper';
-
 import { ArrowLeftIcon, ArrowRightIcon } from '@/shared/icons';
-import { Button, Title } from '@/shared/ui';
+import { Button, Swiper, Title } from '@/shared/ui';
 
 import { resutList2 } from '../config';
 

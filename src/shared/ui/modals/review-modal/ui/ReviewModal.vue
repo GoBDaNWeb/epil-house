@@ -1,51 +1,67 @@
 <script setup>
-import { reactive, watch } from 'vue';
-
-import { useSeasonTicketModalStore } from '@/entities/season-ticket-modal-store';
-import { useSuccessModalStore } from '@/entities/success-modal-store';
+import { reactive, ref, watch } from 'vue';
 
 import { CloseIcon } from '@/shared/icons';
-import { Button, Input, Radio, Textarea, Title } from '@/shared/ui';
+import { Button, Input, Select, Textarea, Title, useSuccessModalStore } from '@/shared/ui';
 import { hasError, setError } from '@/shared/utils';
 
-import { procedureList } from '../config';
+import { selectList } from '../config';
+import { useReviewModalStore } from '../model';
 
-const seasonTicketModal = useSeasonTicketModalStore();
+const reviewModal = useReviewModalStore();
 const successModal = useSuccessModalStore();
 
 const formErrors = reactive({
-	nameError: false,
-	phoneError: false
+	nameError: '',
+	phoneError: '',
+	courseError: ''
 });
 const formValues = reactive({
 	nameValue: '',
 	phoneValue: '',
-	procedureValue: ''
+	courseValue: '',
+	fileValue: ''
 });
 
 const handleSetError = () => {
 	formErrors.phoneError = setError(formValues.phoneValue);
 	formErrors.nameError = setError(formValues.nameValue);
+	formErrors.courseError = setError(formValues.courseValue);
 };
 
 const handleSubmitForm = () => {
 	if (!hasError(formErrors)) {
-		seasonTicketModal.handleOpenModal();
+		reviewModal.handleOpenModal();
 		successModal.handleOpenModal();
 	}
 };
 
+const handleChangeFile = e => {
+	var files = e.target.files || e.dataTransfer.files;
+	if (!files.length) {
+		return;
+	}
+	formValues.fileValue = [...formValues.fileValue, ...files];
+};
+
+const clearFile = file => {
+	const filtered = formValues.fileValue.filter(fileItem => {
+		return fileItem.name !== file.name;
+	});
+	formValues.fileValue = filtered;
+};
+
 watch(
-	() => [formValues.phoneValue, formValues.nameValue],
+	() => [formValues.phoneValue, formValues.nameValue, formValues.courseValue],
 	() => {
 		handleSetError();
 	}
 );
 
 watch(
-	() => seasonTicketModal.modalActive,
+	() => reviewModal.modalActive,
 	() => {
-		if (seasonTicketModal.modalActive) {
+		if (reviewModal.modalActive) {
 			document.body.style.overflow = 'hidden';
 		} else {
 			document.body.removeAttribute('style');
@@ -57,33 +73,18 @@ watch(
 <template>
 	<transition name="modal">
 		<div
-			class="season-ticket-modal"
-			@click.stop="seasonTicketModal.handleOpenModal"
-			v-if="seasonTicketModal.modalActive"
+			class="review-modal"
+			@click.stop="reviewModal.handleOpenModal"
+			v-if="reviewModal.modalActive"
 		>
 			<div class="close-btn">
-				<Button variable="square" @click.stop="seasonTicketModal.handleOpenModal">
+				<Button variable="square" @click.stop="reviewModal.handleOpenModal">
 					<CloseIcon />
 				</Button>
 			</div>
-			<div class="season-ticket-modal-content" @click.stop>
-				<div class="image-wrapper">
-					<img src="/images/ticket.png" alt="ticket" />
-				</div>
-				<Title variant="h4">заказать абонемент</Title>
+			<div class="review-modal-content" @click.stop>
+				<Title variant="h4">Оставить отзыв</Title>
 				<form @submit.prevent="handleSubmitForm()">
-					<div class="radio-row">
-						<Radio
-							v-model="formValues.procedureValue"
-							v-for="(procedure, index) in procedureList"
-							:key="index"
-							name="procedure"
-							:value="procedure"
-							:checked="index === 0"
-						>
-							{{ procedure }}
-						</Radio>
-					</div>
 					<div class="row">
 						<Input
 							v-model="formValues.nameValue"
@@ -98,10 +99,23 @@ watch(
 							placeholder="+7 (ХХХ) ХХХ-ХХ-ХХ"
 						/>
 					</div>
-					<Textarea
-						placeholder="Укажите желаемые услуги, которые необходимо включить в абонемент"
+					<Select
+						v-model="formValues.courseValue"
+						:options="selectList"
+						:error="formErrors.courseError"
+						name="course"
+						placeholder="Выберите курс"
 					/>
-
+					<Textarea placeholder="Ваш отзыв" />
+					<div class="row file">
+						<Input @change="handleChangeFile" type="file" placeholder="выбрать фото" />
+						<div class="file-wrapper-container" v-if="formValues.fileValue">
+							<div class="file-wrapper" v-for="file in formValues.fileValue" :key="file.name">
+								<Button @click="clearFile(file)" type="button"><CloseIcon /></Button>
+								<p>{{ file.name }}</p>
+							</div>
+						</div>
+					</div>
 					<div class="row">
 						<Button variable="primary" @click="handleSetError">отправить</Button>
 						<p>
@@ -118,7 +132,7 @@ watch(
 <style lang="scss" scoped>
 @import '@/shared/styles/vars';
 
-.season-ticket-modal {
+.review-modal {
 	position: fixed;
 	top: 0;
 	bottom: 0;
@@ -140,7 +154,7 @@ watch(
 			z-index: 2;
 		}
 	}
-	.season-ticket-modal-content {
+	.review-modal-content {
 		width: 50vw;
 		background: var(--white-color);
 		padding: 30px;
@@ -166,23 +180,6 @@ watch(
 			overflow-x: hidden;
 			justify-content: flex-start;
 		}
-		.image-wrapper {
-			width: 200px;
-			height: 155px;
-			position: relative;
-			@media (max-width: $tab) {
-				width: 150px;
-				height: 116px;
-				min-width: 150px;
-				min-height: 116px;
-			}
-			img {
-				position: absolute;
-				width: 100%;
-				height: 100%;
-				object-fit: contain;
-			}
-		}
 		h4 {
 			text-align: left;
 		}
@@ -195,15 +192,24 @@ watch(
 				gap: 20px;
 				margin-top: 30px;
 			}
-			.radio-row {
+			.row.file {
 				display: flex;
-				flex-wrap: wrap;
 				align-items: center;
-				max-width: 80%;
-				gap: 10px;
-				.custom-radio {
-					height: 50px;
+				gap: 30px;
+				@media (max-width: $tab) {
+					flex-direction: column;
+					align-items: flex-start;
+					gap: 20px;
 				}
+				label {
+					max-width: 205px;
+					width: 100%;
+				}
+			}
+			.file-wrapper {
+				display: flex;
+				align-items: center;
+				gap: 18px;
 			}
 			.row {
 				display: grid;
@@ -244,7 +250,7 @@ watch(
 .modal-enter-from,
 .modal-leave-to {
 	opacity: 0;
-	.season-ticket-modal-content {
+	.review-modal-content {
 		transform: translateX(-100%);
 	}
 }
